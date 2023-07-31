@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/frontends/bcm3510_priv.h

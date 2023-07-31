@@ -1,0 +1,1 @@
+../linux/drivers/media/video/pvrusb2/pvrusb2-i2c-core.h

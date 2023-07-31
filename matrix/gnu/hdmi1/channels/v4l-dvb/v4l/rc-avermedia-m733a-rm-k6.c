@@ -1,0 +1,1 @@
+../linux/drivers/media/IR/keymaps/rc-avermedia-m733a-rm-k6.c

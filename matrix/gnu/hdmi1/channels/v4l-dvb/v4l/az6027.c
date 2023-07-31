@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/dvb-usb/az6027.c

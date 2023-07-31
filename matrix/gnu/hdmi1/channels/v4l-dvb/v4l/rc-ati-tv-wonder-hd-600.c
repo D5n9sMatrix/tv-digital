@@ -1,0 +1,1 @@
+../linux/drivers/media/IR/keymaps/rc-ati-tv-wonder-hd-600.c

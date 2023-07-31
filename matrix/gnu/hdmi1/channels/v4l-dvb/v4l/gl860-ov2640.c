@@ -1,0 +1,1 @@
+../linux/drivers/media/video/gspca/gl860/gl860-ov2640.c

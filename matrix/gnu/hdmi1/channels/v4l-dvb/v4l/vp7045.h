@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/dvb-usb/vp7045.h

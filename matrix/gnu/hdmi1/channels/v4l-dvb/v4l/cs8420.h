@@ -1,0 +1,1 @@
+../linux/drivers/media/video/cs8420.h

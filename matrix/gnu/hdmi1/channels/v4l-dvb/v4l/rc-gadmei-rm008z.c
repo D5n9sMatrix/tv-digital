@@ -1,0 +1,1 @@
+../linux/drivers/media/IR/keymaps/rc-gadmei-rm008z.c

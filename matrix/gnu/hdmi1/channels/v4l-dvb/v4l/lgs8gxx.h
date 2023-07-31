@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/frontends/lgs8gxx.h

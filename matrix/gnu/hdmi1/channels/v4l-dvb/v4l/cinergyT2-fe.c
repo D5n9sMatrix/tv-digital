@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/dvb-usb/cinergyT2-fe.c

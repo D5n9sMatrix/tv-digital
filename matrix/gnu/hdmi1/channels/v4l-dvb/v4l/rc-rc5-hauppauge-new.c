@@ -1,0 +1,1 @@
+../linux/drivers/media/IR/keymaps/rc-rc5-hauppauge-new.c

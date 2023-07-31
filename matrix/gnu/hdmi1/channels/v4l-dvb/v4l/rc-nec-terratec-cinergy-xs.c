@@ -1,0 +1,1 @@
+../linux/drivers/media/IR/keymaps/rc-nec-terratec-cinergy-xs.c

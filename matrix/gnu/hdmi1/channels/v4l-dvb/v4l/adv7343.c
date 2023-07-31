@@ -1,0 +1,1 @@
+../linux/drivers/media/video/adv7343.c

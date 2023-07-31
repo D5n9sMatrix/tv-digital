@@ -1,0 +1,1 @@
+../linux/drivers/media/video/gspca/coarse_expo_autogain.h

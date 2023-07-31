@@ -1,0 +1,1 @@
+../linux/drivers/media/video/gspca/pac_common.h

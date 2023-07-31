@@ -1,0 +1,1 @@
+../linux/drivers/media/video/pwc/pwc-dec23.h

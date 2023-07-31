@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/frontends/stv0288.c

@@ -1,0 +1,1 @@
+../linux/drivers/media/video/gspca/m5602/m5602_mt9m111.h

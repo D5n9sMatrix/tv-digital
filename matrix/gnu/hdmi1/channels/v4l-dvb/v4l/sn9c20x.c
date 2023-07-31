@@ -1,0 +1,1 @@
+../linux/drivers/media/video/gspca/sn9c20x.c

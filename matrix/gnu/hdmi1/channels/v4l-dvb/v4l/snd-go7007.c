@@ -1,0 +1,1 @@
+../linux/drivers/staging/go7007/snd-go7007.c

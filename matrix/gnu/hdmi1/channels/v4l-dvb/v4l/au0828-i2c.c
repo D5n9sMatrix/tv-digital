@@ -1,0 +1,1 @@
+../linux/drivers/media/video/au0828/au0828-i2c.c

@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/frontends/stb0899_cfg.h

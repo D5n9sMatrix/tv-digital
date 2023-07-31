@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/dvb-usb/dib07x0.h

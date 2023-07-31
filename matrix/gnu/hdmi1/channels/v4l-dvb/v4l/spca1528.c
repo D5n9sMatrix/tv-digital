@@ -1,0 +1,1 @@
+../linux/drivers/media/video/gspca/spca1528.c

@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/frontends/eds1547.h

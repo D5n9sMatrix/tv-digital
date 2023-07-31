@@ -1,0 +1,1 @@
+../linux/drivers/media/video/gspca/stv06xx/stv06xx_st6422.h

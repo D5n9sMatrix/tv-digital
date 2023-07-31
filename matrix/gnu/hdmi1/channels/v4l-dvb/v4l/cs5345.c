@@ -1,0 +1,1 @@
+../linux/drivers/media/video/cs5345.c

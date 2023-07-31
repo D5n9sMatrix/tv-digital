@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/frontends/atbm8830_priv.h

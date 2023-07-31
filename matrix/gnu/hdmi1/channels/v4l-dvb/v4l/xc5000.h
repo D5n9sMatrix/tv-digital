@@ -1,0 +1,1 @@
+../linux/drivers/media/common/tuners/xc5000.h

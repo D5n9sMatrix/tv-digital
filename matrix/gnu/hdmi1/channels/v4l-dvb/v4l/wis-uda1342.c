@@ -1,0 +1,1 @@
+../linux/drivers/staging/go7007/wis-uda1342.c

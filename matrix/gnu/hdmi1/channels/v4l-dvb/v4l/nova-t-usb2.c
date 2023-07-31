@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/dvb-usb/nova-t-usb2.c

@@ -1,0 +1,1 @@
+../linux/drivers/media/IR/keymaps/rc-winfast-usbii-deluxe.c

@@ -1,0 +1,1 @@
+../linux/drivers/media/common/tuners/qt1010_priv.h

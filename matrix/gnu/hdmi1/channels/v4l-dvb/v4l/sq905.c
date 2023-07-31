@@ -1,0 +1,1 @@
+../linux/drivers/media/video/gspca/sq905.c

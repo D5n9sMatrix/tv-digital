@@ -1,0 +1,1 @@
+../linux/drivers/media/video/gspca/ov534.c

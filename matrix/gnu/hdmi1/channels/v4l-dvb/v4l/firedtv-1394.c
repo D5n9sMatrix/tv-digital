@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/firewire/firedtv-1394.c

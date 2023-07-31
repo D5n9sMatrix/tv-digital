@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/siano/smsusb.c

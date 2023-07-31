@@ -1,0 +1,1 @@
+../linux/drivers/media/video/gspca/stv0680.c

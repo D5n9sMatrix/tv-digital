@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/frontends/s5h1420_priv.h

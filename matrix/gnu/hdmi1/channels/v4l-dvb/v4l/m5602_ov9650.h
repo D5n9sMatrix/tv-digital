@@ -1,0 +1,1 @@
+../linux/drivers/media/video/gspca/m5602/m5602_ov9650.h

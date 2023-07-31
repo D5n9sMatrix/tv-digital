@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/dvb-usb/au6610.c

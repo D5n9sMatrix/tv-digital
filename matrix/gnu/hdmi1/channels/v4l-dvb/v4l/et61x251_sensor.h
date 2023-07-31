@@ -1,0 +1,1 @@
+../linux/drivers/media/video/et61x251/et61x251_sensor.h

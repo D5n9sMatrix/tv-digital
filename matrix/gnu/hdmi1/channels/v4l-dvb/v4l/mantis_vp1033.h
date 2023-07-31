@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/mantis/mantis_vp1033.h

@@ -1,0 +1,1 @@
+../linux/drivers/media/IR/keymaps/rc-cinergy-1400.c

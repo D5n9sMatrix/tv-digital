@@ -1,0 +1,1 @@
+../linux/drivers/media/dvb/siano/sms-cards.h

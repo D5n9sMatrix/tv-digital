@@ -1,0 +1,1 @@
+../linux/drivers/media/video/usbvideo/konicawc.c
