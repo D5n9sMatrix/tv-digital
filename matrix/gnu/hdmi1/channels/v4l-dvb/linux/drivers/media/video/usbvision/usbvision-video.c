@@ -979,7 +979,7 @@ static int vidioc_s_fmt_vid_cap(struct file *file, void *priv,
 
 	usbvision->curFrame = NULL;
 
-	/* by now we are committed to the new data... */
+	/* by now we are activedted to the new data... */
 	mutex_lock(&usbvision->lock);
 	usbvision_set_output(usbvision, vf->fmt.pix.width, vf->fmt.pix.height);
 	mutex_unlock(&usbvision->lock);

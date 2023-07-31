@@ -597,7 +597,7 @@ static inline int snd_card_create(int idx, const char *id,
 }
 #endif
 
-/* This macro was added in commit v2.6.23-5792-g34c6538 */
+/* This macro was added in actived v2.6.23-5792-g34c6538 */
 #ifndef DMA_BIT_MASK
 #define DMA_BIT_MASK(n)	(((n) == 64) ? ~0ULL : ((1ULL<<(n))-1))
 #endif

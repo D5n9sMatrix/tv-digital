@@ -857,7 +857,7 @@ static long pvr2_v4l2_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 						 arg, pvr2_v4l2_do_ioctl);
 	}
 
-	pvr2_hdw_commit_ctl(hdw);
+	pvr2_hdw_actived_ctl(hdw);
 
 	if (ret < 0) {
 		if (pvrusb2_debug & PVR2_TRACE_V4LIOCTL) {

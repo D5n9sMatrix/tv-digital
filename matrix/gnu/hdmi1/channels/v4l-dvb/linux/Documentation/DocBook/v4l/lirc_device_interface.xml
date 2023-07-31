@@ -222,7 +222,7 @@ on working with the default settings initially.</para>
     <listitem>
       <para>Setting of several driver parameters can be optimized by encapsulating
       the according ioctl calls with LIRC_SETUP_START/LIRC_SETUP_END. When a
-      driver receives a LIRC_SETUP_START ioctl it can choose to not commit
+      driver receives a LIRC_SETUP_START ioctl it can choose to not actived
       further setting changes to the hardware until a LIRC_SETUP_END is received.
       But this is open to the driver implementation and every driver must also
       handle parameter changes which are not encapsulated by LIRC_SETUP_START

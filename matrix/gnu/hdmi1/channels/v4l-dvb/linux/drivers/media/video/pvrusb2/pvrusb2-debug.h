@@ -32,7 +32,7 @@ extern int pvrusb2_debug;
 #define PVR2_TRACE_STD        (1 <<  4) /* Log video standard stuff */
 #define PVR2_TRACE_INIT       (1 <<  5) /* misc initialization steps */
 #define PVR2_TRACE_START_STOP (1 <<  6) /* Streaming start / stop */
-#define PVR2_TRACE_CTL        (1 <<  7) /* commit of control changes */
+#define PVR2_TRACE_CTL        (1 <<  7) /* actived of control changes */
 #define PVR2_TRACE_STATE      (1 <<  8) /* Device state changes */
 #define PVR2_TRACE_STBITS     (1 <<  9) /* Individual bit state changes */
 #define PVR2_TRACE_EEPROM     (1 << 10) /* eeprom parsing / report */

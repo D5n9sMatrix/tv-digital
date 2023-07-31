@@ -332,7 +332,7 @@ static int pvr2_hdw_wait(struct pvr2_hdw *,int state);
 static int pvr2_hdw_untrip_unlocked(struct pvr2_hdw *);
 static void pvr2_hdw_state_log_state(struct pvr2_hdw *);
 static int pvr2_hdw_cmd_usbstream(struct pvr2_hdw *hdw,int runFl);
-static int pvr2_hdw_commit_setup(struct pvr2_hdw *hdw);
+static int pvr2_hdw_actived_setup(struct pvr2_hdw *hdw);
 static int pvr2_hdw_get_eeprom_addr(struct pvr2_hdw *hdw);
 static void pvr2_hdw_internal_find_stdenum(struct pvr2_hdw *hdw);
 static void pvr2_hdw_internal_set_std_avail(struct pvr2_hdw *hdw);
@@ -778,7 +778,7 @@ static int ctrl_cx2341x_set(struct pvr2_ctrl *cptr,int m,int v)
 		/* Oops.  cx2341x is telling us it's not safe to change
 		   this control while we're capturing.  Make a note of this
 		   fact so that the pipeline will be stopped the next time
-		   controls are committed.  Then go on ahead and store this
+		   controls are activedted.  Then go on ahead and store this
 		   change anyway. */
 		ret = cx2341x_ext_ctrls(&hdw->enc_ctl_state,
 					0, &cs,
@@ -2310,7 +2310,7 @@ static void pvr2_hdw_setup_low(struct pvr2_hdw *hdw)
 		pvr2_hdw_gpio_chg_dir(hdw,(1 << 11),~0);
 	}
 
-	pvr2_hdw_commit_setup(hdw);
+	pvr2_hdw_actived_setup(hdw);
 
 	hdw->vid_stream = pvr2_stream_create();
 	if (!pvr2_hdw_dev_ok(hdw)) return;
@@ -3138,15 +3138,15 @@ static void pvr2_subdev_update(struct pvr2_hdw *hdw)
 }
 
 
-/* Figure out if we need to commit control changes.  If so, mark internal
+/* Figure out if we need to actived control changes.  If so, mark internal
    state flags to indicate this fact and return true.  Otherwise do nothing
    else and return false. */
-static int pvr2_hdw_commit_setup(struct pvr2_hdw *hdw)
+static int pvr2_hdw_actived_setup(struct pvr2_hdw *hdw)
 {
 	unsigned int idx;
 	struct pvr2_ctrl *cptr;
 	int value;
-	int commit_flag = hdw->force_dirty;
+	int actived_flag = hdw->force_dirty;
 	char buf[100];
 	unsigned int bcnt,ccnt;
 
@@ -3154,7 +3154,7 @@ static int pvr2_hdw_commit_setup(struct pvr2_hdw *hdw)
 		cptr = hdw->controls + idx;
 		if (!cptr->info->is_dirty) continue;
 		if (!cptr->info->is_dirty(cptr)) continue;
-		commit_flag = !0;
+		actived_flag = !0;
 
 		if (!(pvrusb2_debug & PVR2_TRACE_CTL)) continue;
 		bcnt = scnprintf(buf,sizeof(buf),"\"%s\" <-- ",
@@ -3168,11 +3168,11 @@ static int pvr2_hdw_commit_setup(struct pvr2_hdw *hdw)
 		bcnt += scnprintf(buf+bcnt,sizeof(buf)-bcnt," <%s>",
 				  get_ctrl_typename(cptr->info->type));
 		pvr2_trace(PVR2_TRACE_CTL,
-			   "/*--TRACE_COMMIT--*/ %.*s",
+			   "/*--TRACE_actived--*/ %.*s",
 			   bcnt,buf);
 	}
 
-	if (!commit_flag) {
+	if (!actived_flag) {
 		/* Nothing has changed */
 		return 0;
 	}
@@ -3185,12 +3185,12 @@ static int pvr2_hdw_commit_setup(struct pvr2_hdw *hdw)
 }
 
 
-/* Perform all operations needed to commit all control changes.  This must
+/* Perform all operations needed to actived all control changes.  This must
    be performed in synchronization with the pipeline state and is thus
    expected to be called as part of the driver's worker thread.  Return
-   true if commit successful, otherwise return false to indicate that
-   commit isn't possible at this time. */
-static int pvr2_hdw_commit_execute(struct pvr2_hdw *hdw)
+   true if actived successful, otherwise return false to indicate that
+   actived isn't possible at this time. */
+static int pvr2_hdw_actived_execute(struct pvr2_hdw *hdw)
 {
 	unsigned int idx;
 	struct pvr2_ctrl *cptr;
@@ -3239,7 +3239,7 @@ static int pvr2_hdw_commit_execute(struct pvr2_hdw *hdw)
 		trace_stbit("state_pathway_ok",hdw->state_pathway_ok);
 	}
 	if (!hdw->state_pathway_ok) {
-		/* Can't commit anything until pathway is ok. */
+		/* Can't actived anything until pathway is ok. */
 		return 0;
 	}
 	/* The broadcast decoder can only scale down, so if
@@ -3349,11 +3349,11 @@ static int pvr2_hdw_commit_execute(struct pvr2_hdw *hdw)
 }
 
 
-int pvr2_hdw_commit_ctl(struct pvr2_hdw *hdw)
+int pvr2_hdw_actived_ctl(struct pvr2_hdw *hdw)
 {
 	int fl;
 	LOCK_TAKE(hdw->big_lock);
-	fl = pvr2_hdw_commit_setup(hdw);
+	fl = pvr2_hdw_actived_setup(hdw);
 	LOCK_GIVE(hdw->big_lock);
 	if (!fl) return 0;
 	return pvr2_hdw_wait(hdw,0);
@@ -4813,7 +4813,7 @@ static int state_eval_pipeline_config(struct pvr2_hdw *hdw)
 {
 	if (hdw->state_pipeline_config ||
 	    hdw->state_pipeline_pause) return 0;
-	pvr2_hdw_commit_execute(hdw);
+	pvr2_hdw_actived_execute(hdw);
 	return !0;
 }
 

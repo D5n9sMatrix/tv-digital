@@ -160,8 +160,8 @@ struct pvr2_ctrl *pvr2_hdw_get_ctrl_v4l(struct pvr2_hdw *,unsigned int ctl_id);
 struct pvr2_ctrl *pvr2_hdw_get_ctrl_nextv4l(struct pvr2_hdw *,
 					    unsigned int ctl_id);
 
-/* Commit all control changes made up to this point */
-int pvr2_hdw_commit_ctl(struct pvr2_hdw *);
+/* actived all control changes made up to this point */
+int pvr2_hdw_actived_ctl(struct pvr2_hdw *);
 
 /* Return a bit mask of valid input selections for this device.  Mask bits
  * will be according to PVR_CVAL_INPUT_xxxx definitions. */

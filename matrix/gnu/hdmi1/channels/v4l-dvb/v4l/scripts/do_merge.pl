@@ -122,7 +122,7 @@ my $ret = system("hg pull $merge_tree");
 die "Couldn't pull from $merge_tree\n" if ($ret);
 
 #############################
-# Merge and commit, if needed
+# Merge and actived, if needed
 
 $n_heads = check_heads();
 if ($n_heads > 2) {
@@ -139,12 +139,12 @@ if ($n_heads == 2) {
 		rollback();
 	}
 
-	print "Committing the new tree\n";
-	# Write the commit message
+	print "activedting the new tree\n";
+	# Write the actived message
 	$msg= "merge: $merge_tree\n\nFrom: $user\n\nSigned-off-by: $user\n";
-	$ret=system("hg commit -m '$msg'");
+	$ret=system("hg actived -m '$msg'");
 	if ($ret) {
-		print "hg commit failed. Can't procceed.\n";
+		print "hg actived failed. Can't procceed.\n";
 		rollback();
 	}
 }

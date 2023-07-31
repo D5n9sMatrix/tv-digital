@@ -142,6 +142,6 @@ From: $user
 #      core modules
 Priority: normal
 
-# At the end Signed-off-by: fields by patch author and committer, at least.
+# At the end Signed-off-by: fields by patch author and activedter, at least.
 Signed-off-by: $user
 EOF

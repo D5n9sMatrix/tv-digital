@@ -391,7 +391,7 @@ struct cx18_stream {
 	u32 mdl_size;		/* total bytes in all buffers in a mdl */
 
 	/* MDL Queues */
-	struct cx18_queue q_free;	/* free - in rotation, not committed */
+	struct cx18_queue q_free;	/* free - in rotation, not activedted */
 	struct cx18_queue q_busy;	/* busy - in use by firmware */
 	struct cx18_queue q_full;	/* full - data for user apps */
 	struct cx18_queue q_idle;	/* idle - not in rotation */

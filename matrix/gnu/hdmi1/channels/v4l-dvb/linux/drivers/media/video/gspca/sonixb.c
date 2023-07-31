@@ -459,7 +459,7 @@ static const __u8 initPas106[] = {
   0x0b Green2 Gain
   0x0c Red Gain
   0x0e Global gain
-  0x13 Write 1 to commit settings to sensor
+  0x13 Write 1 to actived settings to sensor
 */
 
 static const __u8 pas106_sensor_init[][8] = {

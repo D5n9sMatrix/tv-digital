@@ -216,6 +216,6 @@ $body="$body\n\n$signed";
 $body=~s/^[\n\s]+//;
 $body=~s/[\n\s]+$//;
 
-# First from is used by hg to recognize commiter name
-print "#Committer: $maintainer_name <$maintainer_email>\n";
+# First from is used by hg to recognize activeder name
+print "#activedter: $maintainer_name <$maintainer_email>\n";
 print "$subject\n\n$from\n\n$body\n";

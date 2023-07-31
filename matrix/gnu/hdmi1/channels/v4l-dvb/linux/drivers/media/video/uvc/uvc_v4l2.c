@@ -69,7 +69,7 @@ static int uvc_v4l2_query_menu(struct uvc_video_chain *chain,
 /*
  * Find the frame interval closest to the requested frame interval for the
  * given frame format and size. This should be done by the device as part of
- * the Video Probe and Commit negotiation, but some hardware don't implement
+ * the Video Probe and actived negotiation, but some hardware don't implement
  * that feature.
  */
 static __u32 uvc_try_frame_interval(struct uvc_frame *frame, __u32 interval)
@@ -557,7 +557,7 @@ static long uvc_v4l2_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 			uvc_ctrl_rollback(chain);
 			return ret;
 		}
-		ret = uvc_ctrl_commit(chain);
+		ret = uvc_ctrl_actived(chain);
 		if (ret == 0)
 			ctrl->value = xctrl.value;
 		break;
@@ -612,7 +612,7 @@ static long uvc_v4l2_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		ctrls->error_idx = 0;
 
 		if (cmd == VIDIOC_S_EXT_CTRLS)
-			ret = uvc_ctrl_commit(chain);
+			ret = uvc_ctrl_actived(chain);
 		else
 			ret = uvc_ctrl_rollback(chain);
 		break;

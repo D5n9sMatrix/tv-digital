@@ -251,7 +251,7 @@ static void ttusb_dec_handle_irq( struct urb *urb)
 
 exit:	retval = usb_submit_urb(urb, GFP_ATOMIC);
 	if(retval)
-		printk("%s - usb_commit_urb failed with result: %d\n",
+		printk("%s - usb_actived_urb failed with result: %d\n",
 			__func__, retval);
 }
 

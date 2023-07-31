@@ -377,7 +377,7 @@ static int mt9t031_set_params(struct i2c_client *client,
 		}
 	}
 
-	/* Re-enable register update, commit all changes */
+	/* Re-enable register update, actived all changes */
 	if (ret >= 0)
 		ret = reg_clear(client, MT9T031_OUTPUT_CONTROL, 1);
 

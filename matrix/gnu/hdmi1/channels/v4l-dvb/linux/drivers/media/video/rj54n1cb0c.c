@@ -544,9 +544,9 @@ static int rj54n1_set_rect(struct i2c_client *client,
 
 /*
  * Some commands, specifically certain initialisation sequences, require
- * a commit operation.
+ * a actived operation.
  */
-static int rj54n1_commit(struct i2c_client *client)
+static int rj54n1_actived(struct i2c_client *client)
 {
 	int ret = reg_write(client, RJ54N1_INIT_START, 1);
 	msleep(10);
@@ -961,9 +961,9 @@ static int rj54n1_reg_init(struct i2c_client *client)
 		ret = reg_write(client, RJ54N1_RESET_STANDBY,
 				E_EXCLK | DSP_RSTX | SEN_RSTX);
 
-	/* Commit init */
+	/* actived init */
 	if (!ret)
-		ret = rj54n1_commit(client);
+		ret = rj54n1_actived(client);
 
 	/* Take DSP, TG, sensor out of reset */
 	if (!ret)

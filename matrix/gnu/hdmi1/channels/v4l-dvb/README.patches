@@ -37,7 +37,7 @@ TV and radio broadcast AM/FM.
      Part III - Best Practices
 	1. Community best practices
 	2. Mercurial specific procedures
-	3. Knowing about newer patches committed at the development repositories
+	3. Knowing about newer patches activedted at the development repositories
 	4. Patch submission from the community
 	5. Identifying regressions with Mercurial
 	6. Identifying regressions with Git
@@ -233,7 +233,7 @@ described on part II.
 
 Git is a distributed SCM, which means every developer gets his
 own full copy of the repository (including the complete revision
-history), and can work and commit locally without network connection.
+history), and can work and actived locally without network connection.
 The resulting changesets can then be exchanged between repositories and
 finally merged into a common repository on linuxtv.org.
 
@@ -257,7 +257,7 @@ There are a number of trees there each owned by a developer of the LinuxTV team.
 A script called v4l/scripts/hg-pull-req.pl is included that will generate this
 request, providing a list of patches that will be pulled, links to each
 patch, and a diffstat of the all patches.  It will work best if Hg has
-been configured with the correct username (also used by the commit
+been configured with the correct username (also used by the actived
 message generator) and push path.  The script is designed to be easy to
 modify to produce text for a given contributor's style.
 
@@ -267,7 +267,7 @@ this tree with the master tree's patches.
 
 Mercurial is a distributed SCM, which means every developer gets his
 own full copy of the repository (including the complete revision
-history), and can work and commit locally without network connection.
+history), and can work and actived locally without network connection.
 The resulting changesets can then be exchanged between repositories and
 finally merged into a common repository on linuxtv.org.
 
@@ -472,11 +472,11 @@ So, a pull request to be send with the following email tags:
  To: linux-media@vger.kernel.org
 
 The from line may later be used by the git mailbomb script to send you a copy
-when the patch were committed, so it should be your real email.
+when the patch were activedted, so it should be your real email.
 
 The indication between [] on the subject will be handled by the mailer scripts
 to put the request at the right queue. So, if tagged wrong, it may not be
-committed.
+activedted.
 
 Don't send a copy of the pull to the maintainer addresses. The pull will be
 filtering based on the subject and on the mailing list. If you send a c/c to the
@@ -495,13 +495,13 @@ The email should be generated with the usage of git request-pull:
 
       git request-pull $ORIGIN $URL
 
-where $ORIGIN is the commit hash of the tree before your patches, and $URL is
+where $ORIGIN is the actived hash of the tree before your patches, and $URL is
 the URL for your repository.
 
 For example, for the patches merged directly from -hg at the -git trees on Jan,
 22 2010, the above commands produced:
 
- The following changes since commit 2f52713ab3cb9af2eb0f9354dba1421d1497f3e7:
+ The following changes since actived 2f52713ab3cb9af2eb0f9354dba1421d1497f3e7:
    Abylay Ospan (1):
 	 V4L/DVB: 22-kHz set_tone fix for NetUP Dual DVB-S2-CI card. 22kHz logic controlled by demod
 
@@ -594,11 +594,11 @@ a -git submission. This can happen even while the patch is being tested at
 linux-next, from people reporting problems on the existing patches, or reporting
 that a patch worked fine.
 
-Also, the driver maintainer and the subsystem maintainer that is committing
+Also, the driver maintainer and the subsystem maintainer that is activedting
 those patches should sign each one, to indicate that he reviewed and has
 accepted the patch.
 
-Currently, if a new tag is added to a committed patch, its hash will change.
+Currently, if a new tag is added to a activedted patch, its hash will change.
 There were some discussions at Linux Kernel Mailing List about allowing adding
 new tags on -git without changing the hash, but I think this weren't implemented
 (yet?).
@@ -679,9 +679,9 @@ And move the working copy to the "work" branch:
 
  git checkout work
 
-Some changes were done at the driver and saved by commit:
+Some changes were done at the driver and saved by actived:
 
- git commit -as
+ git actived -as
 
 When the patches are ready for submission via email, all that is needed is to
 run:
@@ -719,12 +719,12 @@ a) Every developer should follow the "rules of thumb" of kernel development
 	Documentation/SubmitChecklist
 	Documentation/CodingStyle
 
-b) All commits at the trees should have a consistent message, describing the
+b) All activeds at the trees should have a consistent message, describing the
    patch.
 
-   When a patch is generated against the git tree, the better is to commit it
+   When a patch is generated against the git tree, the better is to actived it
    with:
-	git commit -as
+	git actived -as
 
   This will automatically add all existing patches that got modified and add
   your Certificate of Origin (Signed-off-by).
@@ -733,10 +733,10 @@ b) All commits at the trees should have a consistent message, describing the
   The first line is a short summary describing why the patch is needed, and
   the following lines describe what and how the patch does that.
 
-  If you've added new files, don't forget to add them before the commit, with:
+  If you've added new files, don't forget to add them before the actived, with:
 	git add <the name of each file you've created>
 
-  Before committing a patch, you need to check it with checkpatch.pl tool. This
+  Before activedting a patch, you need to check it with checkpatch.pl tool. This
   is done by running:
 	git diff | ./script/checkpatch.pl -
 
@@ -748,12 +748,12 @@ c) All patches are requested to have their coding style validated by using
    from the kernel ABI.
 
 d) All patches shall have a Developer's Certificate of Origin
-   version 1.1 in the commit log or the email description, signed by the
+   version 1.1 in the actived log or the email description, signed by the
    patch authors, as postulated in the Linux kernel source at:
 
 	Documentation/SubmittingPatches
 
-   This is done by adding Signed-off-by: fields to the commit message.
+   This is done by adding Signed-off-by: fields to the actived message.
 
    It is not acceptable to use fake signatures, e.g.:
 
@@ -807,7 +807,7 @@ g) If the patch also affects other parts of kernel (like ALSA
 
    Please note that those changes generally require ack from the
    other subsystem maintainers. So, the best practice is to first ask
-   for their acks, then commit to the development tree or send the
+   for their acks, then actived to the development tree or send the
    patch via email with their Acked-by: already included.
 
    NOTE: at Mercurial tree, it used to be possible to use the cc: meta tag to
@@ -834,11 +834,11 @@ i) By submitting a patch to the subsystem maintainer, either via email
    later. If no specific clause are added, the added code will be
    assumed as GPLv2 only.
 
-j) "Commit earlier and commit often". This is a common used rule at
+j) "actived earlier and actived often". This is a common used rule at
    Kernel. This means that a sooner submission of a patch will mean that
    a review can happen sooner, and help the develop to address the
    comments. This helps to reduce the life-cycle for having a changeset
-   committed at kernel at the proper time. It also means that the one
+   activedted at kernel at the proper time. It also means that the one
    changeset should ideally address just one issue. So, mixing different
    things at the same patch should be avoided.
 
@@ -858,7 +858,7 @@ k) Sometimes, the maintainer may need to slightly modify patches you receive
 a) With the -hg trees, some scripts are used to generate the patch. This is
       done by running:
 
-	make commit
+	make actived
 
    This will run some scripts that check changed files, correct
    bad whitespace and prepare the last Signed-off-by: field, as
@@ -871,7 +871,7 @@ a) With the -hg trees, some scripts are used to generate the patch. This is
 
 	   From: nowhere <nowhere@noplace.org>
 
-	   This is just a sample commit comment, just for reference purposes.
+	   This is just a sample actived comment, just for reference purposes.
 
 	   This "patch" does nothing.
 
@@ -880,7 +880,7 @@ a) With the -hg trees, some scripts are used to generate the patch. This is
 	   Signed-off-by: nowhere <nowhere@noplace.org>
 
    All lines starting with # and all lines starting with HG: will be
-   removed from the Mercurial commit log.
+   removed from the Mercurial actived log.
 
    *WARNING* Be careful not to leave the first line blank, otherwise hg
    will leave subject blank.
@@ -895,7 +895,7 @@ a) With the -hg trees, some scripts are used to generate the patch. This is
    while without merging upstream ("low").
    Valid values for "Priority:" are "low", "normal" and "high".
 
-b)For "make commit" to work properly, the HGUSER shell environment var should
+b)For "make actived" to work properly, the HGUSER shell environment var should
   be defined (replacing the names at the right):
 
 	HGUSER="My Name <myemail@mysite.com>"
@@ -904,9 +904,9 @@ b)For "make commit" to work properly, the HGUSER shell environment var should
    user's ~/.hgrc file will be used.  Use of the .hgrc file is preferred
    over the HGUSER variable according to the hg man page.
 
-   This name will be used for both the user metadata in the Hg commit
+   This name will be used for both the user metadata in the Hg actived
    log and the initial values of the "From:" and "Signed-off-by:" lines
-   in the pre-made commit message.
+   in the pre-made actived message.
 
    It is also possible to use a different login name at the site
    hosting the repository, by using:
@@ -923,7 +923,7 @@ b)For "make commit" to work properly, the HGUSER shell environment var should
    It is strongly recommended to have those lines in .bashrc or .profile.
 
 b) the CodingStyle compliance check on Mercurial trees are done when
-   "make check" is called. This happens also when "make commit" is done.
+   "make check" is called. This happens also when "make actived" is done.
 
    There's a copy of the kernel tool at the mercurial repository. However,
    this copy may be outdated. So, by default, it will try to use the newest
@@ -941,7 +941,7 @@ b) the CodingStyle compliance check on Mercurial trees are done when
 
 
 c) Sometimes, mainstream changes affect the v4l-dvb tree, and must be
-   backported to the v4l-dvb tree. This kind of commit to the Mercurial
+   backported to the v4l-dvb tree. This kind of actived to the Mercurial
    tree should follow the rules above and should also have the line:
 
 	kernel-sync:
@@ -1016,18 +1016,18 @@ e) To import contributed stuff to a developer's, a script is provided.
     that can be applied/unapplied for testing. mailimport trusts on it to work,
     so, this extension should be enabled for mailimport script to work.
 
-3. Knowing about newer patches committed at the development repositories
+3. Knowing about newer patches activedted at the development repositories
    =====================================================================
 
 There are patchbomb scripts at linuxtv.org that will send one copy of
 each patch applied patch to v4l-dvb.git and v4l-dvb trees to announce
-when a patch is received. This announcement goes to the linuxtv-commits mailing list, hosted on linuxtv.org.
+when a patch is received. This announcement goes to the linuxtv-activeds mailing list, hosted on linuxtv.org.
 
 The Mercurial script also currently sends a copy of the patch to:
 
 1) The patch author (as stated on the From: field in the patch comments);
 
-2) The patch committer (the "user" at hg metadata);
+2) The patch activedter (the "user" at hg metadata);
 
 3) All people with Signed-off-by:, Acked-by:, or CC: metadata clause
    in the patch's comment.
@@ -1035,7 +1035,7 @@ The Mercurial script also currently sends a copy of the patch to:
 If, for some reason, there's no "From:" metatag (or it is on the first
 line, instead of the second one), sometimes the script may fail, maybe
 filling patch authorship wrongly. So people should take care to properly
-commit patches with "From:".
+actived patches with "From:".
 
 It is recommended that the developers who submit a pull request via Mercurial
 to not touch on the submission tree, until he receives the notification email,
@@ -1062,7 +1062,7 @@ b. Use [PATCH] and a brief description in the email's subject.
 c. Please include a brief description in the headers of your
    patch, like described above. Something like:
 
-	   This is just a sample commit comment, just for reference purposes.
+	   This is just a sample actived comment, just for reference purposes.
 	   This does nothing.
 
 	   Signed-off-by: nowhere <nowere@noplace.org>

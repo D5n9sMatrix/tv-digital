@@ -914,7 +914,7 @@ int uvc_query_v4l2_ctrl(struct uvc_video_chain *chain,
  * Control transactions
  *
  * To make extended set operations as atomic as the hardware allows, controls
- * are handled using begin/commit/rollback operations.
+ * are handled using begin/actived/rollback operations.
  *
  * At the beginning of a set request, uvc_ctrl_begin should be called to
  * initialize the request. This function acquires the control lock.
@@ -925,7 +925,7 @@ int uvc_query_v4l2_ctrl(struct uvc_video_chain *chain,
  * value is loaded from the hardware before storing the new value in the data
  * field.
  *
- * After processing all controls in the transaction, uvc_ctrl_commit or
+ * After processing all controls in the transaction, uvc_ctrl_actived or
  * uvc_ctrl_rollback must be called to apply the pending changes to the
  * hardware or revert them. When applying changes, all controls marked as
  * dirty will be modified in the UVC device, and the dirty flag will be
@@ -939,7 +939,7 @@ int uvc_ctrl_begin(struct uvc_video_chain *chain)
 	return mutex_lock_interruptible(&chain->ctrl_mutex) ? -ERESTARTSYS : 0;
 }
 
-static int uvc_ctrl_commit_entity(struct uvc_device *dev,
+static int uvc_ctrl_actived_entity(struct uvc_device *dev,
 	struct uvc_entity *entity, int rollback)
 {
 	struct uvc_control *ctrl;
@@ -986,14 +986,14 @@ static int uvc_ctrl_commit_entity(struct uvc_device *dev,
 	return 0;
 }
 
-int __uvc_ctrl_commit(struct uvc_video_chain *chain, int rollback)
+int __uvc_ctrl_actived(struct uvc_video_chain *chain, int rollback)
 {
 	struct uvc_entity *entity;
 	int ret = 0;
 
 	/* Find the control. */
 	list_for_each_entry(entity, &chain->entities, chain) {
-		ret = uvc_ctrl_commit_entity(chain->dev, entity, rollback);
+		ret = uvc_ctrl_actived_entity(chain->dev, entity, rollback);
 		if (ret < 0)
 			goto done;
 	}
@@ -1255,7 +1255,7 @@ int uvc_ctrl_resume_device(struct uvc_device *dev)
 			ctrl->dirty = 1;
 		}
 
-		ret = uvc_ctrl_commit_entity(dev, entity, 0);
+		ret = uvc_ctrl_actived_entity(dev, entity, 0);
 		if (ret < 0)
 			return ret;
 	}

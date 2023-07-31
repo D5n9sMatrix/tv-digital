@@ -258,7 +258,7 @@ extern int dvbsec_diseqc_set_listen(struct dvbfe_handle *fe,
 				   enum dvbsec_diseqc_listen state);
 
 /**
- * Set the state of the committed switches of a DISEQC device.
+ * Set the state of the activedted switches of a DISEQC device.
  * These are switches which are defined to have a standard name.
  *
  * @param fe Frontend concerned.
@@ -269,7 +269,7 @@ extern int dvbsec_diseqc_set_listen(struct dvbfe_handle *fe,
  * @param switch_option Value to set the switch option switch to.
  * @return 0 on success, or nonzero on error.
  */
-extern int dvbsec_diseqc_set_committed_switches(struct dvbfe_handle *fe,
+extern int dvbsec_diseqc_set_activedted_switches(struct dvbfe_handle *fe,
 					       enum dvbsec_diseqc_address address,
 					       enum dvbsec_diseqc_oscillator oscillator,
 					       enum dvbsec_diseqc_polarization polarization,
@@ -277,7 +277,7 @@ extern int dvbsec_diseqc_set_committed_switches(struct dvbfe_handle *fe,
 					       enum dvbsec_diseqc_switch switch_option);
 
 /**
- * Set the state of the uncommitted switches of a DISEQC device.
+ * Set the state of the unactivedted switches of a DISEQC device.
  * These provide another four switching possibilities.
  *
  * @param fe Frontend concerned.
@@ -288,7 +288,7 @@ extern int dvbsec_diseqc_set_committed_switches(struct dvbfe_handle *fe,
  * @param s3 Value to set the S4 switch to.
  * @return 0 on success, or nonzero on error.
  */
-extern int dvbsec_diseqc_set_uncommitted_switches(struct dvbfe_handle *fe,
+extern int dvbsec_diseqc_set_unactivedted_switches(struct dvbfe_handle *fe,
 						 enum dvbsec_diseqc_address address,
 						 enum dvbsec_diseqc_switch s1,
 						 enum dvbsec_diseqc_switch s2,

@@ -120,7 +120,7 @@ cardlist	- Updates Documentation/video4linux/CARDLIST.*
 
 update		- updates the tree from master repository
 
-commit		- commits the change, asking for a commit msg
+actived		- activeds the change, asking for a actived msg
 
 push		- sends outgoing stuff to master repository
 

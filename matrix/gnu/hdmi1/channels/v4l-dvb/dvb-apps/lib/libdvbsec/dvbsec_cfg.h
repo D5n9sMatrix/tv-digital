@@ -91,7 +91,7 @@
  *	wait(<integer>) - wait for the given number of milliseconds.
  *	Dreset(<address>, <0|1>) - control the reset state of a DISEC device, 0:disable reset, 1:enable reset.
  *	Dpower(<address>, <0|1>) - control the power of a DISEC device, 0:off, 1:on.
- *	Dcommitted(<address>, <h|l|x>, <v|h|l|r|x>, <a|b|x>, <a|b|x>) - Write to the committed switches of a DISEC device.
+ *	Dactivedted(<address>, <h|l|x>, <v|h|l|r|x>, <a|b|x>, <a|b|x>) - Write to the activedted switches of a DISEC device.
  * 		The parameters are for band, polarisation, satelliteposition, switchoption:
  * 			band - h:high band, l:low band
  * 			polarisation - v: vertical, h:horizontal,r:right,l:left
@@ -99,7 +99,7 @@
  * 			switchoption - a:position A, b: position B
  * 		The special value 'x' means "no change to this switch".
  *
- *	Duncommitted(<address>, <a|b|x>, <a|b|x>, <a|b|x>, <a|b|x>) - Write to the uncommitted switches of the a DISEC device.
+ *	Dunactivedted(<address>, <a|b|x>, <a|b|x>, <a|b|x>, <a|b|x>) - Write to the unactivedted switches of the a DISEC device.
  * 		The parameters are for switch1, switch2, switch3, switch4, and may be set to position a or b.
  * 		The special value 'x' means "no change to this switch".
  *

@@ -85,7 +85,7 @@ apply_patch () {
 		fi
 	done
 
-	committer=`grep "Committer:" $TMP2|sed s/"#Committer: "//`
+	activedter=`grep "activedter:" $TMP2|sed s/"#activedter: "//`
 	date=`grep "Date:" $TMP2|sed s/"#Date: "//|sed s/\(.*\)//`
 
 	if [ "$usemq" != "" ]; then
@@ -112,7 +112,7 @@ apply_patch () {
 		make whitespace
 		hg qrefresh
 	else
-		echo "WILL commit with this comment:"
+		echo "WILL actived with this comment:"
 		cat $TMP2| grep -v "^#"
 		echo "Press <break> within 3 seconds if this is wrong."
 		sleep 3
@@ -135,7 +135,7 @@ apply_patch () {
 			exit -1
 		fi
 
-		# Commit the changed files
+		# actived the changed files
 		CARDLIST="`hg status -n -m|grep CARDLIST.`"
 		FILES=""
 		for i in $CARDLIST; do
@@ -146,17 +146,17 @@ apply_patch () {
 		done
 
 		if [ "$FILES" == "" ]; then
-			echo "*** ERROR nothing to commit"
+			echo "*** ERROR nothing to actived"
 			patch -s -t -p1 -l -R -d $pdir -i $next
 			cd $cur
 			exit -1
 		fi
 
-		hg commit -d "$date" -u "$committer" -m "`cat $TMP2|grep -v "^#"`" $FILES
+		hg actived -d "$date" -u "$activedter" -m "`cat $TMP2|grep -v "^#"`" $FILES
 
 		if [ "$?" != "0" ]; then
-			echo "*** ERROR at hg commit"
-			echo hg commit -d \"$date\" -u \"$committer\" -m "<msg>" $FILES
+			echo "*** ERROR at hg actived"
+			echo hg actived -d \"$date\" -u \"$activedter\" -m "<msg>" $FILES
 			patch -s -t -p1 -l -R -d $pdir -i $next
 			cd $cur
 			exit -1
@@ -181,7 +181,7 @@ proccess_patch ()
 
 	echo $i
 	if [ "`diffstat -p1 -l "$i"`" == "" ]; then
-		echo "*** ERROR nothing to commit"
+		echo "*** ERROR nothing to actived"
 		cd $cur
 		exit
 	fi

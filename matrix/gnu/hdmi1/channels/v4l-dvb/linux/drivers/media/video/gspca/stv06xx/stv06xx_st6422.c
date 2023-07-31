@@ -217,7 +217,7 @@ static int st6422_init(struct sd *sd)
 		{ 0x15c3, 0x08 },	/* 0x04/0x14 ... test pictures ??? */
 
 
-		{ 0x143f, 0x01 },	/* commit settings */
+		{ 0x143f, 0x01 },	/* actived settings */
 
 	};
 
@@ -323,7 +323,7 @@ static int st6422_set_brightness(struct gspca_dev *gspca_dev, __s32 val)
 	if (err < 0)
 		return err;
 
-	/* commit settings */
+	/* actived settings */
 	err = stv06xx_write_bridge(sd, 0x143f, 0x01);
 	return (err < 0) ? err : 0;
 }
@@ -357,7 +357,7 @@ static int st6422_set_contrast(struct gspca_dev *gspca_dev, __s32 val)
 	if (err < 0)
 		return err;
 
-	/* commit settings */
+	/* actived settings */
 	err = stv06xx_write_bridge(sd, 0x143f, 0x01);
 	return (err < 0) ? err : 0;
 }
@@ -409,7 +409,7 @@ static int st6422_set_gain(struct gspca_dev *gspca_dev, __s32 val)
 	if (err < 0)
 		return err;
 
-	/* commit settings */
+	/* actived settings */
 	err = stv06xx_write_bridge(sd, 0x143f, 0x01);
 	return (err < 0) ? err : 0;
 }
@@ -446,7 +446,7 @@ static int st6422_set_exposure(struct gspca_dev *gspca_dev, __s32 val)
 	if (err < 0)
 		return err;
 
-	/* commit settings */
+	/* actived settings */
 	err = stv06xx_write_bridge(sd, 0x143f, 0x01);
 	return (err < 0) ? err : 0;
 }

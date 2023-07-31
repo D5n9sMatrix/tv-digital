@@ -191,7 +191,7 @@ int dvbsec_std_sequence(struct dvbfe_handle *fe,
 		return -EINVAL;
 	}
 
-	dvbsec_diseqc_set_committed_switches(fe,
+	dvbsec_diseqc_set_activedted_switches(fe,
 					    DISEQC_ADDRESS_ANY_DEVICE,
 					    oscillator,
 					    polarization,
@@ -264,7 +264,7 @@ int dvbsec_diseqc_set_listen(struct dvbfe_handle *fe,
 	return dvbfe_do_diseqc_command(fe, data, sizeof(data));
 }
 
-int dvbsec_diseqc_set_committed_switches(struct dvbfe_handle *fe,
+int dvbsec_diseqc_set_activedted_switches(struct dvbfe_handle *fe,
 					enum dvbsec_diseqc_address address,
 					enum dvbsec_diseqc_oscillator oscillator,
 					enum dvbsec_diseqc_polarization polarization,
@@ -322,7 +322,7 @@ int dvbsec_diseqc_set_committed_switches(struct dvbfe_handle *fe,
 	return dvbfe_do_diseqc_command(fe, data, sizeof(data));
 }
 
-int dvbsec_diseqc_set_uncommitted_switches(struct dvbfe_handle *fe,
+int dvbsec_diseqc_set_unactivedted_switches(struct dvbfe_handle *fe,
 					  enum dvbsec_diseqc_address address,
 					  enum dvbsec_diseqc_switch s1,
 					  enum dvbsec_diseqc_switch s2,
@@ -809,7 +809,7 @@ int dvbsec_command(struct dvbfe_handle *fe, char *command)
 				dvbsec_diseqc_set_power(fe, address, DISEQC_POWER_OFF);
 			}
 #endif
-		} else if (!strncasecmp(name, "Dcommitted", namelen)) {
+		} else if (!strncasecmp(name, "Dactivedted", namelen)) {
 			if (parseintarg(&args, argsend, &address))
 				return -1;
 			if (parsechararg(&args, argsend, &iarg))
@@ -854,19 +854,19 @@ int dvbsec_command(struct dvbfe_handle *fe, char *command)
 			}
 
 #ifdef TEST_SEC_COMMAND
-			printf("Dcommitted: %i %i %i %i %i\n", address,
+			printf("Dactivedted: %i %i %i %i %i\n", address,
 			       oscillator,
 			       polarization,
 			       parse_switch(iarg3),
 			       parse_switch(iarg4));
 #else
-			dvbsec_diseqc_set_committed_switches(fe, address,
+			dvbsec_diseqc_set_activedted_switches(fe, address,
 							    oscillator,
 							    polarization,
 							    parse_switch(iarg3),
 							    parse_switch(iarg4));
 #endif
-		} else if (!strncasecmp(name, "Duncommitted", namelen)) {
+		} else if (!strncasecmp(name, "Dunactivedted", namelen)) {
 			if (parsechararg(&args, argsend, &address))
 				return -1;
 			if (parsechararg(&args, argsend, &iarg))
@@ -879,13 +879,13 @@ int dvbsec_command(struct dvbfe_handle *fe, char *command)
 				return -1;
 
 #ifdef TEST_SEC_COMMAND
-			printf("Duncommitted: %i %i %i %i %i\n", address,
+			printf("Dunactivedted: %i %i %i %i %i\n", address,
 			       parse_switch(iarg),
 			       parse_switch(iarg2),
 			       parse_switch(iarg3),
 			       parse_switch(iarg4));
 #else
-			dvbsec_diseqc_set_uncommitted_switches(fe, address,
+			dvbsec_diseqc_set_unactivedted_switches(fe, address,
 					parse_switch(iarg),
 					parse_switch(iarg2),
 					parse_switch(iarg3),

@@ -601,7 +601,7 @@ extern int uvc_video_resume(struct uvc_streaming *stream);
 extern int uvc_video_enable(struct uvc_streaming *stream, int enable);
 extern int uvc_probe_video(struct uvc_streaming *stream,
 		struct uvc_streaming_control *probe);
-extern int uvc_commit_video(struct uvc_streaming *stream,
+extern int uvc_actived_video(struct uvc_streaming *stream,
 		struct uvc_streaming_control *ctrl);
 extern int uvc_query_ctrl(struct uvc_device *dev, __u8 query, __u8 unit,
 		__u8 intfnum, __u8 cs, void *data, __u16 size);
@@ -628,14 +628,14 @@ extern int uvc_ctrl_resume_device(struct uvc_device *dev);
 extern void uvc_ctrl_init(void);
 
 extern int uvc_ctrl_begin(struct uvc_video_chain *chain);
-extern int __uvc_ctrl_commit(struct uvc_video_chain *chain, int rollback);
-static inline int uvc_ctrl_commit(struct uvc_video_chain *chain)
+extern int __uvc_ctrl_actived(struct uvc_video_chain *chain, int rollback);
+static inline int uvc_ctrl_actived(struct uvc_video_chain *chain)
 {
-	return __uvc_ctrl_commit(chain, 0);
+	return __uvc_ctrl_actived(chain, 0);
 }
 static inline int uvc_ctrl_rollback(struct uvc_video_chain *chain)
 {
-	return __uvc_ctrl_commit(chain, 1);
+	return __uvc_ctrl_actived(chain, 1);
 }
 
 extern int uvc_ctrl_get(struct uvc_video_chain *chain,

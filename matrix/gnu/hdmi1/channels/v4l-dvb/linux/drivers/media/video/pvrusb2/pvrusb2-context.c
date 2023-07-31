@@ -257,7 +257,7 @@ static void pvr2_context_reset_input_limits(struct pvr2_context *mp)
 		tmsk &= cp->input_mask;
 	}
 	pvr2_hdw_set_input_allowed(hdw,mmsk,tmsk);
-	pvr2_hdw_commit_ctl(hdw);
+	pvr2_hdw_actived_ctl(hdw);
 }
 
 
@@ -372,7 +372,7 @@ int pvr2_channel_limit_inputs(struct pvr2_channel *cp,unsigned int cmsk)
 			break;
 		}
 		cp->input_mask = cmsk;
-		pvr2_hdw_commit_ctl(hdw);
+		pvr2_hdw_actived_ctl(hdw);
 	} while (0);
 	pvr2_context_exit(cp->mc_head);
 	return ret;

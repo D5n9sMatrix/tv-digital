@@ -29,7 +29,7 @@ and filtering several section and PES data streams at the same time.
 </para>
 
 <para>In early 2000, we were approached by Nokia with a proposal for a
-new standard Linux DVB API. As a commitment to the development of
+new standard Linux DVB API. As a activedment to the development of
 terminals based on open standards, Nokia and Convergence made it
 available to all Linux developers and published it on
 <ulink url="http://www.linuxtv.org/" /> in September 2000.

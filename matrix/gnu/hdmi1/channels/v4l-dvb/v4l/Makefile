@@ -66,7 +66,7 @@ spec::
 # Targets which don't need Makefile.media's rules
 no-makefile-media-targets := %config clean distclean snapshot snap \
 	tarball release %links start insmod load stop rmmod unload reload \
-	card% update push %commit help debug cx88-ivtv lxdialog
+	card% update push %actived help debug cx88-ivtv lxdialog
 
 # Targets which don't need .myconfig to exist, to keep us from including it
 no-dot-config-targets := $(no-makefile-media-targets) %install remove
@@ -422,8 +422,8 @@ old-install:: rminstall
 update::
 	make -C .. update
 
-commit cvscommit hgcommit::
-	make -C .. commit
+actived cvsactived hgactived::
+	make -C .. actived
 
 push::
 	make -C .. push

@@ -26,16 +26,16 @@ $(SPECS):
 %::
 	$(MAKE) -C $(BUILD_DIR) $(MAKECMDGOALS)
 
-commit cvscommit hgcommit change changes changelog:: whitespace
-	@cd $(BUILD_DIR); scripts/cardlist; scripts/do_commit.sh $(EDITOR) $(TMP)/v4l_hg_whitespace; cd ..
+actived cvsactived hgactived change changes changelog:: whitespace
+	@cd $(BUILD_DIR); scripts/cardlist; scripts/do_actived.sh $(EDITOR) $(TMP)/v4l_hg_whitespace; cd ..
 
 qrefresh: Q=q
 qrefresh:: whitespace
 	cd $(BUILD_DIR); scripts/cardlist; cd ..
-	v4l/scripts/prep_commit_msg.pl -q $(TMP)/v4l_hg_whitespace > \
-		$(TMP)/v4l_hg_commit.msg
-	$(EDITOR) $(TMP)/v4l_hg_commit.msg
-	grep -v '^#' $(TMP)/v4l_hg_commit.msg | hg qrefresh -g -l -
+	v4l/scripts/prep_actived_msg.pl -q $(TMP)/v4l_hg_whitespace > \
+		$(TMP)/v4l_hg_actived.msg
+	$(EDITOR) $(TMP)/v4l_hg_actived.msg
+	grep -v '^#' $(TMP)/v4l_hg_actived.msg | hg qrefresh -g -l -
 
 pull update v4l-update::
 	@echo "Pulling changes from master repository $(REPO_PULL)"

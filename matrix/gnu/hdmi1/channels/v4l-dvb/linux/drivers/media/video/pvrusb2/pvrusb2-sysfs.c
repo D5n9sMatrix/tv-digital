@@ -267,7 +267,7 @@ static int store_val_any(struct pvr2_sysfs_ctl_item *cip, int customfl,
 	}
 	if (ret < 0) return ret;
 	ret = pvr2_ctrl_set_mask_value(cip->cptr, mask, val);
-	pvr2_hdw_commit_ctl(cip->chptr->channel.hdw);
+	pvr2_hdw_actived_ctl(cip->chptr->channel.hdw);
 	return ret;
 }
 

@@ -135,7 +135,7 @@ static int uvc_get_video_ctrl(struct uvc_streaming *stream,
 		return -ENOMEM;
 
 	ret = __uvc_query_ctrl(stream->dev, query, 0, stream->intfnum,
-		probe ? UVC_VS_PROBE_CONTROL : UVC_VS_COMMIT_CONTROL, data,
+		probe ? UVC_VS_PROBE_CONTROL : UVC_VS_actived_CONTROL, data,
 		size, uvc_timeout_param);
 
 	if ((query == UVC_GET_MIN || query == UVC_GET_MAX) && ret == 2) {
@@ -162,7 +162,7 @@ static int uvc_get_video_ctrl(struct uvc_streaming *stream,
 		goto out;
 	} else if (ret != size) {
 		uvc_printk(KERN_ERR, "Failed to query (%u) UVC %s control : "
-			"%d (exp. %u).\n", query, probe ? "probe" : "commit",
+			"%d (exp. %u).\n", query, probe ? "probe" : "actived",
 			ret, size);
 		ret = -EIO;
 		goto out;
@@ -239,11 +239,11 @@ static int uvc_set_video_ctrl(struct uvc_streaming *stream,
 	}
 
 	ret = __uvc_query_ctrl(stream->dev, UVC_SET_CUR, 0, stream->intfnum,
-		probe ? UVC_VS_PROBE_CONTROL : UVC_VS_COMMIT_CONTROL, data,
+		probe ? UVC_VS_PROBE_CONTROL : UVC_VS_actived_CONTROL, data,
 		size, uvc_timeout_param);
 	if (ret != size) {
 		uvc_printk(KERN_ERR, "Failed to set UVC %s control : "
-			"%d (exp. %u).\n", probe ? "probe" : "commit",
+			"%d (exp. %u).\n", probe ? "probe" : "actived",
 			ret, size);
 		ret = -EIO;
 	}
@@ -317,7 +317,7 @@ done:
 	return ret;
 }
 
-int uvc_commit_video(struct uvc_streaming *stream,
+int uvc_actived_video(struct uvc_streaming *stream,
 	struct uvc_streaming_control *probe)
 {
 	return uvc_set_video_ctrl(stream, probe, 0);
@@ -1062,7 +1062,7 @@ int uvc_video_resume(struct uvc_streaming *stream)
 
 	stream->frozen = 0;
 
-	ret = uvc_commit_video(stream, &stream->ctrl);
+	ret = uvc_actived_video(stream, &stream->ctrl);
 	if (ret < 0) {
 		uvc_queue_enable(&stream->queue, 0);
 		return ret;
@@ -1126,7 +1126,7 @@ int uvc_video_init(struct uvc_streaming *stream)
 		uvc_set_video_ctrl(stream, probe, 1);
 
 	/* Initialize the streaming parameters with the probe control current
-	 * value. This makes sure SET_CUR requests on the streaming commit
+	 * value. This makes sure SET_CUR requests on the streaming actived
 	 * control will always use values retrieved from a successful GET_CUR
 	 * request on the probe control, as required by the UVC specification.
 	 */
@@ -1211,8 +1211,8 @@ int uvc_video_enable(struct uvc_streaming *stream, int enable)
 	if (ret < 0)
 		return ret;
 
-	/* Commit the streaming parameters. */
-	ret = uvc_commit_video(stream, &stream->ctrl);
+	/* actived the streaming parameters. */
+	ret = uvc_actived_video(stream, &stream->ctrl);
 	if (ret < 0)
 		return ret;
 

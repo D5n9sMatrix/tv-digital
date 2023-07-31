@@ -134,7 +134,7 @@ How to set up a satellite frontend?
 
   Depending on the equipment setup, you may or may not have to repeat the
   DiSEqC commands (only commands, not the whole sequence) for cascaded devices
-  and can pack committed/uncommitted switch messages. See the DiSEqC spec for
+  and can pack activedted/unactivedted switch messages. See the DiSEqC spec for
   details.
 
   In an advanced program, you probably want to send this sequence using an

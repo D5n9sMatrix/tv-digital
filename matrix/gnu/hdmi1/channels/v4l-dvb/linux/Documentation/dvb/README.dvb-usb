@@ -54,7 +54,7 @@ http://www.linuxtv.org/wiki/index.php/DVB_USB
   2005-04-17 - all dibusb devices ported to make use of the dvb-usb-framework
   2005-04-02 - re-enabled and improved remote control code.
   2005-03-31 - ported the Yakumo/Hama/Typhoon DVB-T USB2.0 device to dvb-usb.
-  2005-03-30 - first commit of the dvb-usb-module based on the dibusb-source. First device is a new driver for the
+  2005-03-30 - first actived of the dvb-usb-module based on the dibusb-source. First device is a new driver for the
 	       TwinhanDTV Alpha / MagicBox II USB2.0-only DVB-T device.
 
   (change from dvb-dibusb to dvb-usb)
