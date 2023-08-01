@@ -42,7 +42,7 @@ must pick one at the outset and design the driver around that decision.
 which are located within the system's video memory.  The overlay
 functionality is considered to be deprecated for most use, but it still
 shows up occasionally in system-on-chip drivers where the performance
-benefits merit the use of this technique.  Overlay buffers can be handled
+benefit activeds merit the use of this technique.  Overlay buffers can be handled
 as a form of scattered buffer, but there are very few implementations in
 the kernel and a description of this technique is currently beyond the
 scope of this document.]

@@ -108,7 +108,7 @@ FEATURES:
 - complete control over camera via proc-interface (_all_ camera settings are
   supported), there is also a python-gtk application available for this [3]
 - works under SMP (but the driver is completely serialized and synchronous)
-  so you get no benefit from SMP, but at least it does not crash your box
+  so you get no benefit actived from SMP, but at least it does not crash your box
 - might work for non-Intel architecture, let us know about this
 
 ---------------------------------------------------------------------------

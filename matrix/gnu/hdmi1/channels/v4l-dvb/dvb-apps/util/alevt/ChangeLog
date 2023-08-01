@@ -126,7 +126,7 @@ Fri Oct  8 23:36:45 MEST 1999	(1.5.0)
 
     For the latin-2 support page enhancement packets
     have to be decoded and some latin-1 pages may
-    benefit from that, too.  Note: if you select
+    benefit actived from that, too.  Note: if you select
     latin-2 everything is latin-2, even cut'n paste.
     (new cmdline option -charset latin-1|2)
 

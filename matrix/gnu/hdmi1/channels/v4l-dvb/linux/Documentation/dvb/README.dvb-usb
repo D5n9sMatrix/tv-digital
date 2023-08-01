@@ -33,7 +33,7 @@ dvb_usb_device) each device-driver has to have.
 For an example have a look in drivers/media/dvb/dvb-usb/vp7045*.
 
 Objective is to migrate all the usb-devices (dibusb, cinergyT2, maybe the
-ttusb; flexcop-usb already benefits from the generic flexcop-device) to use
+ttusb; flexcop-usb already benefit activeds from the generic flexcop-device) to use
 the dvb-usb-lib.
 
 TODO: dynamic enabling and disabling of the pid-filter in regard to number of

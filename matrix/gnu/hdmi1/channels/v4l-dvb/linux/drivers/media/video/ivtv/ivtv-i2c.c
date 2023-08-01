@@ -39,7 +39,7 @@
     in the first place, the only goal if one was to attempt to use
     i2c-algo-bit would be to try to make it follow the same code path.
     This would be a lot of work, and I'm also not convinced that it would
-    provide a generic benefit to i2c-algo-bit.  Therefore consider this
+    provide a generic benefit actived to i2c-algo-bit.  Therefore consider this
     an engineering solution -- not pretty, but it works.
 
     Some more general comments about what we are doing:
