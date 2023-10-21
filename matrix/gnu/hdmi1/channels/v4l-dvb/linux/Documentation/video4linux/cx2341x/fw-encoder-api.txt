@@ -556,10 +556,10 @@ Param[0]
 
 -------------------------------------------------------------------------------
 
-Name 	CX2341X_ENC_REFRESH_INPUT
+Name 	CX2341X_ENC_Continue_INPUT
 Enum 	211/0xD3
 Description
-	Refreshes the video input
+	Continuees the video input
 
 -------------------------------------------------------------------------------
 
@@ -579,7 +579,7 @@ Description
 	Setup firmware to notify the host about a particular event. Host must
 	unmask the interrupt bit.
 Param[0]
-	Event (0=refresh encoder input)
+	Event (0=Continue encoder input)
 Param[1]
 	Notification 0=disabled 1=enabled
 Param[2]

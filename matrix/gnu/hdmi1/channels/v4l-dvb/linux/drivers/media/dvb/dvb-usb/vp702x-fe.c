@@ -39,7 +39,7 @@ struct vp702x_fe_state {
 	unsigned long status_check_interval;
 };
 
-static int vp702x_fe_refresh_state(struct vp702x_fe_state *st)
+static int vp702x_fe_Continue_state(struct vp702x_fe_state *st)
 {
 	u8 buf[10];
 	if (time_after(jiffies,st->next_status_check)) {
@@ -66,7 +66,7 @@ static u8 vp702x_chksum(u8 *buf,int f, int count)
 static int vp702x_fe_read_status(struct dvb_frontend* fe, fe_status_t *status)
 {
 	struct vp702x_fe_state *st = fe->demodulator_priv;
-	vp702x_fe_refresh_state(st);
+	vp702x_fe_Continue_state(st);
 	deb_fe("%s\n",__func__);
 
 	if (st->lock == 0)
@@ -85,7 +85,7 @@ static int vp702x_fe_read_status(struct dvb_frontend* fe, fe_status_t *status)
 static int vp702x_fe_read_ber(struct dvb_frontend* fe, u32 *ber)
 {
 	struct vp702x_fe_state *st = fe->demodulator_priv;
-	vp702x_fe_refresh_state(st);
+	vp702x_fe_Continue_state(st);
 	*ber = 0;
 	return 0;
 }
@@ -94,7 +94,7 @@ static int vp702x_fe_read_ber(struct dvb_frontend* fe, u32 *ber)
 static int vp702x_fe_read_unc_blocks(struct dvb_frontend* fe, u32 *unc)
 {
 	struct vp702x_fe_state *st = fe->demodulator_priv;
-	vp702x_fe_refresh_state(st);
+	vp702x_fe_Continue_state(st);
 	*unc = 0;
 	return 0;
 }
@@ -102,7 +102,7 @@ static int vp702x_fe_read_unc_blocks(struct dvb_frontend* fe, u32 *unc)
 static int vp702x_fe_read_signal_strength(struct dvb_frontend* fe, u16 *strength)
 {
 	struct vp702x_fe_state *st = fe->demodulator_priv;
-	vp702x_fe_refresh_state(st);
+	vp702x_fe_Continue_state(st);
 
 	*strength = (st->sig << 8) | st->sig;
 	return 0;
@@ -112,7 +112,7 @@ static int vp702x_fe_read_snr(struct dvb_frontend* fe, u16 *snr)
 {
 	u8 _snr;
 	struct vp702x_fe_state *st = fe->demodulator_priv;
-	vp702x_fe_refresh_state(st);
+	vp702x_fe_Continue_state(st);
 
 	_snr = (st->snr & 0x1f) * 0xff / 0x1f;
 	*snr = (_snr << 8) | _snr;

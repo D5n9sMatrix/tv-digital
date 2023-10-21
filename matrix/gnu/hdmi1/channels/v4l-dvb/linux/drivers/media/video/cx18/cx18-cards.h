@@ -115,7 +115,7 @@ struct cx18_card_tuner_i2c {
 
 struct cx18_ddr {		/* DDR config data */
 	u32 chip_config;
-	u32 refresh;
+	u32 Continue;
 	u32 timing1;
 	u32 timing2;
 	u32 tune_lane;

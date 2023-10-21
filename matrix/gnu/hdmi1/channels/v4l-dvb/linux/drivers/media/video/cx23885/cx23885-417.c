@@ -167,7 +167,7 @@ enum cx23885_copyright {
 	CX23885_COPYRIGHT_ON,
 };
 enum cx23885_notification_type {
-	CX23885_NOTIFICATION_REFRESH,
+	CX23885_NOTIFICATION_Continue,
 };
 enum cx23885_notification_status {
 	CX23885_NOTIFICATION_OFF,
@@ -213,7 +213,7 @@ enum cx23885_mute_video_shift {
 
 /* Registers */
 /* IVTV_REG_OFFSET */
-#define IVTV_REG_ENC_SDRAM_REFRESH (0x07F8)
+#define IVTV_REG_ENC_SDRAM_Continue (0x07F8)
 #define IVTV_REG_ENC_SDRAM_PRECHARGE (0x07FC)
 #define IVTV_REG_SPU (0x9050)
 #define IVTV_REG_HW_BLOCKS (0x9054)
@@ -735,8 +735,8 @@ static char *cmd_to_str(int cmd)
 		return  "SET_FRAME_DROP_RATE";
 	case CX2341X_ENC_PAUSE_ENCODER:
 		return  "PAUSE_ENCODER";
-	case CX2341X_ENC_REFRESH_INPUT:
-		return  "REFRESH_INPUT";
+	case CX2341X_ENC_Continue_INPUT:
+		return  "Continue_INPUT";
 	case CX2341X_ENC_SET_COPYRIGHT:
 		return  "SET_COPYRIGHT";
 	case CX2341X_ENC_SET_EVENT_NOTIFICATION:
@@ -915,7 +915,7 @@ static int cx23885_load_firmware(struct cx23885_dev *dev)
 	retval |= mc417_register_write(dev,
 		IVTV_REG_HW_BLOCKS, IVTV_CMD_HW_BLOCKS_RST);
 	retval |= mc417_register_write(dev,
-		IVTV_REG_ENC_SDRAM_REFRESH, 0x80000800);
+		IVTV_REG_ENC_SDRAM_Continue, 0x80000800);
 	retval |= mc417_register_write(dev,
 		IVTV_REG_ENC_SDRAM_PRECHARGE, 0x1A);
 	retval |= mc417_register_write(dev,

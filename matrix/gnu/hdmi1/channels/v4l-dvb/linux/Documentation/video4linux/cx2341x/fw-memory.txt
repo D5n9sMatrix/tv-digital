@@ -82,7 +82,7 @@ Memory locations for Encoder Buffers 0x700-0x7ff:
 These registers show offsets of memory locations pertaining to each
 buffer area used for encoding, have to shift them by <<1 first.
 
-0x07F8: Encoder SDRAM refresh
+0x07F8: Encoder SDRAM Continue
 0x07FC: Encoder SDRAM pre-charge
 
 Memory locations for Decoder Buffers 0x800-0x8ff:
@@ -90,7 +90,7 @@ Memory locations for Decoder Buffers 0x800-0x8ff:
 These registers show offsets of memory locations pertaining to each
 buffer area used for decoding, have to shift them by <<1 first.
 
-0x08F8: Decoder SDRAM refresh
+0x08F8: Decoder SDRAM Continue
 0x08FC: Decoder SDRAM pre-charge
 
 Other memory locations:

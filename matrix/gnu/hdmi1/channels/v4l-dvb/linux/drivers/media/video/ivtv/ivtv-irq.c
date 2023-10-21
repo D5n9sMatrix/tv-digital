@@ -943,7 +943,7 @@ irqreturn_t ivtv_irq_handler(int irq, void *dev_id)
 
 	if (combo & IVTV_IRQ_ENC_VIM_RST) {
 		IVTV_DEBUG_IRQ("VIM RST\n");
-		/*ivtv_vapi(itv, CX2341X_ENC_REFRESH_INPUT, 0); */
+		/*ivtv_vapi(itv, CX2341X_ENC_Continue_INPUT, 0); */
 	}
 
 	if (combo & IVTV_IRQ_DEC_AUD_MODE_CHG) {

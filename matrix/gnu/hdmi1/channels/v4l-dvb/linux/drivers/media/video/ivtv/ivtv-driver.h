@@ -108,9 +108,9 @@
 #define IVTV_REG_IRQMASK 	(0x0048)
 
 /* Setup Registers */
-#define IVTV_REG_ENC_SDRAM_REFRESH 	(0x07F8)
+#define IVTV_REG_ENC_SDRAM_Continue 	(0x07F8)
 #define IVTV_REG_ENC_SDRAM_PRECHARGE 	(0x07FC)
-#define IVTV_REG_DEC_SDRAM_REFRESH 	(0x08F8)
+#define IVTV_REG_DEC_SDRAM_Continue 	(0x08F8)
 #define IVTV_REG_DEC_SDRAM_PRECHARGE 	(0x08FC)
 #define IVTV_REG_VDM 			(0x2800)
 #define IVTV_REG_AO 			(0x2D00)

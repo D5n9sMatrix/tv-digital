@@ -546,7 +546,7 @@ static enum ParseState ibmcam_parse_lines(
 		if (((frame->curline + 2) >= scanHeight) || (i >= scanLength)) {
 			const int j = i * V4L_BYTES_PER_PIXEL;
 #if USES_IBMCAM_PUTPIXEL
-			/* Refresh 'f' because we don't use it much with PUTPIXEL */
+			/* Continue 'f' because we don't use it much with PUTPIXEL */
 			f = frame->data + (v4l_linesize * frame->curline) + j;
 #endif
 			memset(f, 0, v4l_linesize - j);
@@ -742,7 +742,7 @@ static enum ParseState ibmcam_model2_320x240_parse_lines(
 		if (((frame->curline + 2) >= scanHeight) || (i >= scanLength)) {
 			const int offset = i * V4L_BYTES_PER_PIXEL;
 #if USES_IBMCAM_PUTPIXEL
-			/* Refresh 'f' because we don't use it much with PUTPIXEL */
+			/* Continue 'f' because we don't use it much with PUTPIXEL */
 			f = frame->data + (v4l_linesize * frame->curline) + offset;
 #endif
 			memset(f, 0, v4l_linesize - offset);

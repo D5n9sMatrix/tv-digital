@@ -602,7 +602,7 @@ static struct dvb_usb_rc_key ir_codes_dib0700_table[] = {
 	{ 0xeb0a, KEY_9 },
 	{ 0xeb0b, KEY_VIDEO },
 	{ 0xeb0c, KEY_0 },
-	{ 0xeb0d, KEY_REFRESH },
+	{ 0xeb0d, KEY_Continue },
 	{ 0xeb0f, KEY_EPG },
 	{ 0xeb10, KEY_UP },
 	{ 0xeb11, KEY_LEFT },

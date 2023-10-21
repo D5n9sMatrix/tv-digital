@@ -712,7 +712,7 @@ static int saa711x_s_clock_freq(struct v4l2_subdev *sd, u32 freq)
 	if (freq < 32000 || freq > 48000)
 		return -EINVAL;
 
-	/* hz is the refresh rate times 100 */
+	/* hz is the Continue rate times 100 */
 	hz = (state->std & V4L2_STD_525_60) ? 5994 : 5000;
 	/* acpf = (256 * freq) / field_frequency == (256 * 100 * freq) / hz */
 	acpf = (25600 * freq) / hz;

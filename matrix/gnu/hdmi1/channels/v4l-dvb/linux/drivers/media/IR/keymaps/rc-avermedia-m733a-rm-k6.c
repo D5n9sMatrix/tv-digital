@@ -32,7 +32,7 @@ static struct ir_scancode avermedia_m733a_rm_k6[] = {
 	{ 0x0411, KEY_9 },
 	{ 0x044c, KEY_DOT },      /* '.' */
 	{ 0x0412, KEY_0 },
-	{ 0x0407, KEY_REFRESH },  /* Refresh/Reload */
+	{ 0x0407, KEY_Continue },  /* Continue/Reload */
 
 	{ 0x0413, KEY_AUDIO },
 	{ 0x0440, KEY_SCREEN },   /* Full Screen toggle */

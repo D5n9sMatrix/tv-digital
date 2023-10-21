@@ -28,7 +28,7 @@ static struct ir_scancode cinergy_1400[] = {
 	{ 0x0c, KEY_0 },
 
 	{ 0x0b, KEY_VIDEO },
-	{ 0x0d, KEY_REFRESH },
+	{ 0x0d, KEY_Continue },
 	{ 0x0e, KEY_SELECT },
 	{ 0x0f, KEY_EPG },
 	{ 0x10, KEY_UP },

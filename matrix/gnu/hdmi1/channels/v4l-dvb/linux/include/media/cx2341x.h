@@ -162,7 +162,7 @@ void cx2341x_log_status(const struct cx2341x_mpeg_params *p, const char *prefix)
 #define CX2341X_ENC_INITIALIZE_INPUT 		0xcd
 #define CX2341X_ENC_SET_FRAME_DROP_RATE 	0xd0
 #define CX2341X_ENC_PAUSE_ENCODER 		0xd2
-#define CX2341X_ENC_REFRESH_INPUT 		0xd3
+#define CX2341X_ENC_Continue_INPUT 		0xd3
 #define CX2341X_ENC_SET_COPYRIGHT		0xd4
 #define CX2341X_ENC_SET_EVENT_NOTIFICATION 	0xd5
 #define CX2341X_ENC_SET_NUM_VSYNC_LINES 	0xd6

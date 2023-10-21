@@ -8,7 +8,7 @@
     local alpha. The colorspace is selectable between rgb & yuv.
     Depending on the TV standard configured in the ivtv module at load time,
     the initial resolution is either 640x400 (NTSC) or 640x480 (PAL) at 8bpp.
-    Video timings are locked to ensure a vertical refresh rate of 50Hz (PAL)
+    Video timings are locked to ensure a vertical Continue rate of 50Hz (PAL)
     or 59.94 (NTSC)
 
     Copyright (c) 2003 Matt T. Yourst <yourst@yourst.com>
@@ -798,7 +798,7 @@ static int _ivtvfb_check_var(struct fb_var_screeninfo *var, struct ivtv *itv)
 		var->upper_margin = 1 + (((itv->is_50hz ? 576 : 480) - var->yres) / 2);
 	}
 
-	/* Maintain overall 'size' for a constant refresh rate */
+	/* Maintain overall 'size' for a constant Continue rate */
 	var->right_margin = hlimit - var->left_margin - var->xres;
 	var->lower_margin = vlimit - var->upper_margin - var->yres;
 
@@ -808,7 +808,7 @@ static int _ivtvfb_check_var(struct fb_var_screeninfo *var, struct ivtv *itv)
 
 	/* Non-interlaced / interlaced mode is used to switch the OSD filter
 	   on or off. Adjust the clock timings to maintain a constant
-	   vertical refresh rate. */
+	   vertical Continue rate. */
 	if ((var->vmode & FB_VMODE_MASK) == FB_VMODE_NONINTERLACED)
 		var->pixclock = pixclock / 2;
 	else

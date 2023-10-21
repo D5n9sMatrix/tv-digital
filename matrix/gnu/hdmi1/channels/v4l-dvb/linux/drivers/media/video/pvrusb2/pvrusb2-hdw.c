@@ -1598,7 +1598,7 @@ int pvr2_upload_firmware2(struct pvr2_hdw *hdw)
 	ret |= pvr2_hdw_gpio_chg_out(hdw,0xffffffff,0x00000008); /*gpio output state*/
 	ret |= pvr2_write_register(hdw, 0x9058, 0xffffffed); /*VPU ctrl*/
 	ret |= pvr2_write_register(hdw, 0x9054, 0xfffffffd); /*reset hw blocks*/
-	ret |= pvr2_write_register(hdw, 0x07f8, 0x80000800); /*encoder SDRAM refresh*/
+	ret |= pvr2_write_register(hdw, 0x07f8, 0x80000800); /*encoder SDRAM Continue*/
 	ret |= pvr2_write_register(hdw, 0x07fc, 0x0000001a); /*encoder SDRAM pre-charge*/
 	ret |= pvr2_write_register(hdw, 0x0700, 0x00000000); /*I2C clock*/
 	ret |= pvr2_write_register(hdw, 0xaa00, 0x00000000); /*unknown*/

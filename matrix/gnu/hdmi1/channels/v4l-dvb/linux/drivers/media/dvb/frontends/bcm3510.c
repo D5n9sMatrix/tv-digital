@@ -267,7 +267,7 @@ static int bcm3510_bert_reset(struct bcm3510_state *st)
 	return 0;
 }
 
-static int bcm3510_refresh_state(struct bcm3510_state *st)
+static int bcm3510_Continue_state(struct bcm3510_state *st)
 {
 	if (time_after(jiffies,st->next_status_check)) {
 		bcm3510_do_hab_cmd(st, CMD_STATUS, MSGID_STATUS1, NULL,0, (u8 *)&st->status1, sizeof(st->status1));
@@ -280,7 +280,7 @@ static int bcm3510_refresh_state(struct bcm3510_state *st)
 static int bcm3510_read_status(struct dvb_frontend *fe, fe_status_t *status)
 {
 	struct bcm3510_state* st = fe->demodulator_priv;
-	bcm3510_refresh_state(st);
+	bcm3510_Continue_state(st);
 
 	*status = 0;
 	if (st->status1.STATUS1.RECEIVER_LOCK)
@@ -304,7 +304,7 @@ static int bcm3510_read_status(struct dvb_frontend *fe, fe_status_t *status)
 static int bcm3510_read_ber(struct dvb_frontend* fe, u32* ber)
 {
 	struct bcm3510_state* st = fe->demodulator_priv;
-	bcm3510_refresh_state(st);
+	bcm3510_Continue_state(st);
 
 	*ber = (st->status2.LDBER0 << 16) | (st->status2.LDBER1 << 8) | st->status2.LDBER2;
 	return 0;
@@ -313,7 +313,7 @@ static int bcm3510_read_ber(struct dvb_frontend* fe, u32* ber)
 static int bcm3510_read_unc(struct dvb_frontend* fe, u32* unc)
 {
 	struct bcm3510_state* st = fe->demodulator_priv;
-	bcm3510_refresh_state(st);
+	bcm3510_Continue_state(st);
 	*unc = (st->status2.LDUERC0 << 8) | st->status2.LDUERC1;
 	return 0;
 }
@@ -323,7 +323,7 @@ static int bcm3510_read_signal_strength(struct dvb_frontend* fe, u16* strength)
 	struct bcm3510_state* st = fe->demodulator_priv;
 	s32 t;
 
-	bcm3510_refresh_state(st);
+	bcm3510_Continue_state(st);
 	t = st->status2.SIGNAL;
 
 	if (t > 190)
@@ -341,7 +341,7 @@ static int bcm3510_read_signal_strength(struct dvb_frontend* fe, u16* strength)
 static int bcm3510_read_snr(struct dvb_frontend* fe, u16* snr)
 {
 	struct bcm3510_state* st = fe->demodulator_priv;
-	bcm3510_refresh_state(st);
+	bcm3510_Continue_state(st);
 
 	*snr = st->status1.SNR_EST0*1000 + ((st->status1.SNR_EST1*1000) >> 8);
 	return 0;

@@ -110,7 +110,7 @@ apply_patch () {
 		hg qnew -d "$date" -m "`cat $TMP2|grep -v "^#"`" $name
 		make cardlist
 		make whitespace
-		hg qrefresh
+		hg qContinue
 	else
 		echo "WILL actived with this comment:"
 		cat $TMP2| grep -v "^#"

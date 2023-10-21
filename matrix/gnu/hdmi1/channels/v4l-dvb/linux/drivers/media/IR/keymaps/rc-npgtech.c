@@ -27,7 +27,7 @@ static struct ir_scancode npgtech[] = {
 	{ 0x1e, KEY_9 },
 	{ 0x3a, KEY_0 },
 	{ 0x22, KEY_NUMLOCK },		/* -/-- */
-	{ 0x20, KEY_REFRESH },
+	{ 0x20, KEY_Continue },
 
 	{ 0x03, KEY_BRIGHTNESSDOWN },
 	{ 0x28, KEY_AUDIO },

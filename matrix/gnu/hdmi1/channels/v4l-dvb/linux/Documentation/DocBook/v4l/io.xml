@@ -913,7 +913,7 @@ containing only the odd and even lines of the image, respectively.
 Alternating the so called odd and even field are transmitted, and due
 to a small delay between fields a cathode ray TV displays the lines
 interleaved, yielding the original frame. This curious technique was
-invented because at refresh rates similar to film the image would
+invented because at Continue rates similar to film the image would
 fade out too quickly. Transmitting fields reduces the flicker without
 the necessity of doubling the frame rate and with it the bandwidth
 required for each channel.</para>

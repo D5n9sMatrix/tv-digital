@@ -490,8 +490,8 @@ extern char migor_sdram_leave_end;
 
 static int __init migor_devices_setup(void)
 {
-	/* register board specific self-refresh code */
-	sh_mobile_register_self_refresh(SUSP_SH_STANDBY | SUSP_SH_SF,
+	/* register board specific self-Continue code */
+	sh_mobile_register_self_Continue(SUSP_SH_STANDBY | SUSP_SH_SF,
 					&migor_sdram_enter_start,
 					&migor_sdram_enter_end,
 					&migor_sdram_leave_start,

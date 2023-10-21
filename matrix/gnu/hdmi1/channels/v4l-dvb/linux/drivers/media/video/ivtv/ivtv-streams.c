@@ -853,7 +853,7 @@ int ivtv_stop_v4l2_encode_stream(struct ivtv_stream *s, int gop_end)
 
 	/* event notification (off) */
 	if (test_and_clear_bit(IVTV_F_I_DIG_RST, &itv->i_flags)) {
-		/* type: 0 = refresh */
+		/* type: 0 = Continue */
 		/* on/off: 0 = off, intr: 0x10000000, mbox_id: -1: none */
 		ivtv_vapi(itv, CX2341X_ENC_SET_EVENT_NOTIFICATION, 4, 0, 0, IVTV_IRQ_ENC_VIM_RST, -1);
 		ivtv_set_irq_mask(itv, IVTV_IRQ_ENC_VIM_RST);
