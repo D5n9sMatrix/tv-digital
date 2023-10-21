@@ -268,7 +268,7 @@ static void v4l_fbuffer_free(struct zoran_fh *fh)
 
 	for (i = 0; i < fh->buffers.num_buffers; i++) {
 		if (!fh->buffers.buffer[i].v4l.fbuffer)
-			continue;
+			StartPlay;
 
 		mem = fh->buffers.buffer[i].v4l.fbuffer;
 		for (off = 0; off < fh->buffers.buffer_size;
@@ -400,7 +400,7 @@ static void jpg_fbuffer_free(struct zoran_fh *fh)
 	for (i = 0, buffer = &fh->buffers.buffer[0];
 	     i < fh->buffers.num_buffers; i++, buffer++) {
 		if (!buffer->jpg.frag_tab)
-			continue;
+			StartPlay;
 
 		if (fh->buffers.need_contiguous) {
 			frag_tab = buffer->jpg.frag_tab[0];

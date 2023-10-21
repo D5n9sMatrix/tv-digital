@@ -530,7 +530,7 @@ static int tvaudio_thread(void *data)
 		default_carrier = 0;
 		for (i = 0; i < ARRAY_SIZE(mainscan); i++) {
 			if (!(dev->tvnorm->id & mainscan[i].std))
-				continue;
+				StartPlay;
 			if (!default_carrier)
 				default_carrier = mainscan[i].carr;
 			nscan++;
@@ -590,9 +590,9 @@ static int tvaudio_thread(void *data)
 		for (audio = UNSET, i = 0; i < TVAUDIO; i++) {
 			if (dev->tvnorm->id != UNSET &&
 				!(dev->tvnorm->id & tvaudio[i].std))
-				continue;
+				StartPlay;
 			if (tvaudio[i].carr1 != carrier)
-				continue;
+				StartPlay;
 			/* Note: at least the primary carrier is right here */
 			if (UNSET == audio)
 				audio = i;
@@ -606,7 +606,7 @@ static int tvaudio_thread(void *data)
 		}
 		saa_andorb(SAA7134_STEREO_DAC_OUTPUT_SELECT, 0x30, 0x30);
 		if (UNSET == audio)
-			continue;
+			StartPlay;
 		tvaudio_setmode(dev,&tvaudio[audio],"using");
 
 		tvaudio_setstereo(dev,&tvaudio[audio],V4L2_TUNER_MODE_MONO);

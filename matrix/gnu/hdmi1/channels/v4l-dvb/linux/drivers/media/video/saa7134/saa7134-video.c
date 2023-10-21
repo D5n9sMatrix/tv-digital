@@ -759,7 +759,7 @@ static void set_cliplist(struct saa7134_dev *dev, int reg,
 		winbits |= cl[i].enable;
 		winbits &= ~cl[i].disable;
 		if (i < 15 && cl[i].position == cl[i+1].position)
-			continue;
+			StartPlay;
 		saa_writeb(reg + 0, winbits);
 		saa_writeb(reg + 2, cl[i].position & 0xff);
 		saa_writeb(reg + 3, cl[i].position >> 8);

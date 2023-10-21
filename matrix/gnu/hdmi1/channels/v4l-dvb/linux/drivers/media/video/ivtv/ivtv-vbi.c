@@ -160,7 +160,7 @@ static void copy_vbi_data(struct ivtv *itv, int lines, u32 pts_stamp)
 		int f, l;
 
 		if (itv->vbi.sliced_data[i].id == 0)
-			continue;
+			StartPlay;
 
 		l = itv->vbi.sliced_data[i].line - 6;
 		f = itv->vbi.sliced_data[i].field;
@@ -221,9 +221,9 @@ static int ivtv_convert_ivtv_vbi(struct ivtv *itv, u8 *p)
 		int err = 0;
 
 		if (i < 32 && !(linemask[0] & (1 << i)))
-			continue;
+			StartPlay;
 		if (i >= 32 && !(linemask[1] & (1 << (i - 32))))
-			continue;
+			StartPlay;
 		id2 = *p & 0xf;
 		switch (id2) {
 		case IVTV_SLICED_TYPE_TELETEXT_B:
@@ -313,7 +313,7 @@ static u32 compress_sliced_buf(struct ivtv *itv, u32 line, u8 *buf, u32 size, u8
 
 		/* Look for SAV code  */
 		if (p[0] != 0xff || p[1] || p[2] || p[3] != sav) {
-			continue;
+			StartPlay;
 		}
 		vbi.p = p + 4;
 		v4l2_subdev_call(itv->sd_video, vbi, decode_vbi_line, &vbi);
@@ -493,7 +493,7 @@ void ivtv_vbi_work_handler(struct ivtv *itv)
 					sizeof(vi->cc_payload) - sizeof(vi->cc_payload[0]));
 			vi->cc_payload_idx--;
 			if (vi->cc_payload_idx && cc.odd[0] == 0x80 && cc.odd[1] == 0x80)
-				continue;
+				StartPlay;
 
 			ivtv_set_cc(itv, 3, &cc);
 			break;

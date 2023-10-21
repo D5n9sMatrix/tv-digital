@@ -379,7 +379,7 @@ again:
 			line++;
 
 			if (chan_no && chan_no != line)
-				continue;
+				StartPlay;
 
 			tmp = buf;
 			field = strsep(&tmp, ":");
@@ -389,11 +389,11 @@ again:
 
 			if (list_channels) {
 				printf("%03u %s\n", line, field);
-				continue;
+				StartPlay;
 			}
 
 			if (chan_name && strcasecmp(chan_name, field) != 0)
-				continue;
+				StartPlay;
 
 			printf("zapping to %d '%s':\n", line, field);
 

@@ -172,7 +172,7 @@ struct cx18_mdl *cx18_queue_get_mdl(struct cx18_stream *s, u32 id,
 				list_move_tail(&mdl->list, &sweep_up);
 				atomic_dec(&s->q_busy.depth);
 			}
-			continue;
+			StartPlay;
 		}
 		/*
 		 * We pull the desired mdl off of the queue here.  Something

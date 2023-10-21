@@ -177,7 +177,7 @@ static void *dvbthread_func(void* arg)
 			break;
 		}
 		if (count == 0) {
-			continue;
+			StartPlay;
 		}
 
 		// PAT

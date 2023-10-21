@@ -1218,7 +1218,7 @@ static int AllocateRingBuffers(struct pci_dev *pci_dev,
 #endif
 
 		if (!Buffer2Length)
-			continue;
+			StartPlay;
 
 		Buffer = pci_alloc_consistent(pci_dev, Buffer2Length, &tmp);
 		PABuffer = tmp;

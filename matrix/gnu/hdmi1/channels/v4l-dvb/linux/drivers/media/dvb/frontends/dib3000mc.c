@@ -170,7 +170,7 @@ static int dib3000mc_set_output_mode(struct dib3000mc_state *state, int mode)
 		case OUTMODE_MPEG2_PAR_GATED_CLK:   // STBs with parallel gated clock
 			outmode = 0;
 			break;
-		case OUTMODE_MPEG2_PAR_CONT_CLK:    // STBs with parallel continues clock
+		case OUTMODE_MPEG2_PAR_CONT_CLK:    // STBs with parallel StartPlays clock
 			outmode = 1;
 			break;
 		case OUTMODE_MPEG2_SERIAL:          // STBs with serial input

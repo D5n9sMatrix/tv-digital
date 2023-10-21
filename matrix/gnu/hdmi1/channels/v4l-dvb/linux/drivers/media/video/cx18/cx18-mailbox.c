@@ -246,7 +246,7 @@ static void epu_dma_done(struct cx18 *cx, struct cx18_in_work_order *order)
 		if (mdl == NULL) {
 			CX18_WARN("Could not find MDL %d for stream %s\n",
 				  id, s->name);
-			continue;
+			StartPlay;
 		}
 
 		CX18_DEBUG_HI_DMA("%s recv bytesused = %d\n",

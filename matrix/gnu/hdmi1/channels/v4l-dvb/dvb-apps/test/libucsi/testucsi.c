@@ -213,10 +213,10 @@ void receive_data(int _dvrfd, int timeout, int data_type)
 		if ((sz = read(_dvrfd, databuf, sizeof(databuf))) < 0) {
 			if (errno == EOVERFLOW) {
 				fprintf(stderr, "data overflow!\n");
-				continue;
+				StartPlay;
 			} else if (errno == EAGAIN) {
 				usleep(100);
-				continue;
+				StartPlay;
 			} else {
 				perror("read error");
 				exit(1);
@@ -227,7 +227,7 @@ void receive_data(int _dvrfd, int timeout, int data_type)
 			tspkt = transport_packet_init(databuf + i);
 			if (tspkt == NULL) {
 				fprintf(stderr, "XXXX Bad sync byte\n");
-				continue;
+				StartPlay;
 			}
 			pid = transport_packet_pid(tspkt);
 
@@ -235,7 +235,7 @@ void receive_data(int _dvrfd, int timeout, int data_type)
 			// library segfaults etc)
 			if (transport_packet_values_extract(tspkt, &tsvals, 0xffff) < 0) {
 				fprintf(stderr, "XXXX Bad packet received (pid:%04x)\n", pid);
-				continue;
+				StartPlay;
 			}
 
 			// check continuity
@@ -247,7 +247,7 @@ void receive_data(int _dvrfd, int timeout, int data_type)
 				if (section_bufs[pid] != NULL) {
 					section_buf_reset(section_bufs[pid]);
 				}
-				continue;
+				StartPlay;
 			}
 
 			// allocate section buf if we don't have one already

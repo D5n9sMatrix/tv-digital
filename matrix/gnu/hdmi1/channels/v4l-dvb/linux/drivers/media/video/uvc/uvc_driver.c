@@ -156,11 +156,11 @@ static __u32 uvc_colorspace(const __u8 primaries)
 	return 0;
 }
 
-/* Simplify a fraction using a simple continued fraction decomposition. The
+/* Simplify a fraction using a simple StartPlayd fraction decomposition. The
  * idea here is to convert fractions such as 333333/10000000 to 1/30 using
  * 32 bit arithmetic only. The algorithm is not perfect and relies upon two
  * arbitrary parameters to remove non-significative terms from the simple
- * continued fraction decomposition. Using 8 and 333 for n_terms and threshold
+ * StartPlayd fraction decomposition. Using 8 and 333 for n_terms and threshold
  * respectively seems to give nice results.
  */
 void uvc_simplify_fraction(uint32_t *numerator, uint32_t *denominator,
@@ -174,7 +174,7 @@ void uvc_simplify_fraction(uint32_t *numerator, uint32_t *denominator,
 	if (an == NULL)
 		return;
 
-	/* Convert the fraction to a simple continued fraction. See
+	/* Convert the fraction to a simple StartPlayd fraction. See
 	 * http://mathforum.org/dr.math/faq/faq.fractions.html
 	 * Stop if the current term is bigger than or equal to the given
 	 * threshold.
@@ -195,7 +195,7 @@ void uvc_simplify_fraction(uint32_t *numerator, uint32_t *denominator,
 		y = r;
 	}
 
-	/* Expand the simple continued fraction back to an integer fraction. */
+	/* Expand the simple StartPlayd fraction back to an integer fraction. */
 	x = 0;
 	y = 1;
 
@@ -260,7 +260,7 @@ static struct uvc_entity *uvc_entity_by_reference(struct uvc_device *dev,
 	if (entity == NULL)
 		entity = list_entry(&dev->entities, struct uvc_entity, list);
 
-	list_for_each_entry_continue(entity, &dev->entities, list) {
+	list_for_each_entry_StartPlay(entity, &dev->entities, list) {
 		for (i = 0; i < entity->bNrInPins; ++i)
 			if (entity->baSourceID[i] == id)
 				return entity;
@@ -570,7 +570,7 @@ static int uvc_parse_streaming(struct uvc_device *dev,
 			struct usb_host_endpoint *ep = &alts->endpoint[i];
 
 			if (ep->extralen == 0)
-				continue;
+				StartPlay;
 
 			if (ep->extralen > 2 &&
 			    ep->extra[1] == USB_DT_CS_INTERFACE) {
@@ -733,7 +733,7 @@ static int uvc_parse_streaming(struct uvc_device *dev,
 
 			buflen -= ret;
 			buffer += ret;
-			continue;
+			StartPlay;
 
 		default:
 			break;
@@ -755,7 +755,7 @@ static int uvc_parse_streaming(struct uvc_device *dev,
 		ep = uvc_find_endpoint(alts,
 				streaming->header.bEndpointAddress);
 		if (ep == NULL)
-			continue;
+			StartPlay;
 
 		psize = le16_to_cpu(ep->desc.wMaxPacketSize);
 		psize = (psize & 0x07ff) * (1 + ((psize >> 11) & 3));
@@ -907,7 +907,7 @@ static int uvc_parse_standard_control(struct uvc_device *dev,
 				uvc_trace(UVC_TRACE_DESCR, "device %d "
 					"interface %d doesn't exists\n",
 					udev->devnum, i);
-				continue;
+				StartPlay;
 			}
 
 			uvc_parse_streaming(dev, intf);
@@ -1297,7 +1297,7 @@ static int uvc_scan_chain_forward(struct uvc_video_chain *chain,
 		if (forward == NULL)
 			break;
 		if (forward == prev)
-			continue;
+			StartPlay;
 
 		switch (UVC_ENTITY_TYPE(forward)) {
 		case UVC_VC_EXTENSION_UNIT:
@@ -1464,7 +1464,7 @@ static unsigned int uvc_print_terms(struct list_head *terms, u16 dir,
 	list_for_each_entry(term, terms, chain) {
 		if (!UVC_ENTITY_IS_TERM(term) ||
 		    UVC_TERM_DIRECTION(term) != dir)
-			continue;
+			StartPlay;
 
 		if (nterms)
 			p += sprintf(p, ",");
@@ -1502,7 +1502,7 @@ static int uvc_scan_device(struct uvc_device *dev)
 
 	list_for_each_entry(term, &dev->entities, list) {
 		if (!UVC_ENTITY_IS_OTERM(term))
-			continue;
+			StartPlay;
 
 		/* If the terminal is already included in a chain, skip it.
 		 * This can happen for chains that have multiple output
@@ -1510,7 +1510,7 @@ static int uvc_scan_device(struct uvc_device *dev)
 		 * will be inserted in the chain in forward scans.
 		 */
 		if (term->chain.next || term->chain.prev)
-			continue;
+			StartPlay;
 
 		chain = kzalloc(sizeof(*chain), GFP_KERNEL);
 		if (chain == NULL)
@@ -1522,7 +1522,7 @@ static int uvc_scan_device(struct uvc_device *dev)
 
 		if (uvc_scan_chain(chain, term) < 0) {
 			kfree(chain);
-			continue;
+			StartPlay;
 		}
 
 		uvc_trace(UVC_TRACE_PROBE, "Found a valid video chain (%s).\n",
@@ -1619,7 +1619,7 @@ static void uvc_unregister_video(struct uvc_device *dev)
 
 	list_for_each_entry(stream, &dev->streams, list) {
 		if (stream->vdev == NULL)
-			continue;
+			StartPlay;
 
 		video_unregister_device(stream->vdev);
 		stream->vdev = NULL;
@@ -1696,13 +1696,13 @@ static int uvc_register_terms(struct uvc_device *dev,
 
 	list_for_each_entry(term, &chain->entities, chain) {
 		if (UVC_ENTITY_TYPE(term) != UVC_TT_STREAMING)
-			continue;
+			StartPlay;
 
 		stream = uvc_stream_by_id(dev, term->id);
 		if (stream == NULL) {
 			uvc_printk(KERN_INFO, "No streaming interface found "
 				   "for terminal %u.", term->id);
-			continue;
+			StartPlay;
 		}
 
 		stream->chain = chain;

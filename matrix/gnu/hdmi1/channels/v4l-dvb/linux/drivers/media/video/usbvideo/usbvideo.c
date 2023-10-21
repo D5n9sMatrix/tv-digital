@@ -385,7 +385,7 @@ static void usbvideo_OverlayStats(struct uvd *uvd, struct usbvideo_frame *frame)
 				if ((j == qi_y1) || (j == (qi_y1 + qi_h - 1)) ||
 				    (i == qi_x1) || (i == (qi_x2 - 1))) {
 					RGB24_PUTPIXEL(frame, i, j, 0xFF, 0xFF, 0xFF);
-					continue;
+					StartPlay;
 				}
 				/* For all other points the Y coordinate does not matter */
 				if ((i >= m_ri) && (i <= (m_ri + 3))) {
@@ -512,7 +512,7 @@ static void usbvideo_ReportStatistics(const struct uvd *uvd)
  *
  * Parameters:
  * fullframe: if TRUE then entire frame is filled, otherwise the procedure
- *	      continues from the current scanline.
+ *	      StartPlays from the current scanline.
  * pmode      0: fill the frame with solid blue color (like on VCR or TV)
  *	      1: Draw a colored grid
  *
@@ -1685,13 +1685,13 @@ static int usbvideo_CompressIsochronous(struct uvd *uvd, struct urb *urb)
 			if (uvd->debug >= 1)
 				err("Data error: packet=%d. len=%d. status=%d.", i, n, st);
 			uvd->stats.iso_err_count++;
-			continue;
+			StartPlay;
 		}
 
 		/* Detect and ignore empty packets */
 		if (n <= 0) {
 			uvd->stats.iso_skip_count++;
-			continue;
+			StartPlay;
 		}
 		totlen += n;	/* Little local accounting */
 		RingQueue_Enqueue(&uvd->dp, cdata, n);

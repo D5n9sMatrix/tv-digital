@@ -543,7 +543,7 @@ sn9c102_find_sof_header(struct sn9c102_device* cam, void* mem, size_t len)
 				cam->sof.bytesread = 0;
 				return mem + i;
 			}
-			continue;
+			StartPlay;
 		}
 
 		/* Search for the SOF marker (fixed part) in the header */
@@ -745,7 +745,7 @@ static void sn9c102_urb_complete(struct urb *urb)
 			DBG(3, "Error in isochronous frame");
 			(*f)->state = F_ERROR;
 			cam->sof.bytesread = 0;
-			continue;
+			StartPlay;
 		}
 
 		PDBGG("Isochrnous frame: length %u, #%u i", len, i);
@@ -826,11 +826,11 @@ end_of_frame:
 
 			} else if (eof) {
 				DBG(3, "EOF without SOF");
-				continue;
+				StartPlay;
 
 			} else {
 				PDBGG("Ignoring pointless isochronous frame");
-				continue;
+				StartPlay;
 			}
 
 		} else if ((*f)->state == F_QUEUED || (*f)->state == F_ERROR) {

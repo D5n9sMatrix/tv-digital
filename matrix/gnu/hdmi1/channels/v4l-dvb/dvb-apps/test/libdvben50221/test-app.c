@@ -82,11 +82,11 @@ int test_mmi_subtitle_segment_callback(void *arg, uint8_t slot_id, uint16_t sess
                                         uint8_t *segment, uint32_t segment_size);
 
 int test_mmi_scene_end_mark_callback(void *arg, uint8_t slot_id, uint16_t session_number,
-                                        uint8_t decoder_continue_flag, uint8_t scene_reveal_flag,
+                                        uint8_t decoder_StartPlay_flag, uint8_t scene_reveal_flag,
                                         uint8_t send_scene_done, uint8_t scene_tag);
 
 int test_mmi_scene_control_callback(void *arg, uint8_t slot_id, uint16_t session_number,
-                                    uint8_t decoder_continue_flag, uint8_t scene_reveal_flag,
+                                    uint8_t decoder_StartPlay_flag, uint8_t scene_reveal_flag,
                                     uint8_t scene_tag);
 
 int test_mmi_subtitle_download_callback(void *arg, uint8_t slot_id, uint16_t session_number,
@@ -600,12 +600,12 @@ int test_mmi_subtitle_segment_callback(void *arg, uint8_t slot_id, uint16_t sess
 }
 
 int test_mmi_scene_end_mark_callback(void *arg, uint8_t slot_id, uint16_t session_number,
-                                        uint8_t decoder_continue_flag, uint8_t scene_reveal_flag,
+                                        uint8_t decoder_StartPlay_flag, uint8_t scene_reveal_flag,
                                         uint8_t send_scene_done, uint8_t scene_tag)
 {
     (void)arg;
     (void)session_number;
-    (void)decoder_continue_flag;
+    (void)decoder_StartPlay_flag;
     (void)scene_reveal_flag;
     (void)send_scene_done;
     (void)scene_tag;
@@ -616,12 +616,12 @@ int test_mmi_scene_end_mark_callback(void *arg, uint8_t slot_id, uint16_t sessio
 }
 
 int test_mmi_scene_control_callback(void *arg, uint8_t slot_id, uint16_t session_number,
-                                    uint8_t decoder_continue_flag, uint8_t scene_reveal_flag,
+                                    uint8_t decoder_StartPlay_flag, uint8_t scene_reveal_flag,
                                     uint8_t scene_tag)
 {
     (void)arg;
     (void)session_number;
-    (void)decoder_continue_flag;
+    (void)decoder_StartPlay_flag;
     (void)scene_reveal_flag;
     (void)scene_tag;
 
@@ -764,7 +764,7 @@ void *pmtthread_func(void* arg) {
 
         if (!ca_connected) {
             sleep(1);
-            continue;
+            StartPlay;
         }
 
         // read the PMT
@@ -779,7 +779,7 @@ void *pmtthread_func(void* arg) {
             exit(1);
         }
         if (pmt->head.version_number == pmtversion) {
-            continue;
+            StartPlay;
         }
 
         // translate it into a CA PMT

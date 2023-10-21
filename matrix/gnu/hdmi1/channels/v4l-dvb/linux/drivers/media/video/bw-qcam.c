@@ -1032,7 +1032,7 @@ static int accept_bwqcam(struct parport *port)
 				printk(KERN_ERR
 					"bw-qcam: bad port specifier \"%s\"\n",
 					parport[n]);
-				continue;
+				StartPlay;
 			}
 			if (r == port->number)
 				return 1;

@@ -126,7 +126,7 @@ static inline int dvb_isoc_copy(struct cx231xx *dev, struct urb *urb)
 		if (status < 0) {
 			print_err_status(dev, i, status);
 			if (urb->iso_frame_desc[i].status != -EPROTO)
-				continue;
+				StartPlay;
 		}
 
 		dvb_dmx_swfilter(&dev->dvb->demux, urb->transfer_buffer +

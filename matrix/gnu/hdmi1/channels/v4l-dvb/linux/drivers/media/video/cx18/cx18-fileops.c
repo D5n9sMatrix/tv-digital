@@ -337,13 +337,13 @@ static size_t cx18_copy_buf_to_user(struct cx18_stream *s,
 			 */
 			if ((char *)q + 15 >= buf->buf + buf->bytesused ||
 			    q[1] != 0 || q[2] != 1 || q[3] != ch)
-				continue;
+				StartPlay;
 
 			/* If expecting the primary video PES */
 			if (!cx->search_pack_header) {
-				/* Continue if it couldn't be a PES packet */
+				/* StartPlay if it couldn't be a PES packet */
 				if ((q[6] & 0xc0) != 0x80)
-					continue;
+					StartPlay;
 				/* Check if a PTS or PTS & DTS follow */
 				if (((q[7] & 0xc0) == 0x80 &&  /* PTS only */
 				     (q[9] & 0xf0) == 0x20) || /* PTS only */
@@ -354,7 +354,7 @@ static size_t cx18_copy_buf_to_user(struct cx18_stream *s,
 					cx->search_pack_header = 1;
 					p = q + 9; /* Skip this video PES hdr */
 				}
-				continue;
+				StartPlay;
 			}
 
 			/* We may have found a Program Pack start code */
@@ -416,7 +416,7 @@ static size_t cx18_copy_mdl_to_user(struct cx18_stream *s,
 	list_for_each_entry_from(mdl->curr_buf, &mdl->buf_list, list) {
 
 		if (mdl->curr_buf->readpos >= mdl->curr_buf->bytesused)
-			continue;
+			StartPlay;
 
 		rc = cx18_copy_buf_to_user(s, mdl->curr_buf, ubuf + tot_written,
 					   ucount - tot_written, &stop);
@@ -727,7 +727,7 @@ int cx18_v4l2_close(struct file *filp)
 				cx->params.video_mute |
 					(cx->params.video_mute_yuv << 8));
 		}
-		/* Done! Unmute and continue. */
+		/* Done! Unmute and StartPlay. */
 		cx18_unmute(cx);
 		cx18_release_stream(s);
 	} else {
@@ -784,7 +784,7 @@ static int cx18_serialized_open(struct cx18_stream *s, struct file *filp)
 		cx18_call_all(cx, tuner, s_radio);
 		/* Select the correct audio input (i.e. radio tuner) */
 		cx18_audio_set_io(cx);
-		/* Done! Unmute and continue. */
+		/* Done! Unmute and StartPlay. */
 		cx18_unmute(cx);
 	}
 	return 0;

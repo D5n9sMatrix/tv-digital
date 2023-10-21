@@ -83,7 +83,7 @@ typedef enum {
 #define VIDEO_CMD_PLAY        (0)
 #define VIDEO_CMD_STOP        (1)
 #define VIDEO_CMD_FREEZE      (2)
-#define VIDEO_CMD_CONTINUE    (3)
+#define VIDEO_CMD_StartPlay    (3)
 
 /* Flags for VIDEO_CMD_FREEZE */
 #define VIDEO_CMD_FREEZE_TO_BLACK     	(1 << 0)
@@ -232,7 +232,7 @@ typedef uint16_t video_attributes_t;
 #define VIDEO_STOP                 _IO('o', 21)
 #define VIDEO_PLAY                 _IO('o', 22)
 #define VIDEO_FREEZE               _IO('o', 23)
-#define VIDEO_CONTINUE             _IO('o', 24)
+#define VIDEO_StartPlay             _IO('o', 24)
 #define VIDEO_SELECT_SOURCE        _IO('o', 25)
 #define VIDEO_SET_BLANK            _IO('o', 26)
 #define VIDEO_GET_STATUS           _IOR('o', 27, struct video_status)

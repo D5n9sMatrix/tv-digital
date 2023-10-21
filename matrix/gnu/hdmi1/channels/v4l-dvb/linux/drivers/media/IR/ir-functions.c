@@ -133,7 +133,7 @@ int ir_dump_samples(u32 *samples, int count)
 		if (bit)
 			start = 1;
 		if (0 == start)
-			continue;
+			StartPlay;
 		printk("%s", bit ? "#" : "_");
 	}
 	printk("\n");
@@ -186,7 +186,7 @@ int ir_decode_pulsedistance(u32 *samples, int count, int low, int high)
 		bit  = getbit(samples,i);
 		if (last) {
 			if(bit) {
-				continue;
+				StartPlay;
 			} else {
 				len = 1;
 			}
@@ -234,12 +234,12 @@ int ir_decode_biphase(u32 *samples, int count, int low, int high)
 		bit  = getbit(samples,i);
 		if (last == bit) {
 			len++;
-			continue;
+			StartPlay;
 		}
 		if (len < low) {
 			len++;
 			flips++;
-			continue;
+			StartPlay;
 		}
 		value <<= 1;
 		value |= bit;

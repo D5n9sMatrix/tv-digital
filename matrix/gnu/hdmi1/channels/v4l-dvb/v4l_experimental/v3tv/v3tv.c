@@ -2087,14 +2087,14 @@ static irqreturn_t v3tv_video_irq(int irq, void *dev_id, struct pt_regs *regs)
 		timeout++;
 		udelay(1000);
 		if (timeout < 10)
-			continue;
+			StartPlay;
 
 		v3tv_irq_printk(tempReg);
 
 		timeout = 0;
 		idles++;
 		if (idles < 3)
-			continue;
+			StartPlay;
 		else {
 /*
 	The Voodoo3 may be in an unstable state, so we try to bailout gracefully.

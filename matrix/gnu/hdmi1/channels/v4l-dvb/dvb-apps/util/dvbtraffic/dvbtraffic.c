@@ -91,11 +91,11 @@ int main(int argc, char **argv)
 			break;
 		}
 		if (buffer[0] != 0x47) {
-			continue;
+			StartPlay;
 			printf("desync (%x)\n", buffer[0]);
 			while (buffer[0] != 0x47)
 				read(fd, buffer, 1);
-			continue;
+			StartPlay;
 		}
 		ok = 1;
 		pid = ((((unsigned) buffer[1]) << 8) |

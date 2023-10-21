@@ -514,7 +514,7 @@ void em28xx_do_i2c_scan(struct em28xx *dev)
 		dev->i2c_client.addr = i;
 		rc = i2c_master_recv(&dev->i2c_client, &buf, 0);
 		if (rc < 0)
-			continue;
+			StartPlay;
 		i2c_devicelist[i] = i;
 		printk(KERN_INFO "%s: found i2c device @ 0x%x [%s]\n",
 		       dev->name, i << 1, i2c_devs[i] ? i2c_devs[i] : "???");

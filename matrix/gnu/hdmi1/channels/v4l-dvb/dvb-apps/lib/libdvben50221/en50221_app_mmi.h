@@ -203,7 +203,7 @@ typedef int (*en50221_app_mmi_subtitle_segment_callback) (void *arg,
  * @param arg Private argument.
  * @param slot_id Slot id concerned.
  * @param session_number Session number concerned.
- * @param decoder_continue_flag
+ * @param decoder_StartPlay_flag
  * @param scene_reveal_flag
  * @param send_scene_done
  * @param scene_tag
@@ -212,7 +212,7 @@ typedef int (*en50221_app_mmi_subtitle_segment_callback) (void *arg,
 typedef int (*en50221_app_mmi_scene_end_mark_callback) (void *arg,
 							uint8_t slot_id,
 							uint16_t session_number,
-							uint8_t decoder_continue_flag,
+							uint8_t decoder_StartPlay_flag,
 							uint8_t scene_reveal_flag,
 							uint8_t send_scene_done,
 							uint8_t scene_tag);
@@ -223,7 +223,7 @@ typedef int (*en50221_app_mmi_scene_end_mark_callback) (void *arg,
  * @param arg Private argument.
  * @param slot_id Slot id concerned.
  * @param session_number Session number concerned.
- * @param decoder_continue_flag
+ * @param decoder_StartPlay_flag
  * @param scene_reveal_flag
  * @param scene_tag
  * @return 0 on success, -1 on failure.
@@ -231,7 +231,7 @@ typedef int (*en50221_app_mmi_scene_end_mark_callback) (void *arg,
 typedef int (*en50221_app_mmi_scene_control_callback) (void *arg,
 						       uint8_t slot_id,
 						       uint16_t session_number,
-						       uint8_t decoder_continue_flag,
+						       uint8_t decoder_StartPlay_flag,
 						       uint8_t scene_reveal_flag,
 						       uint8_t scene_tag);
 
@@ -541,14 +541,14 @@ extern int en50221_app_mmi_display_message(struct en50221_app_mmi *mmi,
  *
  * @param mmi mmi resource instance.
  * @param session_number Session number to send it on.
- * @param decoder_continue Copy of flag in scene_end_mark.
+ * @param decoder_StartPlay Copy of flag in scene_end_mark.
  * @param scene_reveal Copy of flag in scene_end_mark.
  * @param scene_tag Scene tag this responds to.
  * @return 0 on success, -1 on failure.
  */
 extern int en50221_app_mmi_scene_done(struct en50221_app_mmi *mmi,
 				      uint16_t session_number,
-				      uint8_t decoder_continue,
+				      uint8_t decoder_StartPlay,
 				      uint8_t scene_reveal,
 				      uint8_t scene_tag);
 

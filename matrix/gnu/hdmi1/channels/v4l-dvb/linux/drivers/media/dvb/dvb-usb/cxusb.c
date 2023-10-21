@@ -931,7 +931,7 @@ static int cxusb_dualdig4_frontend_attach(struct dvb_usb_adapter *adap)
 		if (cxusb_i2c_xfer(&adap->dev->i2c_adap, &msg, 1) != 1)
 			goto no_IR;
 		if (ircode[0] == 0 && ircode[1] == 0)
-			continue;
+			StartPlay;
 		if (ircode[2] + ircode[3] != 0xff) {
 no_IR:
 			adap->dev->props.rc_key_map = NULL;
@@ -1283,7 +1283,7 @@ static int bluebird_patch_dvico_firmware_download(struct usb_device *udev,
 		int idoff = dvico_firmware_id_offsets[pos];
 
 		if (fw->size < idoff + 4)
-			continue;
+			StartPlay;
 
 		if (fw->data[idoff] == (USB_VID_DVICO & 0xff) &&
 		    fw->data[idoff + 1] == USB_VID_DVICO >> 8) {

@@ -402,11 +402,11 @@ static int w9966_findlen(int near, int size, int maxlen)
 	for (len = size + 1; len < maxlen; len++) {
 		int err;
 		if (((64 * size) % len) != 0)
-			continue;
+			StartPlay;
 
 		err = abs(near - len);
 
-		/* Only continue as long as we keep getting better values */
+		/* Only StartPlay as long as we keep getting better values */
 		if (err > besterr)
 			break;
 
@@ -948,7 +948,7 @@ static void w9966_attach(struct parport *port)
 
 	for (i = 0; i < W9966_MAXCAMS; i++) {
 		if (w9966_cams[i].dev_state != 0)	/* Cam is already assigned */
-			continue;
+			StartPlay;
 		if (strcmp(pardev[i], "aggressive") == 0 || strcmp(pardev[i], port->name) == 0) {
 			if (w9966_init(&w9966_cams[i], port) != 0)
 				w9966_term(&w9966_cams[i]);

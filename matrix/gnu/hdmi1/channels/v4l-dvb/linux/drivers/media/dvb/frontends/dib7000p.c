@@ -119,7 +119,7 @@ static int dib7000p_set_output_mode(struct dib7000p_state *state, int mode)
 		case OUTMODE_MPEG2_PAR_GATED_CLK:   // STBs with parallel gated clock
 			outreg = (1 << 10);  /* 0x0400 */
 			break;
-		case OUTMODE_MPEG2_PAR_CONT_CLK:    // STBs with parallel continues clock
+		case OUTMODE_MPEG2_PAR_CONT_CLK:    // STBs with parallel StartPlays clock
 			outreg = (1 << 10) | (1 << 6); /* 0x0440 */
 			break;
 		case OUTMODE_MPEG2_SERIAL:          // STBs with serial input
@@ -610,7 +610,7 @@ static int dib7000p_set_agc_config(struct dib7000p_state *state, u8 band)
 	dib7000p_write_word(state, 101, (agc->alpha_mant << 5) | agc->alpha_exp);
 	dib7000p_write_word(state, 102, (agc->beta_mant << 6)  | agc->beta_exp);
 
-	/* AGC continued */
+	/* AGC StartPlayd */
 	dprintk( "WBD: ref: %d, sel: %d, active: %d, alpha: %d",
 		state->wbd_ref != 0 ? state->wbd_ref : agc->wbd_ref, agc->wbd_sel, !agc->perform_agc_softsplit, agc->wbd_sel);
 

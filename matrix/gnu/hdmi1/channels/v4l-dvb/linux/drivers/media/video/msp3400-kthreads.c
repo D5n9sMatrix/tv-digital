@@ -500,7 +500,7 @@ restart:
 				"thread: no carrier scan\n");
 			state->scan_in_progress = 0;
 			msp_set_audio(client);
-			continue;
+			StartPlay;
 		}
 
 		/* mute audio */
@@ -683,7 +683,7 @@ restart:
 				"thread: no carrier scan\n");
 			state->scan_in_progress = 0;
 			msp_set_audio(client);
-			continue;
+			StartPlay;
 		}
 
 		/* mute audio */
@@ -978,7 +978,7 @@ restart:
 				"thread: no carrier scan\n");
 			state->scan_in_progress = 0;
 			msp_set_audio(client);
-			continue;
+			StartPlay;
 		}
 
 		/* setup the chip*/
@@ -1009,7 +1009,7 @@ restart:
 		if (state->std == 1) {
 			v4l_dbg(1, msp_debug, client,
 				"detection still in progress after 10 tries. giving up.\n");
-			continue;
+			StartPlay;
 		}
 
 unmute:
@@ -1032,7 +1032,7 @@ unmute:
 		/* the periodic stereo/SAP check is only relevant for
 		   the 0x20 standard (BTSC) */
 		if (state->std != 0x20)
-			continue;
+			StartPlay;
 
 		state->watch_stereo = 1;
 

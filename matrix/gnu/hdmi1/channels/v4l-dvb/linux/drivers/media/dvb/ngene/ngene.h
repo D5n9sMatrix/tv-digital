@@ -212,8 +212,8 @@ enum OPCODES {
 	CMD_I2C_WRITE       = 0x04,
 
 	CMD_I2C_WRITE_NOSTOP = 0x05,
-	CMD_I2C_CONTINUE_WRITE = 0x06,
-	CMD_I2C_CONTINUE_WRITE_NOSTOP = 0x07,
+	CMD_I2C_StartPlay_WRITE = 0x06,
+	CMD_I2C_StartPlay_WRITE_NOSTOP = 0x07,
 
 	CMD_DEBUG_OUTPUT    = 0x09,
 
@@ -253,7 +253,7 @@ struct FW_I2C_WRITE {
 	u8 Data[250];
 } __attribute__ ((__packed__));
 
-struct FW_I2C_CONTINUE_WRITE {
+struct FW_I2C_StartPlay_WRITE {
 	struct FW_HEADER hdr;
 	u8 Data[250];
 } __attribute__ ((__packed__));
@@ -440,7 +440,7 @@ struct ngene_command {
 		u8                               raw8[256];
 		struct FW_HEADER                 hdr;
 		struct FW_I2C_WRITE              I2CWrite;
-		struct FW_I2C_CONTINUE_WRITE     I2CContinueWrite;
+		struct FW_I2C_StartPlay_WRITE     I2CStartPlayWrite;
 		struct FW_I2C_READ               I2CRead;
 		struct FW_STREAM_CONTROL         StreamControl;
 		struct FW_FWLOAD_PREPARE         FWLoadPrepare;

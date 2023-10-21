@@ -552,14 +552,14 @@ Description
 	During a pause condition, all frames are dropped instead of being encoded.
 Param[0]
 	0=Pause encoding
-	1=Continue encoding
+	1=StartPlay encoding
 
 -------------------------------------------------------------------------------
 
-Name 	CX2341X_ENC_Continue_INPUT
+Name 	CX2341X_ENC_StartPlay_INPUT
 Enum 	211/0xD3
 Description
-	Continuees the video input
+	StartPlayes the video input
 
 -------------------------------------------------------------------------------
 
@@ -579,7 +579,7 @@ Description
 	Setup firmware to notify the host about a particular event. Host must
 	unmask the interrupt bit.
 Param[0]
-	Event (0=Continue encoder input)
+	Event (0=StartPlay encoder input)
 Param[1]
 	Notification 0=disabled 1=enabled
 Param[2]

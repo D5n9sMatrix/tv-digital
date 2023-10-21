@@ -1440,7 +1440,7 @@ static void parse_psip_vct (const unsigned char *buf, int section_length,
 				break;
 			case 0x04: /* ATSC Data */
 			default:
-				continue;
+				StartPlay;
 		}
 
 		if (ch.program_number == 0)
@@ -2394,7 +2394,7 @@ static void dump_lists (void)
 	list_for_each(p1, &scanned_transponders) {
 		t = list_entry(p1, struct transponder, list);
 		if (t->wrong_frequency)
-			continue;
+			StartPlay;
 		list_for_each(p2, &t->services) {
 			n++;
 		}
@@ -2404,7 +2404,7 @@ static void dump_lists (void)
 	list_for_each(p1, &scanned_transponders) {
 		t = list_entry(p1, struct transponder, list);
 		if (t->wrong_frequency)
-			continue;
+			StartPlay;
 		list_for_each(p2, &t->services) {
 			s = list_entry(p2, struct service, list);
 
@@ -2429,13 +2429,13 @@ static void dump_lists (void)
 					s->provider_name[i] = ' ';
 			}
 			if (s->video_pid && !(serv_select & 1))
-				continue; /* no TV services */
+				StartPlay; /* no TV services */
 			if (!s->video_pid && s->audio_num && !(serv_select & 2))
-				continue; /* no radio services */
+				StartPlay; /* no radio services */
 			if (!s->video_pid && !s->audio_num && !(serv_select & 4))
-				continue; /* no data/other services */
+				StartPlay; /* no data/other services */
 			if (s->scrambled && !ca_select)
-				continue; /* FTA only */
+				StartPlay; /* FTA only */
 			switch (output_format)
 			{
 			  case OUTPUT_PIDS:

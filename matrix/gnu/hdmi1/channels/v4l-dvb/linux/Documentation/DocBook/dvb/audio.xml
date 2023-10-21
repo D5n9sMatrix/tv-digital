@@ -469,13 +469,13 @@ role="subsection"><title>AUDIO_PAUSE</title>
  align="char">
 <para>This ioctl call suspends the audio stream being played. Decoding and playing
  are paused. It is then possible to restart again decoding and playing process of
- the audio stream using AUDIO_CONTINUE command.</para>
+ the audio stream using AUDIO_StartPlay command.</para>
 </entry>
  </row><row><entry
  align="char">
 <para>If AUDIO_SOURCE_MEMORY is selected in the ioctl call
  AUDIO_SELECT_SOURCE, the DVB-subsystem will not decode (consume)
- any more data until the ioctl call AUDIO_CONTINUE or AUDIO_PLAY is
+ any more data until the ioctl call AUDIO_StartPlay or AUDIO_PLAY is
  performed.</para>
 </entry>
  </row></tbody></tgroup></informaltable>

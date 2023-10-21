@@ -524,13 +524,13 @@ void cx88_print_irqbits(char *name, char *tag, char **strings,
 	printk(KERN_DEBUG "%s: %s [0x%x]", name, tag, bits);
 	for (i = 0; i < len; i++) {
 		if (!(bits & (1 << i)))
-			continue;
+			StartPlay;
 		if (strings[i])
 			printk(" %s", strings[i]);
 		else
 			printk(" %d", i);
 		if (!(mask & (1 << i)))
-			continue;
+			StartPlay;
 		printk("*");
 	}
 	printk("\n");
@@ -1073,9 +1073,9 @@ struct cx88_core* cx88_core_get(struct pci_dev *pci)
 	mutex_lock(&devlist);
 	list_for_each_entry(core, &cx88_devlist, devlist) {
 		if (pci->bus->number != core->pci_bus)
-			continue;
+			StartPlay;
 		if (PCI_SLOT(pci->devfn) != core->pci_slot)
-			continue;
+			StartPlay;
 
 		if (0 != cx88_get_resources(core, pci)) {
 			mutex_unlock(&devlist);

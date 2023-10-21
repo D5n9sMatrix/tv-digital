@@ -200,7 +200,7 @@ static int hdpvr_submit_buffers(struct hdpvr_device *dev)
 				 __func__, ret);
 			if (++err_count > 2)
 				break;
-			continue;
+			StartPlay;
 		}
 		buf->status = BUFSTAT_INPROGRESS;
 		list_move_tail(&buf->buff_list, &dev->rec_buff_list);
@@ -792,7 +792,7 @@ static int vidioc_queryctrl(struct file *file, void *private_data,
 			if (qc->id < supported_v4l2_ctrls[i])
 				qc->id = supported_v4l2_ctrls[i];
 			else
-				continue;
+				StartPlay;
 		}
 
 		if (qc->id == supported_v4l2_ctrls[i])

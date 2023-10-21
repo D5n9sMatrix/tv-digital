@@ -58,7 +58,7 @@ int main(int argc, char * argv[])
         if ((cafd = dvbca_open(i, 0)) > 0) {
             if (dvbca_get_cam_state(cafd, DEFAULT_SLOT) == DVBCA_CAMSTATE_MISSING) {
                 close(cafd);
-                continue;
+                StartPlay;
             }
 
             // reset it and wait

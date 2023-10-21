@@ -52,7 +52,7 @@ static struct ir_scancode pixelview[] = {
 	{ 0x0c, KEY_KPPLUS },		/* >>> */
 
 	{ 0x0d, KEY_GOTO },		/* mts */
-	{ 0x1d, KEY_Continue },		/* reset */
+	{ 0x1d, KEY_StartPlay },		/* reset */
 	{ 0x18, KEY_MUTE },		/* mute/unmute */
 };
 

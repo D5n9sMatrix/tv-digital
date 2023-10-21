@@ -325,11 +325,11 @@ static irqreturn_t vpif_channel_isr(int irq, void *dev_id)
 		common = &ch->common[i];
 		/* If streaming is started in this channel */
 		if (0 == common->started)
-			continue;
+			StartPlay;
 
 		if (1 == ch->vpifparams.std_info.frm_fmt) {
 			if (list_empty(&common->dma_queue))
-				continue;
+				StartPlay;
 
 			/* Progressive mode */
 			if (!channel_first_int[i][channel_id]) {
@@ -350,7 +350,7 @@ static irqreturn_t vpif_channel_isr(int irq, void *dev_id)
 
 			if (channel_first_int[i][channel_id]) {
 				channel_first_int[i][channel_id] = 0;
-				continue;
+				StartPlay;
 			}
 
 			if (0 == i) {

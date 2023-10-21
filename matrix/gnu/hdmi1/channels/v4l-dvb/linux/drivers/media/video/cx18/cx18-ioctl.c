@@ -864,7 +864,7 @@ static int cx18_process_idx_data(struct cx18_stream *s, struct cx18_mdl *mdl,
 
 		/* Skip any empty buffers in the MDL */
 		if (mdl->curr_buf->readpos >= mdl->curr_buf->bytesused)
-			continue;
+			StartPlay;
 
 		mdl->readpos += _cx18_process_idx_data(mdl->curr_buf, idx);
 
@@ -1050,7 +1050,7 @@ static int cx18_log_status(struct file *file, void *fh)
 		struct cx18_stream *s = &cx->streams[i];
 
 		if (s->video_dev == NULL || s->buffers == 0)
-			continue;
+			StartPlay;
 		CX18_INFO("Stream %s: status 0x%04lx, %d%% of %d KiB (%d buffers) in use\n",
 			  s->name, s->s_flags,
 			  atomic_read(&s->q_full.depth) * s->bufs_per_mdl * 100

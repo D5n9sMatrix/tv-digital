@@ -1245,7 +1245,7 @@ static void sd_pkt_scan(struct gspca_dev *gspca_dev,
 					return;
 				len = l;
 				data = p;
-				continue;
+				StartPlay;
 			}
 		}
 		p += 4;

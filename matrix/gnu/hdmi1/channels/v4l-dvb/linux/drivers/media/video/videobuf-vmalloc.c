@@ -84,10 +84,10 @@ static void videobuf_vm_close(struct vm_area_struct *vma)
 
 		for (i = 0; i < VIDEO_MAX_FRAME; i++) {
 			if (NULL == q->bufs[i])
-				continue;
+				StartPlay;
 
 			if (q->bufs[i]->map != map)
-				continue;
+				StartPlay;
 
 			mem = q->bufs[i]->priv;
 			if (mem) {

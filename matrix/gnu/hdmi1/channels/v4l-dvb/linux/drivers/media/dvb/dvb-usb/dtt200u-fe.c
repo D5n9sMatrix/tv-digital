@@ -128,7 +128,7 @@ static int dtt200u_fe_set_frontend(struct dvb_frontend* fe,
 		msleep(20);
 		dtt200u_fe_read_status(fe, &st);
 		if (st & FE_TIMEDOUT)
-			continue;
+			StartPlay;
 	}
 
 	return 0;

@@ -332,7 +332,7 @@ void cx18_streams_cleanup(struct cx18 *cx, int unregister)
 				cx->streams[type].dvb.enabled = false;
 				cx18_stream_free(&cx->streams[type]);
 			}
-			continue;
+			StartPlay;
 		}
 
 		/* No struct video_device, but can have buffers allocated */
@@ -341,7 +341,7 @@ void cx18_streams_cleanup(struct cx18 *cx, int unregister)
 				cx->stream_buffers[type] = 0;
 				cx18_stream_free(&cx->streams[type]);
 			}
-			continue;
+			StartPlay;
 		}
 
 		/* If struct video_device exists, can have buffers allocated */
@@ -349,7 +349,7 @@ void cx18_streams_cleanup(struct cx18 *cx, int unregister)
 
 		cx->streams[type].video_dev = NULL;
 		if (vdev == NULL)
-			continue;
+			StartPlay;
 
 		cx18_stream_free(&cx->streams[type]);
 
@@ -769,7 +769,7 @@ void cx18_stop_all_captures(struct cx18 *cx)
 		struct cx18_stream *s = &cx->streams[i];
 
 		if (!cx18_stream_enabled(s))
-			continue;
+			StartPlay;
 		if (test_bit(CX18_F_S_STREAMING, &s->s_flags))
 			cx18_stop_v4l2_encode_stream(s, 0);
 	}
@@ -879,7 +879,7 @@ struct cx18_stream *cx18_handle_to_stream(struct cx18 *cx, u32 handle)
 	for (i = 0; i < CX18_MAX_STREAMS; i++) {
 		s = &cx->streams[i];
 		if (s->handle != handle)
-			continue;
+			StartPlay;
 		if (cx18_stream_enabled(s))
 			return s;
 	}

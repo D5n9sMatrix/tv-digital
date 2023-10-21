@@ -134,7 +134,7 @@ enum ScanState {
 
 /* Completion states of the data parser */
 enum ParseState {
-	scan_Continue,		/* Just parse next item */
+	scan_StartPlay,		/* Just parse next item */
 	scan_NextFrame,		/* Frame done, send it to V4L */
 	scan_Out,		/* Not enough data for frame */
 	scan_EndParse		/* End parsing */

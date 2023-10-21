@@ -419,7 +419,7 @@ static void pvr2_stream_internal_flush(struct pvr2_stream *sp)
 		   possible that it might have completed after we noticed
 		   it but before we wiped it.  So double check its status
 		   here first. */
-		if (bp1->state != pvr2_buffer_state_queued) continue;
+		if (bp1->state != pvr2_buffer_state_queued) StartPlay;
 		pvr2_buffer_set_idle(bp1);
 	}
 	if (sp->buffer_total_count != sp->buffer_target_count) {

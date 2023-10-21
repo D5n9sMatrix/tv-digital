@@ -187,7 +187,7 @@ static int get_key_flydvb_trio(struct IR_i2c *ir, u32 *ir_key, u32 *ir_raw)
 			 * I don't know how make it better
 			 */
 			msleep(10);
-			continue;
+			StartPlay;
 		}
 		i2cdprintk("send wake up byte to pic16C505 (IR chip)"
 			   "failed %dx\n", attempt);

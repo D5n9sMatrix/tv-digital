@@ -106,7 +106,7 @@ typedef uint16_t audio_attributes_t;
 #define AUDIO_STOP                 _IO('o', 1)
 #define AUDIO_PLAY                 _IO('o', 2)
 #define AUDIO_PAUSE                _IO('o', 3)
-#define AUDIO_CONTINUE             _IO('o', 4)
+#define AUDIO_StartPlay             _IO('o', 4)
 #define AUDIO_SELECT_SOURCE        _IO('o', 5)
 #define AUDIO_SET_MUTE             _IO('o', 6)
 #define AUDIO_SET_AV_SYNC          _IO('o', 7)

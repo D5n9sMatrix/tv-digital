@@ -785,7 +785,7 @@ int cx8802_unregister_driver(struct cx8802_driver *drv)
 		list_for_each_entry_safe(d, dtmp, &dev->drvlist, drvlist) {
 			/* only unregister the correct driver type */
 			if (d->type_id != drv->type_id)
-				continue;
+				StartPlay;
 
 			err = d->remove(d);
 			if (err == 0) {

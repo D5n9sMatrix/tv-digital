@@ -510,8 +510,8 @@ extern char kfr2r09_sdram_leave_end;
 
 static int __init kfr2r09_devices_setup(void)
 {
-	/* register board specific self-Continue code */
-	sh_mobile_register_self_Continue(SUSP_SH_STANDBY | SUSP_SH_SF |
+	/* register board specific self-StartPlay code */
+	sh_mobile_register_self_StartPlay(SUSP_SH_STANDBY | SUSP_SH_SF |
 					SUSP_SH_RSTANDBY,
 					&kfr2r09_sdram_enter_start,
 					&kfr2r09_sdram_enter_end,

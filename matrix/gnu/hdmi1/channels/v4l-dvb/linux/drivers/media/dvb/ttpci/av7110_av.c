@@ -373,7 +373,7 @@ static int get_video_format(struct av7110 *av7110, u8 *buf, int count)
 	for (i = 7; i < count - 10; i++) {
 		p = buf + i;
 		if (p[0] || p[1] || p[2] != 0x01 || p[3] != 0xb3)
-			continue;
+			StartPlay;
 		p += 4;
 		hsize = ((p[1] &0xF0) >> 4) | (p[0] << 4);
 		vsize = ((p[1] &0x0F) << 8) | (p[2]);
@@ -1054,17 +1054,17 @@ static int play_iframe(struct av7110 *av7110, char __user *buf, unsigned int len
 		}
 		if (c == 0x00) {
 			match = (match == 1 || match == 2) ? 2 : 1;
-			continue;
+			StartPlay;
 		}
 		switch (match++) {
 		case 2: if (c == 0x01)
-				continue;
+				StartPlay;
 			break;
 		case 3: if (c == 0xb5)
-				continue;
+				StartPlay;
 			break;
 		case 4: if ((c & 0xf0) == 0x10)
-				continue;
+				StartPlay;
 			break;
 		}
 		match = 0;
@@ -1151,9 +1151,9 @@ static int dvb_video_ioctl(struct inode *inode, struct file *file,
 			av7110->trickmode = TRICK_FREEZE;
 		break;
 
-	case VIDEO_CONTINUE:
+	case VIDEO_StartPlay:
 		if (av7110->playing & RP_VIDEO)
-			ret = av7110_fw_cmd(av7110, COMTYPE_REC_PLAY, __Continue, 0);
+			ret = av7110_fw_cmd(av7110, COMTYPE_REC_PLAY, __StartPlay, 0);
 		if (!ret)
 			ret = vidcom(av7110, AV_VIDEO_CMD_PLAY, 0);
 		if (!ret) {
@@ -1336,7 +1336,7 @@ static int dvb_audio_ioctl(struct inode *inode, struct file *file,
 			av7110->audiostate.play_state = AUDIO_PAUSED;
 		break;
 
-	case AUDIO_CONTINUE:
+	case AUDIO_StartPlay:
 		if (av7110->audiostate.play_state == AUDIO_PAUSED) {
 			av7110->audiostate.play_state = AUDIO_PLAYING;
 			ret = audcom(av7110, AUDIO_CMD_UNMUTE | AUDIO_CMD_PCM16);

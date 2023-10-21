@@ -64,7 +64,7 @@
 
 #define CX18_DDR_REQUEST_ENABLE      	0xc80000
 #define CX18_DDR_CHIP_CONFIG         	0xc80004
-#define CX18_DDR_Continue            	0xc80008
+#define CX18_DDR_StartPlay            	0xc80008
 #define CX18_DDR_TIMING1             	0xc8000C
 #define CX18_DDR_TIMING2             	0xc80010
 #define CX18_DDR_POWER_REG		0xc8001C
@@ -170,7 +170,7 @@ static int load_apu_fw_direct(const char *fn, u8 __iomem *dst, struct cx18 *cx,
 		if (seghdr.sync1 != APU_ROM_SYNC1 ||
 		    seghdr.sync2 != APU_ROM_SYNC2) {
 			offset += seghdr.size;
-			continue;
+			StartPlay;
 		}
 		CX18_DEBUG_INFO("load segment %x-%x\n", seghdr.addr,
 				seghdr.addr + seghdr.size - 1);
@@ -334,7 +334,7 @@ void cx18_init_memory(struct cx18 *cx)
 
 	cx18_msleep_timeout(10, 0);
 
-	cx18_write_reg(cx, cx->card->ddr.Continue, CX18_DDR_Continue);
+	cx18_write_reg(cx, cx->card->ddr.StartPlay, CX18_DDR_StartPlay);
 	cx18_write_reg(cx, cx->card->ddr.timing1, CX18_DDR_TIMING1);
 	cx18_write_reg(cx, cx->card->ddr.timing2, CX18_DDR_TIMING2);
 

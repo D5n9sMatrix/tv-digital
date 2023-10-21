@@ -97,11 +97,11 @@ void process_pes(int fd)
 	/* search for start of next PES data block 0x000001bd */
 	for (;;) {
 		safe_read(fd, buf, 1);
-		if (buf[0] != 0) continue;
+		if (buf[0] != 0) StartPlay;
 		safe_read(fd, buf, 1);
-		if (buf[0] != 0) continue;
+		if (buf[0] != 0) StartPlay;
 		safe_read(fd, buf, 1);
-		if (buf[0] != 1) continue;
+		if (buf[0] != 1) StartPlay;
 		safe_read(fd, buf, 1);
 		if (buf[0] == 0xbd)
 			break;

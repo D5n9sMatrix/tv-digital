@@ -1614,7 +1614,7 @@ role="subsection"><title>dmx_ts_cb()</title>
 <para>0</para>
 </entry><entry
  align="char">
-<para>Continue filtering.</para>
+<para>StartPlay filtering.</para>
 </entry>
  </row><row><entry
  align="char">
@@ -1719,7 +1719,7 @@ role="subsection"><title>dmx_section_cb()</title>
 <para>0</para>
 </entry><entry
  align="char">
-<para>Continue filtering.</para>
+<para>StartPlay filtering.</para>
 </entry>
  </row><row><entry
  align="char">

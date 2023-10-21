@@ -102,7 +102,7 @@ int get_pmt_pid(char *dmxdev, int sid)
 		}
 		section_length = ((buf[1] & 0x0f) << 8) | buf[2];
 		if (count != section_length + 3)
-			continue;
+			StartPlay;
 
 		buf += 8;
 		section_length -= 8;

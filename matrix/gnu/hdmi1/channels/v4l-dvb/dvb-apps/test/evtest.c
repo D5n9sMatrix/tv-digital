@@ -70,7 +70,7 @@ char *keys[KEY_MAX + 1] = {
   "Coffee", "Direction", "CycleWindows", "Mail", "Bookmarks", "Computer", "Back", "Forward",
   // 0x0A0
   "CloseCD", "EjectCD", "EjectCloseCD", "NextSong", "PlayPause", "PreviousSong", "StopCD", "Record",
-  "Rewind", "Phone", "ISOKey", "Config", "HomePage", "Continue", "Exit", "Move",
+  "Rewind", "Phone", "ISOKey", "Config", "HomePage", "StartPlay", "Exit", "Move",
   // 0x0B0
   "Edit", "ScrollUp", "ScrollDown", "KPLeftParenthesis", "KPRightParenthesis", NULL, NULL, "F13",
   "F14", "F15", "F16", "F17", "F18", "F19", "F20", "F21",

@@ -74,13 +74,13 @@ enum i2c_status {
 };
 
 static char *str_i2c_attr[] = {
-	"NOP", "STOP", "CONTINUE", "START"
+	"NOP", "STOP", "StartPlay", "START"
 };
 
 enum i2c_attr {
 	NOP           = 0,  // no operation on I2C bus
 	STOP          = 1,  // stop condition, no associated byte transfer
-	CONTINUE      = 2,  // continue with byte transfer
+	StartPlay      = 2,  // StartPlay with byte transfer
 	START         = 3   // start condition with byte transfer
 };
 
@@ -226,7 +226,7 @@ static inline int i2c_recv_byte(struct saa7134_dev *dev)
 	enum i2c_status status;
 	unsigned char data;
 
-	i2c_set_attr(dev,CONTINUE);
+	i2c_set_attr(dev,StartPlay);
 	if (!i2c_is_busy_wait(dev))
 		return -EIO;
 	status = i2c_get_status(dev);
@@ -290,7 +290,7 @@ static int saa7134_i2c_xfer(struct i2c_adapter *i2c_adap,
 			for (byte = 0; byte < msgs[i].len; byte++) {
 				data = msgs[i].buf[byte];
 				d1printk(" %02x", data);
-				rc = i2c_send_byte(dev,CONTINUE,data);
+				rc = i2c_send_byte(dev,StartPlay,data);
 				if (rc < 0)
 					goto err;
 			}
@@ -394,7 +394,7 @@ static void do_i2c_scan(char *name, struct i2c_client *c)
 		c->addr = i;
 		rc = i2c_master_recv(c,&buf,0);
 		if (rc < 0)
-			continue;
+			StartPlay;
 		printk("%s: i2c scan: found device @ 0x%x  [%s]\n",
 		       name, i << 1, i2c_devs[i] ? i2c_devs[i] : "???");
 	}

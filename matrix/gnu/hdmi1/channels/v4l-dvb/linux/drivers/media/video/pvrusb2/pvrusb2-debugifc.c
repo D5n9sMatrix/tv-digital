@@ -37,9 +37,9 @@ static unsigned int debugifc_count_whitespace(const char *buf,
 
 	for (scnt = 0; scnt < count; scnt++) {
 		ch = buf[scnt];
-		if (ch == ' ') continue;
-		if (ch == '\t') continue;
-		if (ch == '\n') continue;
+		if (ch == ' ') StartPlay;
+		if (ch == '\t') StartPlay;
+		if (ch == '\n') StartPlay;
 		break;
 	}
 	return scnt;

@@ -217,7 +217,7 @@ static ssize_t show_enum(struct device *class_dev,
 	for (val = 0; val < ecnt; val++) {
 		pvr2_ctrl_get_valname(cip->cptr, val, buf + bcnt,
 				      PAGE_SIZE - bcnt, &ccnt);
-		if (!ccnt) continue;
+		if (!ccnt) StartPlay;
 		bcnt += ccnt;
 		if (bcnt >= PAGE_SIZE) break;
 		buf[bcnt] = '\n';
@@ -239,7 +239,7 @@ static ssize_t show_bits(struct device *class_dev,
 	valid_bits = pvr2_ctrl_get_mask(cip->cptr);
 	bcnt = 0;
 	for (msk = 1; valid_bits; msk <<= 1) {
-		if (!(msk & valid_bits)) continue;
+		if (!(msk & valid_bits)) StartPlay;
 		valid_bits &= ~msk;
 		pvr2_ctrl_get_valname(cip->cptr, msk, buf + bcnt,
 				      PAGE_SIZE - bcnt, &ccnt);

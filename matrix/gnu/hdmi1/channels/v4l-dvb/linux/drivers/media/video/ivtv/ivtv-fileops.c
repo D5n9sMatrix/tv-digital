@@ -318,18 +318,18 @@ static size_t ivtv_copy_buf_to_user(struct ivtv_stream *s, struct ivtv_buffer *b
 			p = q + 1;
 			if ((char *)q + 15 >= buf->buf + buf->bytesused ||
 			    q[1] != 0 || q[2] != 1 || q[3] != ch) {
-				continue;
+				StartPlay;
 			}
 			if (!itv->search_pack_header) {
 				if ((q[6] & 0xc0) != 0x80)
-					continue;
+					StartPlay;
 				if (((q[7] & 0xc0) == 0x80 && (q[9] & 0xf0) == 0x20) ||
 				    ((q[7] & 0xc0) == 0xc0 && (q[9] & 0xf0) == 0x30)) {
 					ch = 0xba;
 					itv->search_pack_header = 1;
 					p = q + 9;
 				}
-				continue;
+				StartPlay;
 			}
 			stuffing = q[13] & 7;
 			/* all stuffing bytes must be 0xff */
@@ -896,7 +896,7 @@ int ivtv_v4l2_close(struct file *filp)
 			ivtv_vapi(itv, CX2341X_ENC_MUTE_VIDEO, 1,
 				itv->params.video_mute | (itv->params.video_mute_yuv << 8));
 		}
-		/* Done! Unmute and continue. */
+		/* Done! Unmute and StartPlay. */
 		ivtv_unmute(itv);
 		ivtv_release_stream(s);
 	} else if (s->type >= IVTV_DEC_STREAM_TYPE_MPG) {
@@ -1015,7 +1015,7 @@ static int ivtv_serialized_open(struct ivtv_stream *s, struct file *filp)
 			ivtv_call_hw(itv, IVTV_HW_SAA711X, video, s_crystal_freq,
 				SAA7115_FREQ_32_11_MHZ, SAA7115_FREQ_FL_APLL);
 		}
-		/* Done! Unmute and continue. */
+		/* Done! Unmute and StartPlay. */
 		ivtv_unmute(itv);
 	}
 

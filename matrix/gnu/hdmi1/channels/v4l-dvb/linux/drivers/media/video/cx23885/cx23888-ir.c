@@ -715,7 +715,7 @@ static int cx23888_ir_rx_read(struct v4l2_subdev *sd, u8 *buf, size_t count,
 		if ((*p & FIFO_RXTX_RTO) == FIFO_RXTX_RTO) {
 			*p = V4L2_SUBDEV_IR_PULSE_RX_SEQ_END;
 			v4l2_dbg(2, ir_888_debug, sd, "rx read: end of rx\n");
-			continue;
+			StartPlay;
 		}
 
 		u = (*p & FIFO_RXTX_LVL) ? V4L2_SUBDEV_IR_PULSE_LEVEL_MASK : 0;

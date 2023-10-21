@@ -359,7 +359,7 @@ static void videobuf_vm_close(struct vm_area_struct *vma)
 		mutex_lock(&q->vb_lock);
 		for (i = 0; i < VIDEO_MAX_FRAME; i++) {
 			if (NULL == q->bufs[i])
-				continue;
+				StartPlay;
 			mem = q->bufs[i]->priv;
 #if 0
 			/* FIXME: this seems to be a hack!!!  */
@@ -367,12 +367,12 @@ static void videobuf_vm_close(struct vm_area_struct *vma)
 				;
 #endif
 			if (!mem)
-				continue;
+				StartPlay;
 
 			MAGIC_CHECK(mem->magic, MAGIC_SG_MEM);
 
 			if (q->bufs[i]->map != map)
-				continue;
+				StartPlay;
 			q->bufs[i]->map   = NULL;
 			q->bufs[i]->baddr = 0;
 			q->ops->buf_release(q, q->bufs[i]);
@@ -608,9 +608,9 @@ static int __videobuf_mmap_mapper(struct videobuf_queue *q,
 		/* look for last buffer to map */
 		for (last = first + 1; last < VIDEO_MAX_FRAME; last++) {
 			if (NULL == q->bufs[last])
-				continue;
+				StartPlay;
 			if (V4L2_MEMORY_MMAP != q->bufs[last]->memory)
-				continue;
+				StartPlay;
 			if (q->bufs[last]->map) {
 				retval = -EBUSY;
 				goto done;
@@ -636,7 +636,7 @@ static int __videobuf_mmap_mapper(struct videobuf_queue *q,
 	size = 0;
 	for (i = first; i <= last; i++) {
 		if (NULL == q->bufs[i])
-			continue;
+			StartPlay;
 		q->bufs[i]->map   = map;
 		q->bufs[i]->baddr = vma->vm_start + size;
 		size += PAGE_ALIGN(q->bufs[i]->bsize);

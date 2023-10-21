@@ -2817,7 +2817,7 @@ static int fetch_frame(void *data)
 			DBG("retry=%d\n", retry);
 
 		if (!cam->ops)
-			continue;
+			StartPlay;
 
 		/* load first frame always uncompressed */
 		if (cam->first_frame &&
@@ -2833,7 +2833,7 @@ static int fetch_frame(void *data)
 		/* init camera upload */
 		if (do_command(cam, CPIA_COMMAND_GrabFrame, 0,
 			       cam->params.streamStartLine, 0, 0))
-			continue;
+			StartPlay;
 
 		if (cam->ops->wait_for_stream_ready) {
 			/* loop until image ready */
@@ -2860,7 +2860,7 @@ static int fetch_frame(void *data)
 					   0, 0, 0, 0);
 			}
 			if(cam->params.status.streamState != STREAM_READY) {
-				continue;
+				StartPlay;
 			}
 		}
 
@@ -2872,7 +2872,7 @@ static int fetch_frame(void *data)
 						  cam->raw_image, 0);
 		if (image_size <= 0) {
 			DBG("streamRead failed: %d\n", image_size);
-			continue;
+			StartPlay;
 		}
 
 		rate = image_size * HZ / 1024;

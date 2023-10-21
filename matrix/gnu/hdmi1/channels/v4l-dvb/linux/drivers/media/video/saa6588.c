@@ -316,7 +316,7 @@ static void saa6588_i2c_poll(struct saa6588 *s)
 	if (blocknum == 6)
 		blocknum = V4L2_RDS_BLOCK_INVALID;
 	/* And if are not in mmbs mode, then 'Block E' is also mapped
-	   to 'Invalid Block'. As far as I can tell MMBS is discontinued,
+	   to 'Invalid Block'. As far as I can tell MMBS is disStartPlayd,
 	   and if there is ever a need to support E blocks, then please
 	   contact the linux-media mailinglist. */
 	else if (!mmbs && blocknum == 5)

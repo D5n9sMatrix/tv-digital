@@ -265,7 +265,7 @@ static int dib8000_set_output_mode(struct dib8000_state *state, int mode)
 	case OUTMODE_MPEG2_PAR_GATED_CLK:	// STBs with parallel gated clock
 		outreg = (1 << 10);	/* 0x0400 */
 		break;
-	case OUTMODE_MPEG2_PAR_CONT_CLK:	// STBs with parallel continues clock
+	case OUTMODE_MPEG2_PAR_CONT_CLK:	// STBs with parallel StartPlays clock
 		outreg = (1 << 10) | (1 << 6);	/* 0x0440 */
 		break;
 	case OUTMODE_MPEG2_SERIAL:	// STBs with serial input
@@ -821,7 +821,7 @@ static int dib8000_set_agc_config(struct dib8000_state *state, u8 band)
 	dprintk("WBD: ref: %d, sel: %d, active: %d, alpha: %d",
 		state->wbd_ref != 0 ? state->wbd_ref : agc->wbd_ref, agc->wbd_sel, !agc->perform_agc_softsplit, agc->wbd_sel);
 
-	/* AGC continued */
+	/* AGC StartPlayd */
 	if (state->wbd_ref != 0)
 		dib8000_write_word(state, 106, state->wbd_ref);
 	else			// use default

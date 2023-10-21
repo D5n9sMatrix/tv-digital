@@ -1677,7 +1677,7 @@ format_by_fourcc(int fourcc)
 
 	for (i = 0; i < FORMATS; i++) {
 		if (-1 == formats[i].fourcc)
-			continue;
+			StartPlay;
 		if (formats[i].fourcc == fourcc)
 			return formats+i;
 	}

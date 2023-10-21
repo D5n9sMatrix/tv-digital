@@ -39,30 +39,30 @@ void v4l2_int_device_try_attach_all(void)
 
 	list_for_each_entry(m, &int_list, head) {
 		if (m->type != v4l2_int_type_master)
-			continue;
+			StartPlay;
 
 		list_for_each_entry(s, &int_list, head) {
 			if (s->type != v4l2_int_type_slave)
-				continue;
+				StartPlay;
 
 			/* Slave is connected? */
 			if (s->u.slave->master)
-				continue;
+				StartPlay;
 
 			/* Slave wants to attach to master? */
 			if (s->u.slave->attach_to[0] != 0
 			    && strncmp(m->name, s->u.slave->attach_to,
 				       V4L2NAMESIZE))
-				continue;
+				StartPlay;
 
 			if (!try_module_get(m->module))
-				continue;
+				StartPlay;
 
 			s->u.slave->master = m;
 			if (m->u.master->attach(s)) {
 				s->u.slave->master = NULL;
 				module_put(m->module);
-				continue;
+				StartPlay;
 			}
 		}
 	}

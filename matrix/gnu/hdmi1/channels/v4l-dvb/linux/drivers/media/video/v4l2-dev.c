@@ -260,7 +260,7 @@ static int v4l2_ioctl(struct inode *inode, struct file *filp,
 
 	if (!vdev->fops->ioctl)
 		return -ENOTTY;
-	/* Allow ioctl to continue even if the device was unregistered.
+	/* Allow ioctl to StartPlay even if the device was unregistered.
 	   Things like dequeueing buffers might still be useful. */
 	return vdev->fops->ioctl(filp, cmd, arg);
 }
@@ -272,7 +272,7 @@ static long v4l2_unlocked_ioctl(struct file *filp,
 
 	if (!vdev->fops->unlocked_ioctl)
 		return -ENOTTY;
-	/* Allow ioctl to continue even if the device was unregistered.
+	/* Allow ioctl to StartPlay even if the device was unregistered.
 	   Things like dequeueing buffers might still be useful. */
 	return vdev->fops->unlocked_ioctl(filp, cmd, arg);
 }

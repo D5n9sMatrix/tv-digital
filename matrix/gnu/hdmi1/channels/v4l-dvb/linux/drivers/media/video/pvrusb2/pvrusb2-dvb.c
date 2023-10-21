@@ -74,7 +74,7 @@ static int pvr2_dvb_feed_func(struct pvr2_dvb_adapter *adap)
 			   just go back and try again.  No point in
 			   blocking unless we really ran out of
 			   buffers to process. */
-			continue;
+			StartPlay;
 		}
 
 
@@ -136,7 +136,7 @@ static void pvr2_dvb_stream_end(struct pvr2_dvb_adapter *adap)
 
 	if (adap->stream_run) {
 		for (idx = 0; idx < PVR2_DVB_BUFFER_COUNT; idx++) {
-			if (!(adap->buffer_storage[idx])) continue;
+			if (!(adap->buffer_storage[idx])) StartPlay;
 			kfree(adap->buffer_storage[idx]);
 			adap->buffer_storage[idx] = NULL;
 		}

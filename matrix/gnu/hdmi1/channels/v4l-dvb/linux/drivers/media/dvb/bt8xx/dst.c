@@ -271,7 +271,7 @@ int write_dst(struct dst_state *state, u8 *data, u8 len)
 		if ((err = i2c_transfer(state->i2c, &msg, 1)) < 0) {
 			dprintk(verbose, DST_INFO, 1, "_write_dst error (err == %i, len == 0x%02x, b0 == 0x%02x)", err, len, data[0]);
 			dst_error_recovery(state);
-			continue;
+			StartPlay;
 		} else
 			break;
 	}
@@ -302,7 +302,7 @@ int read_dst(struct dst_state *state, u8 *ret, u8 len)
 		if ((err = i2c_transfer(state->i2c, &msg, 1)) < 0) {
 			dprintk(verbose, DST_INFO, 1, "read_dst error (err == %i, len == 0x%02x, b0 == 0x%02x)", err, len, ret[0]);
 			dst_error_recovery(state);
-			continue;
+			StartPlay;
 		} else
 			break;
 	}

@@ -211,7 +211,7 @@ static void handle_fcp(struct fw_card *card, struct fw_request *request,
 	list_for_each_entry(f, &node_list, list) {
 		device = device_of(f);
 		if (device->generation != generation)
-			continue;
+			StartPlay;
 
 		smp_rmb(); /* node_id vs. generation */
 

@@ -167,7 +167,7 @@ for custom (driver defined) video standards.</entry>
 #define V4L2_STD_PAL_Nc         ((v4l2_std_id)0x00000400)
 #define V4L2_STD_PAL_60         ((v4l2_std_id)0x00000800)
 </programlisting></para><para><constant>V4L2_STD_PAL_60</constant> is
-a hybrid standard with 525 lines, 60 Hz Continue rate, and PAL color
+a hybrid standard with 525 lines, 60 Hz StartPlay rate, and PAL color
 modulation with a 4.43 MHz color subcarrier. Some PAL video recorders
 can play back NTSC tapes in this mode for display on a 50/60 Hz agnostic
 PAL TV.</para><para><programlisting>
@@ -175,7 +175,7 @@ PAL TV.</para><para><programlisting>
 #define V4L2_STD_NTSC_M_JP      ((v4l2_std_id)0x00002000)
 #define V4L2_STD_NTSC_443       ((v4l2_std_id)0x00004000)
 </programlisting></para><para><constant>V4L2_STD_NTSC_443</constant>
-is a hybrid standard with 525 lines, 60 Hz Continue rate, and NTSC
+is a hybrid standard with 525 lines, 60 Hz StartPlay rate, and NTSC
 color modulation with a 4.43 MHz color
 subcarrier.</para><para><programlisting>
 #define V4L2_STD_NTSC_M_KR      ((v4l2_std_id)0x00008000)

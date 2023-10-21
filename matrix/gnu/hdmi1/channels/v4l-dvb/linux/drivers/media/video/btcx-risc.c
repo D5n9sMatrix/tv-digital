@@ -198,17 +198,17 @@ btcx_calc_skips(int line, int width, int *maxy,
 
 		/* sanity checks */
 		if (clips[clip].c.left + clips[clip].c.width <= 0)
-			continue;
+			StartPlay;
 		if (clips[clip].c.left > (signed)width)
 			break;
 
 		/* vertical range */
 		if (line > clips[clip].c.top+clips[clip].c.height-1)
-			continue;
+			StartPlay;
 		if (line < clips[clip].c.top) {
 			if (maxline > clips[clip].c.top-1)
 				maxline = clips[clip].c.top-1;
-			continue;
+			StartPlay;
 		}
 		if (maxline > clips[clip].c.top+clips[clip].c.height-1)
 			maxline = clips[clip].c.top+clips[clip].c.height-1;

@@ -960,7 +960,7 @@ static int xc_load_fw_and_init_tuner(struct dvb_frontend *fe)
 	ret |= xc_initialize(priv);
 
 	/* Wait for calibration to complete.
-	 * We could continue but XC5000 will clock stretch subsequent
+	 * We could StartPlay but XC5000 will clock stretch subsequent
 	 * I2C transactions until calibration is complete.  This way we
 	 * don't have to rely on clock stretching working.
 	 */

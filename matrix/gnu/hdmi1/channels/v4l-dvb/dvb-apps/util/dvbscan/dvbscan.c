@@ -251,7 +251,7 @@ int main(int argc, char *argv[])
 		// have we already seen this transponder?
 		if (seen_transponder(tmp, scanned)) {
 			free_transponder(tmp);
-			continue;
+			StartPlay;
 		}
 
 		// do we have a valid SEC configuration?
@@ -292,7 +292,7 @@ int main(int argc, char *argv[])
 		}
 		if (!tuned_ok) {
 			free_transponder(tmp);
-			continue;
+			StartPlay;
 		}
 
 		// scan it

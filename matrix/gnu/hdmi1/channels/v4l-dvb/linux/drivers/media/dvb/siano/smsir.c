@@ -200,7 +200,7 @@ static void sms_rc5_accumulate_bits(struct smscore_device_t *coredev,
 	for (i = RC5_MAX_SAME_BIT_CONT; i > 0; i--) {
 		delta_time = time - (i*RC5_DEF_BIT_TIME) + RC5_TIME_GRANULARITY;
 		if (delta_time < 0)
-			continue; /* not so many consecutive bits */
+			StartPlay; /* not so many consecutive bits */
 		if (delta_time > (2 * RC5_TIME_GRANULARITY)) {
 			/* timeout */
 			if (ir_pos == (RC5_WORD_LEN-1))

@@ -229,7 +229,7 @@ int ivtv_streams_setup(struct ivtv *itv)
 			break;
 
 		if (itv->streams[type].vdev == NULL)
-			continue;
+			StartPlay;
 
 		/* Allocate Stream */
 		if (ivtv_stream_alloc(&itv->streams[type]))
@@ -323,7 +323,7 @@ void ivtv_streams_cleanup(struct ivtv *itv, int unregister)
 
 		itv->streams[type].vdev = NULL;
 		if (vdev == NULL)
-			continue;
+			StartPlay;
 
 		ivtv_stream_free(&itv->streams[type]);
 		/* Unregister or release device */
@@ -740,7 +740,7 @@ void ivtv_stop_all_captures(struct ivtv *itv)
 		struct ivtv_stream *s = &itv->streams[i];
 
 		if (s->vdev == NULL)
-			continue;
+			StartPlay;
 		if (test_bit(IVTV_F_S_STREAMING, &s->s_flags)) {
 			ivtv_stop_v4l2_encode_stream(s, 0);
 		}
@@ -853,7 +853,7 @@ int ivtv_stop_v4l2_encode_stream(struct ivtv_stream *s, int gop_end)
 
 	/* event notification (off) */
 	if (test_and_clear_bit(IVTV_F_I_DIG_RST, &itv->i_flags)) {
-		/* type: 0 = Continue */
+		/* type: 0 = StartPlay */
 		/* on/off: 0 = off, intr: 0x10000000, mbox_id: -1: none */
 		ivtv_vapi(itv, CX2341X_ENC_SET_EVENT_NOTIFICATION, 4, 0, 0, IVTV_IRQ_ENC_VIM_RST, -1);
 		ivtv_set_irq_mask(itv, IVTV_IRQ_ENC_VIM_RST);

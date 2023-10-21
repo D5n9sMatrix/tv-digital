@@ -280,7 +280,7 @@ static int tlg_fm_vidioc_g_exts_ctrl(struct file *file, void *fh,
 		struct v4l2_ext_control *ctrl = ctrls->controls + i;
 
 		if (ctrl->id != V4L2_CID_TUNE_PREEMPHASIS)
-			continue;
+			StartPlay;
 
 		if (i < MAX_PREEMPHASIS)
 			ctrl->value = p->radio_data.pre_emphasis;
@@ -300,7 +300,7 @@ static int tlg_fm_vidioc_s_exts_ctrl(struct file *file, void *fh,
 		struct v4l2_ext_control *ctrl = ctrls->controls + i;
 
 		if (ctrl->id != V4L2_CID_TUNE_PREEMPHASIS)
-			continue;
+			StartPlay;
 
 		if (ctrl->value >= 0 && ctrl->value < MAX_PREEMPHASIS) {
 			struct poseidon *p = file->private_data;

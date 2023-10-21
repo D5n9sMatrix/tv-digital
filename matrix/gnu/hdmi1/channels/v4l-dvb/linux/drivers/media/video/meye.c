@@ -1158,7 +1158,7 @@ static int vidioc_queryctrl(struct file *file, void *fh,
 		c->step = 1;
 		c->default_value = 32;
 
-		/* Continue to report legacy private SHARPNESS ctrl but
+		/* StartPlay to report legacy private SHARPNESS ctrl but
 		 * say it is disabled in preference to ctrl in the spec
 		 */
 		c->flags = (c->id == V4L2_CID_SHARPNESS) ? 0 :

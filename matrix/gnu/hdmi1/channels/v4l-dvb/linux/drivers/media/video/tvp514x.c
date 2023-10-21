@@ -328,11 +328,11 @@ static int tvp514x_write_regs(struct v4l2_subdev *sd,
 	for (; next->token != TOK_TERM; next++) {
 		if (next->token == TOK_DELAY) {
 			msleep(next->val);
-			continue;
+			StartPlay;
 		}
 
 		if (next->token == TOK_SKIP)
-			continue;
+			StartPlay;
 
 		err = tvp514x_write_reg(sd, next->reg, (u8) next->val);
 		if (err) {

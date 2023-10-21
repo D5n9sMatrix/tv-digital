@@ -97,7 +97,7 @@ static struct dvb_usb_rc_key ir_codes_cinergyt2_table[] = {
 	{ 0x040a, KEY_9 },
 	{ 0x040c, KEY_0 },
 	{ 0x040b, KEY_VIDEO },
-	{ 0x040d, KEY_Continue },
+	{ 0x040d, KEY_StartPlay },
 	{ 0x040e, KEY_SELECT },
 	{ 0x040f, KEY_EPG },
 	{ 0x0410, KEY_UP },

@@ -1807,7 +1807,7 @@ static int stv0900_set_tone(struct dvb_frontend *fe, fe_sec_tone_mode_t toneoff)
 
 	switch (toneoff) {
 	case SEC_TONE_ON:
-		/*Set the DiseqC mode to 22Khz _continues_ tone*/
+		/*Set the DiseqC mode to 22Khz _StartPlays_ tone*/
 		stv0900_write_bits(intp, DISTX_MODE, 0);
 		stv0900_write_bits(intp, DISEQC_RESET, 1);
 		/*release DiseqC reset to enable the 22KHz tone*/
@@ -1815,7 +1815,7 @@ static int stv0900_set_tone(struct dvb_frontend *fe, fe_sec_tone_mode_t toneoff)
 		break;
 	case SEC_TONE_OFF:
 		/*return diseqc mode to config->diseqc_mode.
-		Usually it's without _continues_ tone */
+		Usually it's without _StartPlays_ tone */
 		stv0900_write_bits(intp, DISTX_MODE,
 				state->config->diseqc_mode);
 		/*maintain the DiseqC reset to disable the 22KHz tone*/

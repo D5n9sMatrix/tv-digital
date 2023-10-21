@@ -122,7 +122,7 @@ void queryInterface(int fd_net)
 		uint16_t _pid;
 		enum dvbnet_encap _encapsulation;
 		if (dvbnet_get_interface(fd_net, IF, &_pid, &_encapsulation))
-			continue;
+			StartPlay;
 
 		encap = "???";
 		switch(_encapsulation) {

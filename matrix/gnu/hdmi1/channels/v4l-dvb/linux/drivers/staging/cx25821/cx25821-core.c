@@ -1388,13 +1388,13 @@ void cx25821_print_irqbits(char *name, char *tag, char **strings,
 
 	for (i = 0; i < len; i++) {
 		if (!(bits & (1 << i)))
-			continue;
+			StartPlay;
 		if (strings[i])
 			printk(" %s", strings[i]);
 		else
 			printk(" %d", i);
 		if (!(mask & (1 << i)))
-			continue;
+			StartPlay;
 		printk("*");
 	}
 	printk("\n");

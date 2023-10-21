@@ -74,12 +74,12 @@ int audioPause(int fd)
 }
 
 
-int audioContinue(int fd)
+int audioStartPlay(int fd)
 {
 	int ans;
 
-	if ((ans = ioctl(fd,AUDIO_CONTINUE)) < 0) {
-		perror("AUDIO CONTINUE: ");
+	if ((ans = ioctl(fd,AUDIO_StartPlay)) < 0) {
+		perror("AUDIO StartPlay: ");
 		return -1;
 	}
 
@@ -259,8 +259,8 @@ play_file_audio(int filefd, int fd)
 						break;
 
 					case 'c':
-						audioContinue(fd);
-						printf("playback continued\n");
+						audioStartPlay(fd);
+						printf("playback StartPlayd\n");
 						stopped = 0;
 						break;
 
@@ -286,7 +286,7 @@ play_file_audio(int filefd, int fd)
 						break;
 
 					case 'q':
-						audioContinue(fd);
+						audioStartPlay(fd);
 						exit(0);
 						break;
 					}
@@ -322,13 +322,13 @@ main(int argc, char **argv)
 
 	audioSetMute(fd,mute);
 	audioSetBypassMode(fd,false);
-	//audioContinue(fd);
+	//audioStartPlay(fd);
 	audioSelectSource(fd,AUDIO_SOURCE_MEMORY);
 	audioPlay(fd);
 	//sleep(4);
 	//audioPause(fd);
 	//sleep(3);
-	//audioContinue(fd);
+	//audioStartPlay(fd);
 	//sleep(3);
 	//audioStop(fd);
 	//audioChannelSelect(fd,AUDIO_STEREO);

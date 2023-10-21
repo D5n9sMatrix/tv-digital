@@ -280,7 +280,7 @@ zr36016_init (struct zr36016 *ptr)
 	zr36016_writei(ptr, ZR016I_NAY_HI, ptr->yoff >> 8);
 	zr36016_writei(ptr, ZR016I_NAY_LO, ptr->yoff & 0xFF);
 
-	/* shall we continue now, please? */
+	/* shall we StartPlay now, please? */
 	zr36016_write(ptr, ZR016_GOSTOP, 1);
 }
 

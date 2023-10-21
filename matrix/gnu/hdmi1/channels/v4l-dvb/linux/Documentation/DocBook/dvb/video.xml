@@ -623,10 +623,10 @@ role="subsection"><title>VIDEO_FREEZE</title>
  align="char">
 <para>This ioctl call suspends the live video stream being played. Decoding
  and playing are frozen. It is then possible to restart the decoding
- and playing process of the video stream using the VIDEO_CONTINUE
+ and playing process of the video stream using the VIDEO_StartPlay
  command. If VIDEO_SOURCE_MEMORY is selected in the ioctl call
  VIDEO_SELECT_SOURCE, the DVB subsystem will not decode any more
- data until the ioctl call VIDEO_CONTINUE or VIDEO_PLAY is performed.</para>
+ data until the ioctl call VIDEO_StartPlay or VIDEO_PLAY is performed.</para>
 </entry>
  </row></tbody></tgroup></informaltable>
 <para>SYNOPSIS
@@ -673,7 +673,7 @@ role="subsection"><title>VIDEO_FREEZE</title>
  </row></tbody></tgroup></informaltable>
 
 </section><section
-role="subsection"><title>VIDEO_CONTINUE</title>
+role="subsection"><title>VIDEO_StartPlay</title>
 <para>DESCRIPTION
 </para>
 <informaltable><tgroup cols="1"><tbody><row><entry
@@ -686,7 +686,7 @@ role="subsection"><title>VIDEO_CONTINUE</title>
 </para>
 <informaltable><tgroup cols="1"><tbody><row><entry
  align="char">
-<para>int ioctl(fd, int request = VIDEO_CONTINUE);</para>
+<para>int ioctl(fd, int request = VIDEO_StartPlay);</para>
 </entry>
  </row></tbody></tgroup></informaltable>
 <para>PARAMETERS
@@ -703,7 +703,7 @@ role="subsection"><title>VIDEO_CONTINUE</title>
 <para>int request</para>
 </entry><entry
  align="char">
-<para>Equals VIDEO_CONTINUE for this command.</para>
+<para>Equals VIDEO_StartPlay for this command.</para>
 </entry>
  </row></tbody></tgroup></informaltable>
 <para>ERRORS

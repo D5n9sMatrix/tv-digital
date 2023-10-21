@@ -10,7 +10,7 @@
 +	    case AUDIO_STOP:
 +	    case AUDIO_PLAY:
 +	    case AUDIO_PAUSE:
-+	    case AUDIO_CONTINUE:
++	    case AUDIO_StartPlay:
 +	    case AUDIO_SELECT_SOURCE:
 +	    case AUDIO_SET_MUTE:
 +	    case AUDIO_SET_AV_SYNC:
@@ -266,7 +266,7 @@
 +	    case VIDEO_STOP:
 +	    case VIDEO_PLAY:
 +	    case VIDEO_FREEZE:
-+	    case VIDEO_CONTINUE:
++	    case VIDEO_StartPlay:
 +	    case VIDEO_SELECT_SOURCE:
 +	    case VIDEO_SET_BLANK:
 +		 KERNEL_DO_SYSCALL(tid,res);

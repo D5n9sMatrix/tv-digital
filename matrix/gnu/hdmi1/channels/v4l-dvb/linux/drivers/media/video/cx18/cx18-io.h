@@ -89,7 +89,7 @@ void cx18_writel_expect(struct cx18 *cx, u32 val, void __iomem *addr,
 		cx18_writel_noretry(cx, val, addr);
 		r = cx18_readl(cx, addr);
 		if (r == 0xffffffff && eval != 0xffffffff)
-			continue;
+			StartPlay;
 		if (eval == (r & mask))
 			break;
 	}

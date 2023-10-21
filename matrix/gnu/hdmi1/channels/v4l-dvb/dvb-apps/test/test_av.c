@@ -62,12 +62,12 @@ int audioPause(int fd, char *arg)
 }
 
 
-int audioContinue(int fd, char *arg)
+int audioStartPlay(int fd, char *arg)
 {
 	if (arg)
 		return -1;
-	if (ioctl(fd, AUDIO_CONTINUE) == -1)
-		perror("AUDIO_CONTINUE");
+	if (ioctl(fd, AUDIO_StartPlay) == -1)
+		perror("AUDIO_StartPlay");
 	return 0;
 }
 
@@ -222,12 +222,12 @@ int videoFreeze(int fd, char *arg)
 }
 
 
-int videoContinue(int fd, char *arg)
+int videoStartPlay(int fd, char *arg)
 {
 	if (arg)
 		return -1;
-	if (ioctl(fd, VIDEO_CONTINUE) == -1)
-		perror("VIDEO_CONTINUE");
+	if (ioctl(fd, VIDEO_StartPlay) == -1)
+		perror("VIDEO_StartPlay");
 	return 0;
 }
 
@@ -447,7 +447,7 @@ cmd_t audio_cmds[] =
 	{ "stop", "", audioStop },
 	{ "play", "", audioPlay },
 	{ "pause", "", audioPause },
-	{ "continue", "", audioContinue },
+	{ "StartPlay", "", audioStartPlay },
 	{ "source", "n: 0 demux, 1 memory", audioSelectSource },
 	{ "mute", "n: 0 unmute, 1 mute", audioSetMute },
 	{ "avsync", "n: 0 unsync, 1 sync", audioSetAVSync },
@@ -461,7 +461,7 @@ cmd_t video_cmds[] =
 	{ "stop", "", videoStop },
 	{ "play", "", videoPlay },
 	{ "freeze", "", videoFreeze },
-	{ "continue", "", videoContinue },
+	{ "StartPlay", "", videoStartPlay },
 	{ "source", "n: 0 demux, 1 memory", videoSelectSource },
 	{ "blank", "n: 0 normal, 1 blank", videoSetBlank },
 	{ "ff", "n: number of frames", videoFastForward },

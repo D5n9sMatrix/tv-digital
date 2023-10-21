@@ -372,7 +372,7 @@ case IBMCAM_MODEL_4:
 		usbvideo_TestPattern(uvd, 1, 1);
 		return scan_NextFrame;
 	}
-	return scan_Continue;
+	return scan_StartPlay;
 }
 
 /*
@@ -546,7 +546,7 @@ static enum ParseState ibmcam_parse_lines(
 		if (((frame->curline + 2) >= scanHeight) || (i >= scanLength)) {
 			const int j = i * V4L_BYTES_PER_PIXEL;
 #if USES_IBMCAM_PUTPIXEL
-			/* Continue 'f' because we don't use it much with PUTPIXEL */
+			/* StartPlay 'f' because we don't use it much with PUTPIXEL */
 			f = frame->data + (v4l_linesize * frame->curline) + j;
 #endif
 			memset(f, 0, v4l_linesize - j);
@@ -624,7 +624,7 @@ static enum ParseState ibmcam_parse_lines(
 	if (frame_done || (frame->curline >= VIDEOSIZE_Y(frame->request)))
 		return scan_NextFrame;
 	else
-		return scan_Continue;
+		return scan_StartPlay;
 }
 
 /*
@@ -742,7 +742,7 @@ static enum ParseState ibmcam_model2_320x240_parse_lines(
 		if (((frame->curline + 2) >= scanHeight) || (i >= scanLength)) {
 			const int offset = i * V4L_BYTES_PER_PIXEL;
 #if USES_IBMCAM_PUTPIXEL
-			/* Continue 'f' because we don't use it much with PUTPIXEL */
+			/* StartPlay 'f' because we don't use it much with PUTPIXEL */
 			f = frame->data + (v4l_linesize * frame->curline) + offset;
 #endif
 			memset(f, 0, v4l_linesize - offset);
@@ -803,7 +803,7 @@ static enum ParseState ibmcam_model2_320x240_parse_lines(
 	if (frame_done || (frame->curline >= VIDEOSIZE_Y(frame->request)))
 		return scan_NextFrame;
 	else
-		return scan_Continue;
+		return scan_StartPlay;
 }
 
 /*
@@ -917,7 +917,7 @@ static enum ParseState ibmcam_model3_parse_lines(
 
 			if (i >= data_w) {
 				RGB24_PUTPIXEL(frame, i, rw, 0, 0, 0);
-				continue;
+				StartPlay;
 			}
 
 			/* first line is YYY...Y; second is UYVY...UYVY */
@@ -966,7 +966,7 @@ static enum ParseState ibmcam_model3_parse_lines(
 		}
 		return scan_NextFrame;
 	} else
-		return scan_Continue;
+		return scan_StartPlay;
 }
 
 /*
@@ -1064,7 +1064,7 @@ static enum ParseState ibmcam_model4_128x96_parse_lines(
 		}
 		return scan_NextFrame;
 	} else
-		return scan_Continue;
+		return scan_StartPlay;
 }
 
 /*
@@ -1120,8 +1120,8 @@ static void ibmcam_ProcessIsocData(struct uvd *uvd,
 				}
 			}
 		}
-		if (newstate == scan_Continue)
-			continue;
+		if (newstate == scan_StartPlay)
+			StartPlay;
 		else if ((newstate == scan_NextFrame) || (newstate == scan_Out))
 			break;
 		else

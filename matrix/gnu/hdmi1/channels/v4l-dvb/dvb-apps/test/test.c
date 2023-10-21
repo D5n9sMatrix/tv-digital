@@ -106,7 +106,7 @@ void testpesfilter(void)
 	do {
 	        read(fd, buf, 4);
 		if (htonl(*(uint32_t *)buf)!=0x00001bd)
-		        continue;
+		        StartPlay;
 		read(fd, buf+4, 2);
 		len=(buf[4]<<8)|buf[5];
 	        read(fd, buf+6, len);

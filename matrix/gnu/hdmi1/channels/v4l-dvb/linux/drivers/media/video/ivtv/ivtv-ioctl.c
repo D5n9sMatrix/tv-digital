@@ -294,7 +294,7 @@ static int ivtv_video_command(struct ivtv *itv, struct ivtv_open_id *id,
 		}
 		break;
 
-	case VIDEO_CMD_CONTINUE:
+	case VIDEO_CMD_StartPlay:
 		vc->flags = 0;
 		if (try) break;
 		if (itv->output_mode != OUT_MPG)
@@ -1560,7 +1560,7 @@ static int ivtv_log_status(struct file *file, void *fh)
 		struct ivtv_stream *s = &itv->streams[i];
 
 		if (s->vdev == NULL || s->buffers == 0)
-			continue;
+			StartPlay;
 		IVTV_INFO("Stream %s: status 0x%04lx, %d%% of %d KiB (%d buffers) in use\n", s->name, s->s_flags,
 				(s->buffers - s->q_free.buffers) * 100 / s->buffers,
 				(s->buffers * s->buf_size) / 1024, s->buffers);
@@ -1696,12 +1696,12 @@ static int ivtv_decoder_ioctls(struct file *filp, unsigned int cmd, void *arg)
 		return ivtv_video_command(itv, id, &vc, 0);
 	}
 
-	case VIDEO_CONTINUE: {
+	case VIDEO_StartPlay: {
 		struct video_command vc;
 
-		IVTV_DEBUG_IOCTL("VIDEO_CONTINUE\n");
+		IVTV_DEBUG_IOCTL("VIDEO_StartPlay\n");
 		memset(&vc, 0, sizeof(vc));
-		vc.cmd = VIDEO_CMD_CONTINUE;
+		vc.cmd = VIDEO_CMD_StartPlay;
 		return ivtv_video_command(itv, id, &vc, 0);
 	}
 
@@ -1818,7 +1818,7 @@ static long ivtv_default(struct file *file, void *fh, int cmd, void *arg)
 	case VIDEO_PLAY:
 	case VIDEO_STOP:
 	case VIDEO_FREEZE:
-	case VIDEO_CONTINUE:
+	case VIDEO_StartPlay:
 	case VIDEO_COMMAND:
 	case VIDEO_TRY_COMMAND:
 	case VIDEO_SELECT_SOURCE:

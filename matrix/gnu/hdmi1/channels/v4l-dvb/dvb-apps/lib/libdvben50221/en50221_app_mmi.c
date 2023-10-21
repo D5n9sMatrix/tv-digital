@@ -498,7 +498,7 @@ int en50221_app_mmi_display_message(struct en50221_app_mmi *mmi,
 
 int en50221_app_mmi_scene_done(struct en50221_app_mmi *mmi,
 			       uint16_t session_number,
-			       uint8_t decoder_continue,
+			       uint8_t decoder_StartPlay,
 			       uint8_t scene_reveal, uint8_t scene_tag)
 {
 	uint8_t data[5];
@@ -508,7 +508,7 @@ int en50221_app_mmi_scene_done(struct en50221_app_mmi *mmi,
 	data[2] = TAG_SCENE_DONE & 0xFF;
 	data[3] = 1;
 	data[4] =
-		(decoder_continue ? 0x80 : 0x00) |
+		(decoder_StartPlay ? 0x80 : 0x00) |
 	    	(scene_reveal ? 0x40 : 0x00) |
 		(scene_tag & 0x0f);
 	return mmi->funcs->send_data(mmi->funcs->arg, session_number, data, 5);

@@ -168,7 +168,7 @@ static void dump_statusreg(struct saa7134_dev *dev, int reg,
 	printk(KERN_DEBUG "%s: %s:", dev->name, regname);
 	for (i = 7; i >= 0; i--) {
 		if (NULL == bits[i])
-			continue;
+			StartPlay;
 		printk(" %s=%d", bits[i], (value & (1 << i)) ? 1 : 0);
 	}
 	printk("\n");
@@ -533,7 +533,7 @@ static void print_irqstatus(struct saa7134_dev *dev, int loop,
 	       dev->name,loop,jiffies,report,status);
 	for (i = 0; i < IRQBITS; i++) {
 		if (!(report & (1 << i)))
-			continue;
+			StartPlay;
 		printk(" %s",irqbits[i]);
 	}
 	if (report & SAA7134_IRQ_REPORT_DONE_RA0) {
@@ -825,7 +825,7 @@ static void __devinit must_configure_manually(void)
 		       i,saa7134_boards[i].name);
 		for (p = 0; saa7134_pci_tbl[p].driver_data; p++) {
 			if (saa7134_pci_tbl[p].driver_data != i)
-				continue;
+				StartPlay;
 			printk(" %04x:%04x",
 			       saa7134_pci_tbl[p].subvendor,
 			       saa7134_pci_tbl[p].subdevice);

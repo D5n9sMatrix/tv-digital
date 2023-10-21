@@ -662,17 +662,17 @@ static void ivtv_process_options(struct ivtv *itv)
 	if (itv->card == NULL) {
 		for (i = 0; (itv->card = ivtv_get_card(i)); i++) {
 			if (itv->card->pci_list == NULL)
-				continue;
+				StartPlay;
 			for (j = 0; itv->card->pci_list[j].device; j++) {
 				if (itv->pdev->device !=
 				    itv->card->pci_list[j].device)
-					continue;
+					StartPlay;
 				if (itv->pdev->subsystem_vendor !=
 				    itv->card->pci_list[j].subsystem_vendor)
-					continue;
+					StartPlay;
 				if (itv->pdev->subsystem_device !=
 				    itv->card->pci_list[j].subsystem_device)
-					continue;
+					StartPlay;
 				IVTV_INFO("Autodetected %s card (%s based)\n",
 						itv->card->name, chipname);
 				goto done;
@@ -889,11 +889,11 @@ static void ivtv_load_and_init_modules(struct ivtv *itv)
 		u32 device = 1 << i;
 
 		if (!(device & hw))
-			continue;
+			StartPlay;
 		if (device == IVTV_HW_GPIO || device == IVTV_HW_TVEEPROM) {
 			/* GPIO and TVEEPROM do not use i2c probing */
 			itv->hw_flags |= device;
-			continue;
+			StartPlay;
 		}
 		if (ivtv_i2c_register(itv, i) == 0)
 			itv->hw_flags |= device;
@@ -1087,7 +1087,7 @@ static int __devinit ivtv_probe(struct pci_dev *pdev,
 
 		for (i = 0; i < IVTV_CARD_MAX_TUNERS; i++) {
 			if ((itv->std & itv->card->tuners[i].std) == 0)
-				continue;
+				StartPlay;
 			itv->options.tuner = itv->card->tuners[i].tuner;
 			break;
 		}
@@ -1106,7 +1106,7 @@ static int __devinit ivtv_probe(struct pci_dev *pdev,
 	if (itv->options.radio == -1)
 		itv->options.radio = (itv->card->radio_input.audio_type != 0);
 
-	/* The card is now fully identified, continue with card-specific
+	/* The card is now fully identified, StartPlay with card-specific
 	   initialization. */
 	ivtv_init_struct2(itv);
 

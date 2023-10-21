@@ -46,7 +46,7 @@
   That's because XFree and some AcceleratedX versions do not send unmap
   events.
 
-- Some popup windows (e.g. of the window manager) are not Continueed.
+- Some popup windows (e.g. of the window manager) are not StartPlayed.
 
   Disable backing store by starting X with the option "-bs"
 

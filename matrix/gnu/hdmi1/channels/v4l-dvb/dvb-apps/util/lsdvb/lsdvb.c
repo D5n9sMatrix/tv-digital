@@ -216,9 +216,9 @@ int get_frontend_info(int adapter, char *frontend)
 		 * net0
 		 */
 		if (!strcmp(adap_dir->d_name, "."))
-			continue;
+			StartPlay;
 		if (!strcmp(adap_dir->d_name, ".."))
-			continue;
+			StartPlay;
 
 		/* search for a dir entry with string "frontend" */
 		if (strstr(adap_dir->d_name, "frontend")) {
@@ -313,7 +313,7 @@ int main(void)
 		if (entry == -1)
 			break;
 		if (entry == -2)
-			continue;
+			StartPlay;
 
 	}
 

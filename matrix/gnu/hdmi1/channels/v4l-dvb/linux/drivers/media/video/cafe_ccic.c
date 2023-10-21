@@ -1762,7 +1762,7 @@ static void cafe_frame_tasklet(unsigned long data)
 		if (++(cam->next_buf) >= cam->nbufs)
 			cam->next_buf = 0;
 		if (! test_bit(bufno, &cam->flags))
-			continue;
+			StartPlay;
 		if (list_empty(&cam->sb_avail))
 			break;  /* Leave it valid, hope for better later */
 		clear_bit(bufno, &cam->flags);

@@ -276,11 +276,11 @@ static void cpia2_usb_complete(struct urb *urb)
 			    i, n, st);
 			if(!ALLOW_CORRUPT)
 				cam->workbuff->status = FRAME_ERROR;
-			continue;
+			StartPlay;
 		}
 
 		if(n<=2)
-			continue;
+			StartPlay;
 
 		checksum = 0;
 		for(j=0; j<n-2; ++j)
@@ -291,7 +291,7 @@ static void cpia2_usb_complete(struct urb *urb)
 			    i, n, (int)checksum, (int)iso_checksum);
 			if(!ALLOW_CORRUPT) {
 				cam->workbuff->status = FRAME_ERROR;
-				continue;
+				StartPlay;
 			}
 		}
 		n -= 2;
@@ -306,7 +306,7 @@ static void cpia2_usb_complete(struct urb *urb)
 			}
 			DBG("workbuff not reading, status=%d\n",
 			    cam->workbuff->status);
-			continue;
+			StartPlay;
 		}
 
 		if (cam->frame_size < cam->workbuff->length + n) {
@@ -316,7 +316,7 @@ static void cpia2_usb_complete(struct urb *urb)
 			if(cam->workbuff->length > cam->workbuff->max_length)
 				cam->workbuff->max_length =
 					cam->workbuff->length;
-			continue;
+			StartPlay;
 		}
 
 		if (cam->workbuff->length == 0) {
@@ -328,7 +328,7 @@ static void cpia2_usb_complete(struct urb *urb)
 				data_offset = 2;
 			} else {
 				DBG("Ignoring packet, not beginning!\n");
-				continue;
+				StartPlay;
 			}
 			DBG("Start of frame pattern found\n");
 			do_gettimeofday(&cam->workbuff->timestamp);
@@ -644,7 +644,7 @@ static int submit_urbs(struct camera_data *cam)
 
 	for(i=0; i<NUM_SBUF; ++i) {
 		if (cam->sbuf[i].data)
-			continue;
+			StartPlay;
 		cam->sbuf[i].data =
 		    kmalloc(FRAMES_PER_DESC * FRAME_SIZE_PER_DESC, GFP_KERNEL);
 		if (!cam->sbuf[i].data) {
@@ -661,7 +661,7 @@ static int submit_urbs(struct camera_data *cam)
 	 */
 	for(i=0; i<NUM_SBUF; ++i) {
 		if(cam->sbuf[i].urb) {
-			continue;
+			StartPlay;
 		}
 		urb = usb_alloc_urb(FRAMES_PER_DESC, GFP_KERNEL);
 		if (!urb) {

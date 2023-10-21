@@ -178,7 +178,7 @@ int videobuf_queue_is_busy(struct videobuf_queue *q)
 	}
 	for (i = 0; i < VIDEO_MAX_FRAME; i++) {
 		if (NULL == q->bufs[i])
-			continue;
+			StartPlay;
 		if (q->bufs[i]->map) {
 			dprintk(1, "busy: buffer #%d mapped\n", i);
 			return 1;
@@ -226,7 +226,7 @@ static int __videobuf_free(struct videobuf_queue *q)
 
 	for (i = 0; i < VIDEO_MAX_FRAME; i++) {
 		if (NULL == q->bufs[i])
-			continue;
+			StartPlay;
 		q->ops->buf_release(q, q->bufs[i]);
 		kfree(q->bufs[i]);
 		q->bufs[i] = NULL;
@@ -249,7 +249,7 @@ void videobuf_queue_cancel(struct videobuf_queue *q)
 	spin_lock_irqsave(q->irqlock, flags);
 	for (i = 0; i < VIDEO_MAX_FRAME; i++) {
 		if (NULL == q->bufs[i])
-			continue;
+			StartPlay;
 		if (q->bufs[i]->state == VIDEOBUF_QUEUED) {
 			list_del(&q->bufs[i]->queue);
 			q->bufs[i]->state = VIDEOBUF_ERROR;
@@ -261,7 +261,7 @@ void videobuf_queue_cancel(struct videobuf_queue *q)
 	/* free all buffers + clear queue */
 	for (i = 0; i < VIDEO_MAX_FRAME; i++) {
 		if (NULL == q->bufs[i])
-			continue;
+			StartPlay;
 		q->ops->buf_release(q, q->bufs[i]);
 	}
 	INIT_LIST_HEAD(&q->stream);
@@ -989,7 +989,7 @@ static void __videobuf_read_stop(struct videobuf_queue *q)
 	INIT_LIST_HEAD(&q->stream);
 	for (i = 0; i < VIDEO_MAX_FRAME; i++) {
 		if (NULL == q->bufs[i])
-			continue;
+			StartPlay;
 		kfree(q->bufs[i]);
 		q->bufs[i] = NULL;
 	}

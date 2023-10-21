@@ -388,7 +388,7 @@ static int parse_tvct(int dmxfd)
 			}
 		}
 		if(section_pattern & (1 << tvct->head.ext_head.section_number)) {
-			continue;
+			StartPlay;
 		}
 		section_pattern |= 1 << tvct->head.ext_head.section_number;
 
@@ -566,7 +566,7 @@ static int parse_ett(int dmxfd, int index, uint16_t pid)
 			source_id = ett->ETM_source_id;
 			event_id = ett->ETM_sub_id;
 			if(source_id != channel->src_id) {
-				continue;
+				StartPlay;
 			}
 
 			event = NULL;
@@ -576,17 +576,17 @@ static int parse_ett(int dmxfd, int index, uint16_t pid)
 				return -1;
 			}
 			if(NULL == event) {
-				continue;
+				StartPlay;
 			}
 			if(section_pattern & (1 << curr_index)) {
 				/* the section has been filled, so skip,
 				 * not consider version yet
 				 */
-				continue;
+				StartPlay;
 			}
 			if(event->msg_len) {
 				/* the message has been filled */
-				continue;
+				StartPlay;
 			}
 
 			if(parse_message(channel, ett, event)) {
@@ -628,7 +628,7 @@ static int parse_events(struct atsc_channel_info *curr_info,
 				/* skip if it's the same event spanning
 				 * over sections
 				 */
-				continue;
+				StartPlay;
 			}
 		}
 		curr_info->event_info_index += 1;
@@ -645,7 +645,7 @@ static int parse_events(struct atsc_channel_info *curr_info,
 
 		title = atsc_eit_event_name_title_text(e);
 		if (title == NULL)
-			continue;
+			StartPlay;
 		atsc_text_strings_for_each(title, str, j) {
 			struct atsc_text_string_segment *seg;
 
@@ -726,7 +726,7 @@ static int parse_eit(int dmxfd, int index, uint16_t pid)
 			} else {
 				if(source_id !=
 					atsc_eit_section_source_id(eit)) {
-					continue;
+					StartPlay;
 				}
 			}
 			if(eit_instance_pattern & (1 << curr_channel_index)) {
@@ -758,7 +758,7 @@ static int parse_eit(int dmxfd, int index, uint16_t pid)
 			}
 			if(section_pattern &
 				(1 << eit->head.ext_head.section_number)) {
-				continue;
+				StartPlay;
 			}
 			section_pattern |= 1 << eit->head.ext_head.section_number;
 
@@ -821,13 +821,13 @@ static int parse_eit(int dmxfd, int index, uint16_t pid)
 
 		if(0 == ei->num_eit_sections) {
 			channel->last_event = NULL;
-			continue;
+			StartPlay;
 		}
 		s = &ei->section[ei->num_eit_sections - 1];
 		/* BUG: it's incorrect when last section has no event */
 		if(0 == s->num_events) {
 			channel->last_event = NULL;
-			continue;
+			StartPlay;
 		}
 		channel->last_event = s->events[s->num_events - 1];
 	}
@@ -860,7 +860,7 @@ static int parse_mgt(int dmxfd)
 	for(j = 0; j < (int)(sizeof(mgt_tab_name_array) /
 		sizeof(struct mgt_table_name)); j++) {
 		if(t->table_type > mgt_tab_name_array[j].range) {
-			continue;
+			StartPlay;
 		}
 		table = mgt_tab_name_array[j];
 		if(0 == j || mgt_tab_name_array[j - 1].range + 1 ==
@@ -938,7 +938,7 @@ static int print_events(struct atsc_channel_info *channel,
 			section->events[m];
 
 		if(NULL == event) {
-			continue;
+			StartPlay;
 		}
 		fprintf(stdout, "|%02d:%02d--%02d:%02d| ",
 			event->start.tm_hour, event->start.tm_min,

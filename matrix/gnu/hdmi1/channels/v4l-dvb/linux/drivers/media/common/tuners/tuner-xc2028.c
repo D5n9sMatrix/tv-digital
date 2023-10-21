@@ -459,11 +459,11 @@ static int seek_firmware(struct dvb_frontend *fe, unsigned int type,
 		int nr_matches;
 
 		if (type != (priv->firm[i].type & type_mask))
-			continue;
+			StartPlay;
 
 		match_mask = *id & priv->firm[i].id;
 		if (!match_mask)
-			continue;
+			StartPlay;
 
 		if ((*id & match_mask) == *id)
 			goto found; /* Supports all the requested standards */
@@ -562,7 +562,7 @@ static int load_firmware(struct dvb_frontend *fe, unsigned int type,
 					   (*p) & 0x7f);
 				return -EINVAL;
 			}
-			continue;
+			StartPlay;
 		}
 		if (size >= 0xff00) {
 			switch (size) {
@@ -580,13 +580,13 @@ static int load_firmware(struct dvb_frontend *fe, unsigned int type,
 				return -EINVAL;
 
 			}
-			continue;
+			StartPlay;
 		}
 
 		/* Checks for a sleep command */
 		if (size & 0x8000) {
 			msleep(size & 0x7fff);
-			continue;
+			StartPlay;
 		}
 
 		if ((size + p > endp)) {

@@ -555,7 +555,7 @@ static void uvc_video_decode_isoc(struct urb *urb, struct uvc_streaming *stream,
 		if (urb->iso_frame_desc[i].status < 0) {
 			uvc_trace(UVC_TRACE_FRAME, "USB isochronous frame "
 				"lost (%d).\n", urb->iso_frame_desc[i].status);
-			continue;
+			StartPlay;
 		}
 
 		/* Decode the payload header. */
@@ -569,7 +569,7 @@ static void uvc_video_decode_isoc(struct urb *urb, struct uvc_streaming *stream,
 		} while (ret == -EAGAIN);
 
 		if (ret < 0)
-			continue;
+			StartPlay;
 
 		/* Decode the payload data. */
 		uvc_video_decode_data(stream, buf, mem + ret,
@@ -817,7 +817,7 @@ static void uvc_uninit_video(struct uvc_streaming *stream, int free_buffers)
 	for (i = 0; i < UVC_URBS; ++i) {
 		urb = stream->urb[i];
 		if (urb == NULL)
-			continue;
+			StartPlay;
 
 		usb_kill_urb(urb);
 		usb_free_urb(urb);
@@ -973,7 +973,7 @@ static int uvc_init_video(struct uvc_streaming *stream, gfp_t gfp_flags)
 			ep = uvc_find_endpoint(alts,
 				stream->header.bEndpointAddress);
 			if (ep == NULL)
-				continue;
+				StartPlay;
 
 			/* Check if the bandwidth is high enough. */
 			psize = le16_to_cpu(ep->desc.wMaxPacketSize);

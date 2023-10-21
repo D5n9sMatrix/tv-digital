@@ -1413,7 +1413,7 @@ static int pvr2_locate_firmware(struct pvr2_hdw *hdw,
 				       fwnames[idx]);
 			return idx;
 		}
-		if (ret == -ENOENT) continue;
+		if (ret == -ENOENT) StartPlay;
 		pvr2_trace(PVR2_TRACE_ERROR_LEGS,
 			   "request_firmware fatal error with code=%d",ret);
 		return ret;
@@ -1598,7 +1598,7 @@ int pvr2_upload_firmware2(struct pvr2_hdw *hdw)
 	ret |= pvr2_hdw_gpio_chg_out(hdw,0xffffffff,0x00000008); /*gpio output state*/
 	ret |= pvr2_write_register(hdw, 0x9058, 0xffffffed); /*VPU ctrl*/
 	ret |= pvr2_write_register(hdw, 0x9054, 0xfffffffd); /*reset hw blocks*/
-	ret |= pvr2_write_register(hdw, 0x07f8, 0x80000800); /*encoder SDRAM Continue*/
+	ret |= pvr2_write_register(hdw, 0x07f8, 0x80000800); /*encoder SDRAM StartPlay*/
 	ret |= pvr2_write_register(hdw, 0x07fc, 0x0000001a); /*encoder SDRAM pre-charge*/
 	ret |= pvr2_write_register(hdw, 0x0700, 0x00000000); /*I2C clock*/
 	ret |= pvr2_write_register(hdw, 0xaa00, 0x00000000); /*unknown*/
@@ -1977,7 +1977,7 @@ static void pvr2_hdw_setup_std(struct pvr2_hdw *hdw)
 			     hdw->std_mask_eeprom) &
 			     std_eeprom_maps[idx].msk) :
 			    (std_eeprom_maps[idx].pat !=
-			     hdw->std_mask_eeprom)) continue;
+			     hdw->std_mask_eeprom)) StartPlay;
 			bcnt = pvr2_std_id_to_str(buf,sizeof(buf),
 						  std_eeprom_maps[idx].std);
 			pvr2_trace(PVR2_TRACE_STD,
@@ -2242,8 +2242,8 @@ static void pvr2_hdw_setup_low(struct pvr2_hdw *hdw)
 
 	for (idx = 0; idx < CTRLDEF_COUNT; idx++) {
 		cptr = hdw->controls + idx;
-		if (cptr->info->skip_init) continue;
-		if (!cptr->info->set_value) continue;
+		if (cptr->info->skip_init) StartPlay;
+		if (!cptr->info->set_value) StartPlay;
 		cptr->info->set_value(cptr,~0,cptr->info->default_value);
 	}
 
@@ -2464,7 +2464,7 @@ struct pvr2_hdw *pvr2_hdw_create(struct usb_interface *intf,
 	if (hdw_desc == NULL) {
 		pvr2_trace(PVR2_TRACE_INIT, "pvr2_hdw_create:"
 			   " No device description pointer,"
-			   " unable to continue.");
+			   " unable to StartPlay.");
 		pvr2_trace(PVR2_TRACE_INIT, "If you have a new device type,"
 			   " please contact Mike Isely <isely@pobox.com>"
 			   " to get it included in the driver\n");
@@ -2557,7 +2557,7 @@ struct pvr2_hdw *pvr2_hdw_create(struct usb_interface *intf,
 	/* Ensure that default input choice is a valid one. */
 	m = hdw->input_avail_mask;
 	if (m) for (idx = 0; idx < (sizeof(m) << 3); idx++) {
-		if (!((1 << idx) & m)) continue;
+		if (!((1 << idx) & m)) StartPlay;
 		hdw->input_val = idx;
 		break;
 	}
@@ -2621,7 +2621,7 @@ struct pvr2_hdw *pvr2_hdw_create(struct usb_interface *intf,
 	// Initialize control data regarding video standard masks
 	valid_std_mask = pvr2_std_get_usable();
 	for (idx = 0; idx < 32; idx++) {
-		if (!(valid_std_mask & (1 << idx))) continue;
+		if (!(valid_std_mask & (1 << idx))) StartPlay;
 		cnt1 = pvr2_std_id_to_str(
 			hdw->std_mask_names[idx],
 			sizeof(hdw->std_mask_names[idx])-1,
@@ -2671,7 +2671,7 @@ struct pvr2_hdw *pvr2_hdw_create(struct usb_interface *intf,
 	}
 	mutex_lock(&pvr2_unit_mtx); do {
 		for (idx = 0; idx < PVR_NUM; idx++) {
-			if (unit_pointers[idx]) continue;
+			if (unit_pointers[idx]) StartPlay;
 			hdw->unit_number = idx;
 			unit_pointers[idx] = hdw;
 			break;
@@ -2970,9 +2970,9 @@ struct pvr2_ctrl *pvr2_hdw_get_ctrl_nextv4l(struct pvr2_hdw *hdw,
 	for (idx = 0; idx < hdw->control_cnt; idx++) {
 		cptr = hdw->controls + idx;
 		i = cptr->info->v4l_id;
-		if (!i) continue;
-		if (i <= ctl_id) continue;
-		if (cp2 && (cp2->info->v4l_id < i)) continue;
+		if (!i) StartPlay;
+		if (i <= ctl_id) StartPlay;
+		if (cp2 && (cp2->info->v4l_id < i)) StartPlay;
 		cp2 = cptr;
 	}
 	return cp2;
@@ -3126,9 +3126,9 @@ static void pvr2_subdev_update(struct pvr2_hdw *hdw)
 
 	v4l2_device_for_each_subdev(sd, &hdw->v4l2_dev) {
 		id = sd->grp_id;
-		if (id >= ARRAY_SIZE(pvr2_module_update_functions)) continue;
+		if (id >= ARRAY_SIZE(pvr2_module_update_functions)) StartPlay;
 		fp = pvr2_module_update_functions[id];
-		if (!fp) continue;
+		if (!fp) StartPlay;
 		(*fp)(hdw, sd);
 	}
 
@@ -3152,11 +3152,11 @@ static int pvr2_hdw_actived_setup(struct pvr2_hdw *hdw)
 
 	for (idx = 0; idx < hdw->control_cnt; idx++) {
 		cptr = hdw->controls + idx;
-		if (!cptr->info->is_dirty) continue;
-		if (!cptr->info->is_dirty(cptr)) continue;
+		if (!cptr->info->is_dirty) StartPlay;
+		if (!cptr->info->is_dirty(cptr)) StartPlay;
 		actived_flag = !0;
 
-		if (!(pvrusb2_debug & PVR2_TRACE_CTL)) continue;
+		if (!(pvrusb2_debug & PVR2_TRACE_CTL)) StartPlay;
 		bcnt = scnprintf(buf,sizeof(buf),"\"%s\" <-- ",
 				 cptr->info->name);
 		value = 0;
@@ -3328,7 +3328,7 @@ static int pvr2_hdw_actived_execute(struct pvr2_hdw *hdw)
 	hdw->force_dirty = 0;
 	for (idx = 0; idx < hdw->control_cnt; idx++) {
 		cptr = hdw->controls + idx;
-		if (!cptr->info->clear_dirty) continue;
+		if (!cptr->info->clear_dirty) StartPlay;
 		cptr->info->clear_dirty(cptr);
 	}
 
@@ -4507,7 +4507,7 @@ static int state_eval_encoder_config(struct pvr2_hdw *hdw)
 					add_timer(&hdw->encoder_wait_timer);
 				}
 			}
-			/* We can't continue until we know we have been
+			/* We can't StartPlay until we know we have been
 			   quiet for the interval measured by this
 			   timer. */
 			return 0;
@@ -4900,7 +4900,7 @@ static unsigned int print_input_mask(unsigned int msk,
 	unsigned int idx,ccnt;
 	unsigned int tcnt = 0;
 	for (idx = 0; idx < ARRAY_SIZE(control_values_input); idx++) {
-		if (!((1 << idx) & msk)) continue;
+		if (!((1 << idx) & msk)) StartPlay;
 		ccnt = scnprintf(buf+tcnt,
 				 acnt-tcnt,
 				 "%s%s",
@@ -5384,7 +5384,7 @@ int pvr2_hdw_set_input_allowed(struct pvr2_hdw *hdw,
 		}
 		m = hdw->input_allowed_mask;
 		for (idx = 0; idx < (sizeof(m) << 3); idx++) {
-			if (!((1 << idx) & m)) continue;
+			if (!((1 << idx) & m)) StartPlay;
 			pvr2_hdw_set_input(hdw,idx);
 			break;
 		}

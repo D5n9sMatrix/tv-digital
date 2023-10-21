@@ -248,7 +248,7 @@ static void copy_video_data(struct video_data *video, char *src,
 		if (video->prev_left) {
 			copy_data(video->prev_left);
 			video->prev_left = 0;
-			continue;
+			StartPlay;
 		}
 		copy_data(video->lines_size);
 	}
@@ -379,7 +379,7 @@ static int get_chunk(int start, struct urb *urb,
 		if (-EOVERFLOW == pkt->status) {
 			if (++*bubble_err > urb->number_of_packets / 3)
 				return GET_TOO_MUCH_BUBBLE;
-			continue;
+			StartPlay;
 		}
 
 		/* This is the gap */
@@ -387,7 +387,7 @@ static int get_chunk(int start, struct urb *urb,
 				|| pkt->actual_length > ISO_PKT_SIZE) {
 			if (*head != -1)
 				break;
-			continue;
+			StartPlay;
 		}
 
 		/* a good isochronous packet */
@@ -395,7 +395,7 @@ static int get_chunk(int start, struct urb *urb,
 			if (*head == -1)
 				*head = start;
 			*tail = start;
-			continue;
+			StartPlay;
 		}
 
 		/* trailer is here */

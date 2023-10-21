@@ -444,7 +444,7 @@ static void copy_to_file(int in_fd, int out_fd)
 		if (r < 0) {
 			if (errno == EOVERFLOW) {
 				printf("buffer overrun\n");
-				continue;
+				StartPlay;
 			}
 			PERROR("Read failed");
 			break;

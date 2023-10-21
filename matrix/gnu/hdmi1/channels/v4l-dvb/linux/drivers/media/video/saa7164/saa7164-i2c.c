@@ -42,7 +42,7 @@ static int i2c_xfer(struct i2c_adapter *i2c_adap, struct i2c_msg *msgs, int num)
 		if (msgs[i].flags & I2C_M_RD) {
 			/* Unsupported - Yet*/
 			printk(KERN_ERR "%s() Unsupported - Yet\n", __func__);
-			continue;
+			StartPlay;
 		} else if (i + 1 < num && (msgs[i + 1].flags & I2C_M_RD) &&
 			   msgs[i].addr == msgs[i + 1].addr) {
 			/* write then read from same address */

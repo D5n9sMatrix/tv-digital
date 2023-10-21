@@ -189,7 +189,7 @@ static void mainloop(void)
 
 			if (-1 == r) {
 				if (EINTR == errno)
-					continue;
+					StartPlay;
 				errno_exit("select");
 			}
 
@@ -200,7 +200,7 @@ static void mainloop(void)
 
 			if (read_frame())
 				break;
-			/* EAGAIN - continue select loop. */
+			/* EAGAIN - StartPlay select loop. */
 		}
 	}
 }

@@ -265,7 +265,7 @@ static int pvr2_encoder_cmd(void *ctxt,
 			if (rdData[0] & IVTV_MBOX_FIRMWARE_DONE) {
 				break;
 			}
-			if (rdData[0] && (poll_count < 1000)) continue;
+			if (rdData[0] && (poll_count < 1000)) StartPlay;
 			if (!rdData[0]) {
 				retry_flag = !0;
 				pvr2_trace(
@@ -292,7 +292,7 @@ static int pvr2_encoder_cmd(void *ctxt,
 			break;
 		}
 		if (retry_flag) {
-			if (try_count < 20) continue;
+			if (try_count < 20) StartPlay;
 			pvr2_trace(
 				PVR2_TRACE_ERROR_LEGS,
 				"Too many retries...");

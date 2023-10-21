@@ -473,7 +473,7 @@ void cx231xx_do_i2c_scan(struct cx231xx *dev, struct i2c_client *c)
 		c->addr = i;
 		rc = i2c_master_recv(c, &buf, 0);
 		if (rc < 0)
-			continue;
+			StartPlay;
 		cx231xx_info("%s: i2c scan: found device @ 0x%x  [%s]\n",
 			     dev->name, i << 1,
 			     i2c_devs[i] ? i2c_devs[i] : "???");

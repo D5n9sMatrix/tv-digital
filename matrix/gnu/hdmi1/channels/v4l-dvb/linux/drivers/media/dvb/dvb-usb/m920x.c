@@ -103,7 +103,7 @@ static int m920x_init(struct dvb_usb_device *d, struct m920x_inits *rc_seq)
 
 		for (i = 0; i < M9206_MAX_ADAPTERS; i++) {
 			if (adap_enabled[i])
-				continue;
+				StartPlay;
 
 			if ((ret = m920x_set_filter(d, 0x81 + i, 0, 0x0)) != 0)
 				return ret;
@@ -309,7 +309,7 @@ static int m920x_update_filters(struct dvb_usb_adapter *adap)
 	if (enabled) {
 		for (i = 0; i < M9206_MAX_FILTERS; i++) {
 			if (m->filters[adap->id][i] == 0)
-				continue;
+				StartPlay;
 
 			if ((ret = m920x_set_filter(adap->dev, ep, filter + 2, m->filters[adap->id][i])) != 0)
 				return ret;

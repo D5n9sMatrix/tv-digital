@@ -347,17 +347,17 @@ static inline int cx231xx_isoc_copy(struct cx231xx *dev, struct urb *urb)
 		if (status < 0) {
 			print_err_status(dev, i, status);
 			if (urb->iso_frame_desc[i].status != -EPROTO)
-				continue;
+				StartPlay;
 		}
 
 		if (urb->iso_frame_desc[i].actual_length <= 0) {
 			/* cx231xx_isocdbg("packet %d is empty",i); - spammy */
-			continue;
+			StartPlay;
 		}
 		if (urb->iso_frame_desc[i].actual_length >
 		    dev->video_mode.max_pkt_size) {
 			cx231xx_isocdbg("packet bigger than packet size");
-			continue;
+			StartPlay;
 		}
 
 		/*  get buffer pointer and length */

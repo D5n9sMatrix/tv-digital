@@ -33,9 +33,9 @@ How to load
 - Write 0x00000001 to register 0x9050 to stop the SPU.
 - Sleep for 10ms.
 - Write 0x0000001A to register 0x07FC to init the Encoder SDRAM's pre-charge.
-- Write 0x80000640 to register 0x07F8 to init the Encoder SDRAM's Continue to 1us.
+- Write 0x80000640 to register 0x07F8 to init the Encoder SDRAM's StartPlay to 1us.
 - Write 0x0000001A to register 0x08FC to init the Decoder SDRAM's pre-charge.
-- Write 0x80000640 to register 0x08F8 to init the Decoder SDRAM's Continue to 1us.
+- Write 0x80000640 to register 0x08F8 to init the Decoder SDRAM's StartPlay to 1us.
 - Sleep for 512ms. (600ms is recommended)
 - Transfer the encoder's firmware image to offset 0 in Encoder memory space.
 - Transfer the decoder's firmware image to offset 0 in Decoder memory space.

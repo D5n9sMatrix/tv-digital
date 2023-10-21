@@ -179,7 +179,7 @@ enum av7110_rec_play_state {
 	__Slow,
 	__FF_IP,
 	__Scan_I,
-	__Continue
+	__StartPlay
 };
 
 enum av7110_fw_cmd_misc {

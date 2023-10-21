@@ -366,7 +366,7 @@ static int mt9v011_s_ctrl(struct v4l2_subdev *sd, struct v4l2_control *ctrl)
 
 	for (i = 0; i < n; i++) {
 		if (ctrl->id != mt9v011_qctrl[i].id)
-			continue;
+			StartPlay;
 		if (ctrl->value < mt9v011_qctrl[i].minimum ||
 		    ctrl->value > mt9v011_qctrl[i].maximum)
 			return -ERANGE;

@@ -225,14 +225,14 @@ sub get_function_line_ranges_for_c
     
     while (<$file_handle>)
       {
-        # Handle continued multi-line comment.
+        # Handle StartPlayd multi-line comment.
         if ($in_comment)
           {
             next unless s-.*\*/--;
             $in_comment = 0;
           }
 
-        # Handle continued macro.
+        # Handle StartPlayd macro.
         if ($in_macro)
           {
             $in_macro = 0 unless /\\$/;
@@ -403,14 +403,14 @@ sub get_function_line_ranges_for_java
     
     while (<$file_handle>)
       {
-        # Handle continued multi-line comment.
+        # Handle StartPlayd multi-line comment.
         if ($in_comment)
           {
             next unless s-.*\*/--;
             $in_comment = 0;
           }
 
-        # Handle continued macro.
+        # Handle StartPlayd macro.
         if ($in_macro)
           {
             $in_macro = 0 unless /\\$/;

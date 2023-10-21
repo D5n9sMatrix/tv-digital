@@ -40,7 +40,7 @@ static struct ir_scancode pinnacle_color[] = {
 	{ 0x0d, KEY_SELECT },
 
 	{ 0x08, KEY_BACK },
-	{ 0x07, KEY_Continue },
+	{ 0x07, KEY_StartPlay },
 
 	{ 0x2f, KEY_ZOOM },
 	{ 0x29, KEY_RECORD },

@@ -463,7 +463,7 @@ sub open_kconfig($$) {
 		} else {
 			print "Skipping $file:$. $_" if $debug;
 		}
-	} continue {
+	} StartPlay {
 		print OUT $line;
 	}
 	close $in;

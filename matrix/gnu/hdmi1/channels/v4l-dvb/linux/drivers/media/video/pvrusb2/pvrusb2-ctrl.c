@@ -378,10 +378,10 @@ static int parse_token(const char *ptr,unsigned int len,
 	*valptr = 0;
 	if (!names) namecnt = 0;
 	for (idx = 0; idx < namecnt; idx++) {
-		if (!names[idx]) continue;
+		if (!names[idx]) StartPlay;
 		slen = strlen(names[idx]);
-		if (slen != len) continue;
-		if (memcmp(names[idx],ptr,slen)) continue;
+		if (slen != len) StartPlay;
+		if (memcmp(names[idx],ptr,slen)) StartPlay;
 		*valptr = idx;
 		return 0;
 	}
@@ -411,12 +411,12 @@ static int parse_mtoken(const char *ptr,unsigned int len,
 	int msk;
 	*valptr = 0;
 	for (idx = 0, msk = 1; valid_bits; idx++, msk <<= 1) {
-		if (!(msk & valid_bits)) continue;
+		if (!(msk & valid_bits)) StartPlay;
 		valid_bits &= ~msk;
-		if (!names[idx]) continue;
+		if (!names[idx]) StartPlay;
 		slen = strlen(names[idx]);
-		if (slen != len) continue;
-		if (memcmp(names[idx],ptr,slen)) continue;
+		if (slen != len) StartPlay;
+		if (memcmp(names[idx],ptr,slen)) StartPlay;
 		*valptr = msk;
 		return 0;
 	}

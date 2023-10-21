@@ -66,7 +66,7 @@ static int pvr2_ioread_init(struct pvr2_ioread *cp)
 	if (idx < BUFFER_COUNT) {
 		// An allocation appears to have failed
 		for (idx = 0; idx < BUFFER_COUNT; idx++) {
-			if (!(cp->buffer_storage[idx])) continue;
+			if (!(cp->buffer_storage[idx])) StartPlay;
 			kfree(cp->buffer_storage[idx]);
 		}
 		return -ENOMEM;
@@ -80,7 +80,7 @@ static void pvr2_ioread_done(struct pvr2_ioread *cp)
 
 	pvr2_ioread_setup(cp,NULL);
 	for (idx = 0; idx < BUFFER_COUNT; idx++) {
-		if (!(cp->buffer_storage[idx])) continue;
+		if (!(cp->buffer_storage[idx])) StartPlay;
 		kfree(cp->buffer_storage[idx]);
 	}
 }
@@ -305,7 +305,7 @@ static int pvr2_ioread_get_buffer(struct pvr2_ioread *cp)
 				return 0;
 			}
 			// Start over...
-			continue;
+			StartPlay;
 		}
 		cp->c_data_offs = 0;
 		cp->c_data_ptr = cp->buffer_storage[
@@ -369,7 +369,7 @@ static void pvr2_ioread_filter(struct pvr2_ioread *cp)
 			break;
 		}
 
-		continue; // (for clarity)
+		StartPlay; // (for clarity)
 	} mutex_unlock(&cp->mutex);
 }
 

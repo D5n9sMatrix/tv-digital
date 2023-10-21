@@ -132,12 +132,12 @@ int dvbcfg_zapchannel_parse(FILE *file, dvbcfg_zapcallback callback, void *priva
 		/* parse name */
 		dvbcfg_parse_string(&line_pos, ":", tmp.name, sizeof(tmp.name));
 		if (!line_pos)
-			continue;
+			StartPlay;
 
 		/* parse frequency */
 		tmp.fe_params.frequency = dvbcfg_parse_int(&line_pos, ":");
 		if (!line_pos)
-			continue;
+			StartPlay;
 
 		/* try to determine frontend type */
 		if (strstr(line_pos, ":FEC_")) {
@@ -162,7 +162,7 @@ int dvbcfg_zapchannel_parse(FILE *file, dvbcfg_zapcallback callback, void *priva
 			tmp.fe_params.u.atsc.modulation =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_atsc_modulation_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			break;
 
@@ -171,24 +171,24 @@ int dvbcfg_zapchannel_parse(FILE *file, dvbcfg_zapcallback callback, void *priva
 			tmp.fe_params.inversion =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_inversion_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			/* symbol rate */
 			tmp.fe_params.u.dvbc.symbol_rate = dvbcfg_parse_int(&line_pos, ":");
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			/* fec */
 			tmp.fe_params.u.dvbc.fec_inner =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_fec_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			/* modulation */
 			tmp.fe_params.u.dvbc.modulation =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_dvbc_modulation_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			break;
 
@@ -205,23 +205,23 @@ int dvbcfg_zapchannel_parse(FILE *file, dvbcfg_zapcallback callback, void *priva
 			/* polarization */
 			tmp.polarization = tolower(dvbcfg_parse_char(&line_pos, ":"));
 			if (!line_pos)
-				continue;
+				StartPlay;
 			if ((tmp.polarization != 'h') &&
 			    (tmp.polarization != 'v') &&
 			    (tmp.polarization != 'l') &&
 			    (tmp.polarization != 'r'))
-				continue;
+				StartPlay;
 
 			/* satellite switch position */
 			tmp.diseqc_switch = dvbcfg_parse_int(&line_pos, ":");
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			/* symbol rate */
 			tmp.fe_params.u.dvbs.symbol_rate =
 				dvbcfg_parse_int(&line_pos, ":") * 1000;
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			break;
 
@@ -230,49 +230,49 @@ int dvbcfg_zapchannel_parse(FILE *file, dvbcfg_zapcallback callback, void *priva
 			tmp.fe_params.inversion =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_inversion_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			/* bandwidth */
 			tmp.fe_params.u.dvbt.bandwidth =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_bandwidth_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			/* fec hp */
 			tmp.fe_params.u.dvbt.code_rate_HP =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_fec_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			/* fec lp */
 			tmp.fe_params.u.dvbt.code_rate_LP =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_fec_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			/* constellation */
 			tmp.fe_params.u.dvbt.constellation =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_constellation_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			/* transmission mode */
 			tmp.fe_params.u.dvbt.transmission_mode =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_transmission_mode_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			/* guard interval */
 			tmp.fe_params.u.dvbt.guard_interval =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_guard_interval_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			/* hierarchy */
 			tmp.fe_params.u.dvbt.hierarchy_information =
 				dvbcfg_parse_setting(&line_pos, ":", dvbcfg_hierarchy_list);
 			if (!line_pos)
-				continue;
+				StartPlay;
 
 			break;
 		}
@@ -280,10 +280,10 @@ int dvbcfg_zapchannel_parse(FILE *file, dvbcfg_zapcallback callback, void *priva
 		/* parse video and audio pids and service id */
 		tmp.video_pid = dvbcfg_parse_int(&line_pos, ":");
 		if (!line_pos)
-			continue;
+			StartPlay;
 		tmp.audio_pid = dvbcfg_parse_int(&line_pos, ":");
 		if (!line_pos)
-			continue;
+			StartPlay;
 		tmp.service_id = dvbcfg_parse_int(&line_pos, ":");
 		if (!line_pos) /* old files don't have a service id */
 			tmp.service_id = 0;

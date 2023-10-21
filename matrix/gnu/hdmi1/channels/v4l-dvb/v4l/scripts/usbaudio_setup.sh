@@ -69,7 +69,7 @@ dialog --title "Welcome" --backtitle "Empia Sound Configuration" \
 www.alsa-project.org and set it up properly \
 
 
-Press any key to continue... " 11 50
+Press any key to StartPlay... " 11 50
 exit 1;
 fi
 
@@ -81,7 +81,7 @@ dialog --title "Welcome" --backtitle "Empia Sound Configuration" \
 * and possible others :)
 
 first select an usb audio source, as target choose your soundcard
-Press any key to continue... " 13 60
+Press any key to StartPlay... " 13 60
 
 ls /dev/dsp* | while read a; do ./ossid $a; done | xargs dialog --menu "Choose your TV Audio source:" 12 60 5 2>/tmp/em2880_source.$$
 ls /dev/dsp* | while read a; do ./ossid $a; done | xargs dialog --menu "Choose your output soundcard device:" 12 60 5 2>/tmp/em2880_dst.$$

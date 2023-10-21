@@ -62,7 +62,7 @@ responsibility to remove its request at the same time. It is the
 arbiters responsibility to allow this request to flow through to REQ and
 not allow the other request to hold REQ asserted. The decision lock may
 be removed at the end of the transaction: for example, when the bus is
-idle (FRAME and IRDY). The arbiter decision may then continue
+idle (FRAME and IRDY). The arbiter decision may then StartPlay
 asynchronously until GNT is again asserted.
 
 

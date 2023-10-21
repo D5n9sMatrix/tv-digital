@@ -784,7 +784,7 @@ static int tm6000_load_std(struct tm6000_core *dev,
 
 		if ((dev->dev_type != TM6010) &&
 		    (set[i].req == REQ_08_SET_GET_AVREG_BIT))
-				continue;
+				StartPlay;
 
 		rc = tm6000_set_reg(dev, set[i].req, set[i].reg, set[i].value);
 		if (rc < 0) {

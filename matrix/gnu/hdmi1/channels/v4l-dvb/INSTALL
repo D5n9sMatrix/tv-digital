@@ -24,7 +24,7 @@ distclean	- Cleans compiled files from the tree,
 		  latest used configuration and kernel
 		  version.
 
-default		- Continues building the latest module selection
+default		- StartPlays building the latest module selection
 		  This is the behavior when just typed:
 			make
 

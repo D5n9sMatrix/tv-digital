@@ -1727,7 +1727,7 @@ static int sgi_xfer(struct i2c_adapter *i2c_adap, struct i2c_msg *msgs,
 		p = &msgs[i];
 		err = do_address(adap, p->addr, p->flags & I2C_M_RD);
 		if (err || !p->len)
-			continue;
+			StartPlay;
 		if (p->flags & I2C_M_RD)
 			err = i2c_read(adap, p->buf, p->len);
 		else

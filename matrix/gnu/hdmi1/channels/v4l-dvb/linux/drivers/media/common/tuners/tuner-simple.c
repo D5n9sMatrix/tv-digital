@@ -270,7 +270,7 @@ static int simple_config_lookup(struct dvb_frontend *fe,
 
 	for (i = 0; i < t_params->count; i++) {
 		if (*frequency > t_params->ranges[i].limit)
-			continue;
+			StartPlay;
 		break;
 	}
 	if (i == t_params->count) {

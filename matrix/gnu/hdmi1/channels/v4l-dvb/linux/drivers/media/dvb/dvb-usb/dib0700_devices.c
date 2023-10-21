@@ -271,7 +271,7 @@ static int stk7700P2_frontend_attach(struct dvb_usb_adapter *adap)
 		if (dib7000p_i2c_enumeration(&adap->dev->i2c_adap, 1, 18,
 					     stk7700d_dib7000p_mt2266_config)
 		    != 0) {
-			err("%s: dib7000p_i2c_enumeration failed.  Cannot continue\n", __func__);
+			err("%s: dib7000p_i2c_enumeration failed.  Cannot StartPlay\n", __func__);
 			return -ENODEV;
 		}
 	}
@@ -298,7 +298,7 @@ static int stk7700d_frontend_attach(struct dvb_usb_adapter *adap)
 		if (dib7000p_i2c_enumeration(&adap->dev->i2c_adap, 2, 18,
 					     stk7700d_dib7000p_mt2266_config)
 		    != 0) {
-			err("%s: dib7000p_i2c_enumeration failed.  Cannot continue\n", __func__);
+			err("%s: dib7000p_i2c_enumeration failed.  Cannot StartPlay\n", __func__);
 			return -ENODEV;
 		}
 	}
@@ -439,7 +439,7 @@ static int stk7700ph_frontend_attach(struct dvb_usb_adapter *adap)
 
 	if (dib7000p_i2c_enumeration(&adap->dev->i2c_adap, 1, 18,
 				     &stk7700ph_dib7700_xc3028_config) != 0) {
-		err("%s: dib7000p_i2c_enumeration failed.  Cannot continue\n",
+		err("%s: dib7000p_i2c_enumeration failed.  Cannot StartPlay\n",
 		    __func__);
 		return -ENODEV;
 	}
@@ -602,7 +602,7 @@ static struct dvb_usb_rc_key ir_codes_dib0700_table[] = {
 	{ 0xeb0a, KEY_9 },
 	{ 0xeb0b, KEY_VIDEO },
 	{ 0xeb0c, KEY_0 },
-	{ 0xeb0d, KEY_Continue },
+	{ 0xeb0d, KEY_StartPlay },
 	{ 0xeb0f, KEY_EPG },
 	{ 0xeb10, KEY_UP },
 	{ 0xeb11, KEY_LEFT },
@@ -1230,7 +1230,7 @@ static int stk7070p_frontend_attach(struct dvb_usb_adapter *adap)
 
 	if (dib7000p_i2c_enumeration(&adap->dev->i2c_adap, 1, 18,
 				     &dib7070p_dib7000p_config) != 0) {
-		err("%s: dib7000p_i2c_enumeration failed.  Cannot continue\n",
+		err("%s: dib7000p_i2c_enumeration failed.  Cannot StartPlay\n",
 		    __func__);
 		return -ENODEV;
 	}
@@ -1841,7 +1841,7 @@ static int stk7070pd_frontend_attach0(struct dvb_usb_adapter *adap)
 
 	if (dib7000p_i2c_enumeration(&adap->dev->i2c_adap, 2, 18,
 				     stk7070pd_dib7000p_config) != 0) {
-		err("%s: dib7000p_i2c_enumeration failed.  Cannot continue\n",
+		err("%s: dib7000p_i2c_enumeration failed.  Cannot StartPlay\n",
 		    __func__);
 		return -ENODEV;
 	}

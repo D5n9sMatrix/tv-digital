@@ -401,7 +401,7 @@ void usbvision_scratch_free(struct usb_usbvision *usbvision)
  *
  * Parameters:
  * fullframe:   if TRUE then entire frame is filled, otherwise the procedure
- *		continues from the current scanline.
+ *		StartPlays from the current scanline.
  * pmode	0: fill the frame with solid blue color (like on VCR or TV)
  *		1: Draw a colored grid
  *
@@ -584,7 +584,7 @@ static enum ParseState usbvision_find_header(struct usb_usbvision *usbvision)
 		usbvision_testpattern(usbvision, 1, 1);
 		return ParseState_NextFrame;
 	}
-	return ParseState_Continue;
+	return ParseState_StartPlay;
 }
 
 static enum ParseState usbvision_parse_lines_422(struct usb_usbvision *usbvision,
@@ -702,7 +702,7 @@ static enum ParseState usbvision_parse_lines_422(struct usb_usbvision *usbvision
 		return ParseState_NextFrame;
 	}
 	else {
-		return ParseState_Continue;
+		return ParseState_StartPlay;
 	}
 }
 
@@ -901,7 +901,7 @@ static enum ParseState usbvision_parse_compress(struct usb_usbvision *usbvision,
 	usbvision->BlockPos = BlockPos;
 
 	if ((rc = usbvision_decompress(usbvision, StripData, Y, &BlockPos, &BlockTypePos, IdxEnd)) != IdxEnd) {
-		//return ParseState_Continue;
+		//return ParseState_StartPlay;
 	}
 	if (StripLen > usbvision->maxStripLen) {
 		usbvision->maxStripLen = StripLen;
@@ -909,12 +909,12 @@ static enum ParseState usbvision_parse_compress(struct usb_usbvision *usbvision,
 
 	if (frame->curline%2) {
 		if ((rc = usbvision_decompress(usbvision, StripData, V, &BlockPos, &BlockTypePos, IdxEnd/2)) != IdxEnd/2) {
-		//return ParseState_Continue;
+		//return ParseState_StartPlay;
 		}
 	}
 	else {
 		if ((rc = usbvision_decompress(usbvision, StripData, U, &BlockPos, &BlockTypePos, IdxEnd/2)) != IdxEnd/2) {
-			//return ParseState_Continue;
+			//return ParseState_StartPlay;
 		}
 	}
 
@@ -994,7 +994,7 @@ static enum ParseState usbvision_parse_compress(struct usb_usbvision *usbvision,
 		return ParseState_NextFrame;
 	}
 	else {
-		return ParseState_Continue;
+		return ParseState_StartPlay;
 	}
 
 }
@@ -1274,7 +1274,7 @@ static enum ParseState usbvision_parse_lines_420(struct usb_usbvision *usbvision
 	if (frame->curline >= frame->frmheight)
 		return ParseState_NextFrame;
 	else
-		return ParseState_Continue;
+		return ParseState_StartPlay;
 }
 
 /*
@@ -1316,8 +1316,8 @@ static void usbvision_parse_data(struct usb_usbvision *usbvision)
 
 			}
 		}
-		if (newstate == ParseState_Continue) {
-			continue;
+		if (newstate == ParseState_StartPlay) {
+			StartPlay;
 		}
 		else if ((newstate == ParseState_NextFrame) || (newstate == ParseState_Out)) {
 			break;
@@ -1373,25 +1373,25 @@ static int usbvision_compress_isochronous(struct usb_usbvision *usbvision,
 		if (packet_stat) {	// packet_stat != 0 ?????????????
 			PDEBUG(DBG_ISOC, "data error: [%d] len=%d, status=%X", i, packet_len, packet_stat);
 			usbvision->isocErrCount++;
-			continue;
+			StartPlay;
 		}
 
 		/* Detect and ignore empty packets */
 		if (packet_len < 0) {
 			PDEBUG(DBG_ISOC, "error packet [%d]", i);
 			usbvision->isocSkipCount++;
-			continue;
+			StartPlay;
 		}
 		else if (packet_len == 0) {	/* Frame end ????? */
 			PDEBUG(DBG_ISOC, "null packet [%d]", i);
 			usbvision->isocstate=IsocState_NoFrame;
 			usbvision->isocSkipCount++;
-			continue;
+			StartPlay;
 		}
 		else if (packet_len > usbvision->isocPacketSize) {
 			PDEBUG(DBG_ISOC, "packet[%d] > isocPacketSize", i);
 			usbvision->isocSkipCount++;
-			continue;
+			StartPlay;
 		}
 
 		PDEBUG(DBG_ISOC, "packet ok [%d] len=%d", i, packet_len);
@@ -1404,7 +1404,7 @@ static int usbvision_compress_isochronous(struct usb_usbvision *usbvision,
 		}
 
 		/*
-		 * If usbvision continues to feed us with data but there is no
+		 * If usbvision StartPlays to feed us with data but there is no
 		 * consumption (if, for example, V4L client fell asleep) we
 		 * may overflow the buffer. We have to move old data over to
 		 * free room for new data. This is bad for old data. If we

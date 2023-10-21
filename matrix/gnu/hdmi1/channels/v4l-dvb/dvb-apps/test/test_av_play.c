@@ -191,12 +191,12 @@ static int videoBlank(int fd, int state)
 	return 0;
 }
 
-static int videoContinue(int fd)
+static int videoStartPlay(int fd)
 {
 	int ans;
 
-	if ((ans = ioctl(fd,VIDEO_CONTINUE)) < 0) {
-		perror("VIDEO CONTINUE: ");
+	if ((ans = ioctl(fd,VIDEO_StartPlay)) < 0) {
+		perror("VIDEO StartPlay: ");
 		return -1;
 	}
 
@@ -270,7 +270,7 @@ static void copy_to_dvb(int vfd, int afd, int cfd, const uint8_t* ptr, const uns
 					}
 					if (errno == EAGAIN)
 						usleep(1000);
-					continue;
+					StartPlay;
 				}
 			}
 			if (pfd[0].revents & POLLIN) {
@@ -307,9 +307,9 @@ static void copy_to_dvb(int vfd, int afd, int cfd, const uint8_t* ptr, const uns
 					} else {
 						audioSetAVSync(afd, 1);
 						deviceClear(afd, vfd);
-						videoContinue(vfd);
+						videoStartPlay(vfd);
 					}
-					printf("playback continued\n");
+					printf("playback StartPlayd\n");
 //					stopped = 0;
 					break;
 
@@ -371,7 +371,7 @@ static void copy_to_dvb(int vfd, int afd, int cfd, const uint8_t* ptr, const uns
 					break;
 
 				case 'q':
-					videoContinue(vfd);
+					videoStartPlay(vfd);
 					exit(0);
 					break;
 
@@ -621,7 +621,7 @@ int main(int argc, char **argv)
 
 	printf("Freeze       by pressing `z'\n");
 	printf("Stop         by pressing `s'\n");
-	printf("Continue     by pressing `c'\n");
+	printf("StartPlay     by pressing `c'\n");
 	printf("Start        by pressing `p'\n");
 	printf("FastForward  by pressing `f'\n");
 	printf("Mute         by pressing `m'\n");

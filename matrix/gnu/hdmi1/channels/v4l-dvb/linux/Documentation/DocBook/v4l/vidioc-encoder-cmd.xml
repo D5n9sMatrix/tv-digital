@@ -71,7 +71,7 @@ try a command without actually executing it.</para>
 command code. The <structfield>flags</structfield> field is currently
 only used by the STOP command and contains one bit: If the
 <constant>V4L2_ENC_CMD_STOP_AT_GOP_END</constant> flag is set,
-encoding will continue until the end of the current <wordasword>Group
+encoding will StartPlay until the end of the current <wordasword>Group
 Of Pictures</wordasword>, otherwise it will stop immediately.</para>
 
     <para>A <function>read</function>() call sends a START command to
@@ -132,7 +132,7 @@ this command.</entry>
 	    <entry>1</entry>
 	    <entry>Stop the encoder. When the
 <constant>V4L2_ENC_CMD_STOP_AT_GOP_END</constant> flag is set,
-encoding will continue until the end of the current <wordasword>Group
+encoding will StartPlay until the end of the current <wordasword>Group
 Of Pictures</wordasword>, otherwise encoding will stop immediately.
 When the encoder is already stopped, this command does
 nothing.</entry>

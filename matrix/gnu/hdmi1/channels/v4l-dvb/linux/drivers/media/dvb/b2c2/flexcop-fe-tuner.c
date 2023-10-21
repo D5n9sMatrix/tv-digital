@@ -640,7 +640,7 @@ int flexcop_frontend_init(struct flexcop_device *fc)
 	int i;
 	for (i = 0; i < ARRAY_SIZE(flexcop_frontends); i++) {
 		if (!flexcop_frontends[i].attach)
-			continue;
+			StartPlay;
 		/* type needs to be set before, because of some workarounds
 		 * done based on the probed card type */
 		fc->dev_type = flexcop_frontends[i].type;

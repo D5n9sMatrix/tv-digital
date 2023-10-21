@@ -510,7 +510,7 @@ static int tda18271_powerscan(struct dvb_frontend *fe,
 		count += 200;
 
 		if (count <= count_limit)
-			continue;
+			StartPlay;
 
 		if (sgn <= 0)
 			break;

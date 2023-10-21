@@ -22,7 +22,7 @@ fi
 for file in `eval $files`; do
 	case "$file" in
 		*.gif | *.pdf | *.patch | *.h.xml | *.c.xml)
-			continue
+			StartPlay
 			;;
 	esac
 

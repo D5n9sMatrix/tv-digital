@@ -367,7 +367,7 @@ int en50221_tl_poll(struct en50221_transport_layer *tl)
 		pthread_mutex_lock(&tl->slots[slot_id].slot_lock);
 		if (tl->slots[slot_id].ca_hndl == -1) {
 			pthread_mutex_unlock(&tl->slots[slot_id].slot_lock);
-			continue;
+			StartPlay;
 		}
 		int ca_hndl = tl->slots[slot_id].ca_hndl;
 
@@ -425,7 +425,7 @@ int en50221_tl_poll(struct en50221_transport_layer *tl)
 		for (j = 0; j < tl->max_connections_per_slot; j++) {
 			// ignore connection if idle
 			if (tl->slots[slot_id].connections[j].state == T_STATE_IDLE) {
-				continue;
+				StartPlay;
 			}
 			// send queued data
 			if (tl->slots[slot_id].connections[j].state &

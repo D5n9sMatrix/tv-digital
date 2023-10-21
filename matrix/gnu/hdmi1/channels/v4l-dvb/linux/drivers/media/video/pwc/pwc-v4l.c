@@ -575,7 +575,7 @@ long pwc_video_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		case VIDIOCSYNC:
 		{
 			/* The doc says: "Whenever a buffer is used it should
-			   call VIDIOCSYNC to free this frame up and continue."
+			   call VIDIOCSYNC to free this frame up and StartPlay."
 
 			   The only odd thing about this whole procedure is
 			   that MCAPTURE flags the buffer as "in use", and

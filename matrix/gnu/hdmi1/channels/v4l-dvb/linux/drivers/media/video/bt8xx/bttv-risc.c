@@ -79,7 +79,7 @@ bttv_risc_packed(struct bttv *btv, struct btcx_riscmem *risc,
 	for (line = 0; line < store_lines; line++) {
 		if ((btv->opt_vcr_hack) &&
 		    (line >= (store_lines - VCR_HACK_LINES)))
-			continue;
+			StartPlay;
 		while (offset && offset >= sg_dma_len(sg)) {
 			offset -= sg_dma_len(sg);
 			sg++;
@@ -159,7 +159,7 @@ bttv_risc_planar(struct bttv *btv, struct btcx_riscmem *risc,
 	for (line = 0; line < ylines; line++) {
 		if ((btv->opt_vcr_hack) &&
 		    (line >= (ylines - VCR_HACK_LINES)))
-			continue;
+			StartPlay;
 		switch (vshift) {
 		case 0:
 			chroma = 1;
@@ -280,11 +280,11 @@ bttv_risc_overlay(struct bttv *btv, struct btcx_riscmem *risc,
 	     line++, addr += btv->fbuf.fmt.bytesperline) {
 		if ((btv->opt_vcr_hack) &&
 		     (line >= (ov->w.height - VCR_HACK_LINES)))
-			continue;
+			StartPlay;
 		if ((line%2) == 0  &&  skip_even)
-			continue;
+			StartPlay;
 		if ((line%2) == 1  &&  skip_odd)
-			continue;
+			StartPlay;
 
 		/* calculate clipping */
 		if (line > maxy)

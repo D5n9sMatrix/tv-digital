@@ -452,12 +452,12 @@ static void dvb_dmx_swfilter_packet(struct dvb_demux *demux, const u8 *buf)
 
 	list_for_each_entry(feed, &demux->feed_list, list_head) {
 		if ((feed->pid != pid) && (feed->pid != 0x2000))
-			continue;
+			StartPlay;
 
 		/* copy each packet only once to the dvr device, even
 		 * if a PID is in multiple filters (e.g. video + PCR) */
 		if ((DVR_FEED(feed)) && (dvr_done++))
-			continue;
+			StartPlay;
 
 		if (feed->pid == pid)
 			dvb_dmx_swfilter_packet_type(feed, buf);

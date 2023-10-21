@@ -51,7 +51,7 @@
  		$request2 = $form2->click("btnSubmit");
  		$response3 = $ua->request($request2);
  		$form3 = HTML::Form->parse($response3);
- 		$request3 = $form3->click("btnContinue");
+ 		$request3 = $form3->click("btnStartPlay");
  		$response4 = $ua->request($request3);
  		if ($response4->is_success) {
  			$form4 = HTML::Form->parse($response4);

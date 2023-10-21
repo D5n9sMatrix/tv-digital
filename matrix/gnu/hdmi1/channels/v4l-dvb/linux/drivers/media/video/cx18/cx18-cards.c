@@ -78,7 +78,7 @@ static const struct cx18_card cx18_card_hvr1600_esmt = {
 	.ddr = {
 		/* ESMT M13S128324A-5B memory */
 		.chip_config = 0x003,
-		.Continue = 0x30c,
+		.StartPlay = 0x30c,
 		.timing1 = 0x44220e82,
 		.timing2 = 0x08,
 		.tune_lane = 0,
@@ -125,7 +125,7 @@ static const struct cx18_card cx18_card_hvr1600_samsung = {
 	.ddr = {
 		/* Samsung K4D263238G-VC33 memory */
 		.chip_config = 0x003,
-		.Continue = 0x30c,
+		.StartPlay = 0x30c,
 		.timing1 = 0x23230b73,
 		.timing2 = 0x08,
 		.tune_lane = 0,
@@ -178,7 +178,7 @@ static const struct cx18_card cx18_card_h900 = {
 	.ddr = {
 		/* EtronTech EM6A9160TS-5G memory */
 		.chip_config = 0x50003,
-		.Continue = 0x753,
+		.StartPlay = 0x753,
 		.timing1 = 0x24330e84,
 		.timing2 = 0x1f,
 		.tune_lane = 0,
@@ -231,7 +231,7 @@ static const struct cx18_card cx18_card_mpc718 = {
 	.ddr = {
 		/* Hynix HY5DU283222B DDR RAM */
 		.chip_config = 0x303,
-		.Continue = 0x3bd,
+		.StartPlay = 0x3bd,
 		.timing1 = 0x36320966,
 		.timing2 = 0x1f,
 		.tune_lane = 0,
@@ -287,7 +287,7 @@ static const struct cx18_card cx18_card_cnxt_raptor_pal = {
 	.ddr = {
 		/* MT 46V16M16 memory */
 		.chip_config = 0x50306,
-		.Continue = 0x753,
+		.StartPlay = 0x753,
 		.timing1 = 0x33220953,
 		.timing2 = 0x09,
 		.tune_lane = 0,
@@ -340,7 +340,7 @@ static const struct cx18_card cx18_card_toshiba_qosmio_dvbt = {
 	},
 	.ddr = {
 		.chip_config = 0x202,
-		.Continue = 0x3bb,
+		.StartPlay = 0x3bb,
 		.timing1 = 0x33320a63,
 		.timing2 = 0x0a,
 		.tune_lane = 0,
@@ -395,7 +395,7 @@ static const struct cx18_card cx18_card_leadtek_pvr2100 = {
 	.ddr = {
 		/* Pointer to proper DDR config values provided by Terry Wu */
 		.chip_config = 0x303,
-		.Continue = 0x3bb,
+		.StartPlay = 0x3bb,
 		.timing1 = 0x24220e83,
 		.timing2 = 0x1f,
 		.tune_lane = 0,
@@ -448,7 +448,7 @@ static const struct cx18_card cx18_card_leadtek_dvr3100h = {
 	.ddr = {
 		/* Pointer to proper DDR config values provided by Terry Wu */
 		.chip_config = 0x303,
-		.Continue = 0x3bb,
+		.StartPlay = 0x3bb,
 		.timing1 = 0x24220e83,
 		.timing2 = 0x1f,
 		.tune_lane = 0,

@@ -475,19 +475,19 @@ static inline int em28xx_isoc_copy(struct em28xx *dev, struct urb *urb)
 		if (status < 0) {
 			print_err_status(dev, i, status);
 			if (urb->iso_frame_desc[i].status != -EPROTO)
-				continue;
+				StartPlay;
 		}
 
 		len = urb->iso_frame_desc[i].actual_length - 4;
 
 		if (urb->iso_frame_desc[i].actual_length <= 0) {
 			/* em28xx_isocdbg("packet %d is empty",i); - spammy */
-			continue;
+			StartPlay;
 		}
 		if (urb->iso_frame_desc[i].actual_length >
 						dev->max_pkt_size) {
 			em28xx_isocdbg("packet bigger than packet size");
-			continue;
+			StartPlay;
 		}
 
 		p = urb->transfer_buffer + urb->iso_frame_desc[i].offset;
@@ -498,7 +498,7 @@ static inline int em28xx_isoc_copy(struct em28xx *dev, struct urb *urb)
 		if (p[0] == 0x33 && p[1] == 0x95 && p[2] == 0x00) {
 			em28xx_isocdbg("VBI HEADER!!!\n");
 			/* FIXME: Should add vbi copy */
-			continue;
+			StartPlay;
 		}
 		if (p[0] == 0x22 && p[1] == 0x5a) {
 			em28xx_isocdbg("Video frame %d, length=%i, %s\n", p[2],
@@ -575,18 +575,18 @@ static inline int em28xx_isoc_copy_vbi(struct em28xx *dev, struct urb *urb)
 		if (status < 0) {
 			print_err_status(dev, i, status);
 			if (urb->iso_frame_desc[i].status != -EPROTO)
-				continue;
+				StartPlay;
 		}
 
 		len = urb->iso_frame_desc[i].actual_length;
 		if (urb->iso_frame_desc[i].actual_length <= 0) {
 			/* em28xx_isocdbg("packet %d is empty",i); - spammy */
-			continue;
+			StartPlay;
 		}
 		if (urb->iso_frame_desc[i].actual_length >
 						dev->max_pkt_size) {
 			em28xx_isocdbg("packet bigger than packet size");
-			continue;
+			StartPlay;
 		}
 
 		p = urb->transfer_buffer + urb->iso_frame_desc[i].offset;

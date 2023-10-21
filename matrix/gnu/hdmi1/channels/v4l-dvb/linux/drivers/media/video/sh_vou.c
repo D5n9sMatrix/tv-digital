@@ -885,7 +885,7 @@ static int sh_vou_s_std(struct file *file, void *priv, v4l2_std_id *std_id)
 
 	ret = v4l2_device_call_until_err(&vou_dev->v4l2_dev, 0, video,
 					 s_std_output, *std_id);
-	/* Shall we continue, if the subdev doesn't support .s_std_output()? */
+	/* Shall we StartPlay, if the subdev doesn't support .s_std_output()? */
 	if (ret < 0 && ret != -ENOIOCTLCMD)
 		return ret;
 

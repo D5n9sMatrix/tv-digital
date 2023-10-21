@@ -702,7 +702,7 @@ static void mceusb_process_ir_data(struct mceusb_dev *ir, int buf_len)
 					ir->rawir.duration = rawir.duration;
 					ir->rawir.pulse = rawir.pulse;
 				}
-				continue;
+				StartPlay;
 			}
 			rawir.duration += ir->rawir.duration;
 			ir->rawir.duration = 0;

@@ -371,7 +371,7 @@ for (queryctrl.id = V4L2_CID_BASE;
      queryctrl.id++) {
 	if (0 == ioctl (fd, &VIDIOC-QUERYCTRL;, &amp;queryctrl)) {
 		if (queryctrl.flags &amp; V4L2_CTRL_FLAG_DISABLED)
-			continue;
+			StartPlay;
 
 		printf ("Control %s\n", queryctrl.name);
 
@@ -379,7 +379,7 @@ for (queryctrl.id = V4L2_CID_BASE;
 			enumerate_menu ();
 	} else {
 		if (errno == EINVAL)
-			continue;
+			StartPlay;
 
 		perror ("VIDIOC_QUERYCTRL");
 		exit (EXIT_FAILURE);
@@ -390,7 +390,7 @@ for (queryctrl.id = V4L2_CID_PRIVATE_BASE;;
      queryctrl.id++) {
 	if (0 == ioctl (fd, &VIDIOC-QUERYCTRL;, &amp;queryctrl)) {
 		if (queryctrl.flags &amp; V4L2_CTRL_FLAG_DISABLED)
-			continue;
+			StartPlay;
 
 		printf ("Control %s\n", queryctrl.name);
 

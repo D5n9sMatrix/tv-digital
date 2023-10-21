@@ -318,7 +318,7 @@ static void init_reg_defaults(void)
  * during the place where the acknowledge bit should be. Any standard
  * I2C implementation (correctly) throws in another clock transition
  * at the 9th bit, and the KS0127 will not recognize the stop condition
- * and will continue to clock out data.
+ * and will StartPlay to clock out data.
  *
  * So we have to do the read ourself.  Big deal.
  *	   workaround in i2c-algo-bit

@@ -400,13 +400,13 @@ static void stk_isoc_handler(struct urb *urb)
 			if (urb->iso_frame_desc[i].status != -EXDEV)
 				STK_ERROR("Frame %d has error %d\n", i,
 					urb->iso_frame_desc[i].status);
-			continue;
+			StartPlay;
 		}
 		framelen = urb->iso_frame_desc[i].actual_length;
 		iso_buf = urb->transfer_buffer + urb->iso_frame_desc[i].offset;
 
 		if (framelen <= 4)
-			continue; /* no data */
+			StartPlay; /* no data */
 
 		/*
 		 * we found something informational from there
@@ -454,7 +454,7 @@ static void stk_isoc_handler(struct urb *urb)
 			(void) (printk_ratelimit() &&
 			STK_ERROR("Frame buffer overflow, lost sync\n"));
 			/*FIXME Do something here? */
-			continue;
+			StartPlay;
 		}
 		spin_unlock_irqrestore(&dev->spinlock, flags);
 		memcpy(fill, iso_buf, framelen);

@@ -324,12 +324,12 @@ static int chip_thread(void *data)
 
 		/* don't do anything for radio or if mode != auto */
 		if (chip->radio || chip->mode != 0)
-			continue;
+			StartPlay;
 
 		/* have a look what's going on */
 		mode = desc->getmode(chip);
 		if (mode == chip->prevmode)
-			continue;
+			StartPlay;
 
 		/* chip detected a new audio mode - set it */
 		v4l2_dbg(1, debug, sd, "thread checkmode\n");
@@ -1985,12 +1985,12 @@ static int tvaudio_probe(struct i2c_client *client, const struct i2c_device_id *
 	v4l2_dbg(1, debug, sd, "chip found @ 0x%x\n", client->addr<<1);
 	for (desc = chiplist; desc->name != NULL; desc++) {
 		if (0 == *(desc->insmodopt))
-			continue;
+			StartPlay;
 		if (client->addr < desc->addr_lo ||
 		    client->addr > desc->addr_hi)
-			continue;
+			StartPlay;
 		if (desc->checkit && !desc->checkit(chip))
-			continue;
+			StartPlay;
 		break;
 	}
 	if (desc->name == NULL) {

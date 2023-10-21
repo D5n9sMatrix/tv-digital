@@ -131,11 +131,11 @@ static error_t parse_keyfile(char *fname, char **table, char **type)
 				}
 				p = strtok(NULL, "\n\t =:");
 			} while (p);
-			continue;
+			StartPlay;
 		}
 
 		if (*p == '\n' || *p == '#')
-			continue;
+			StartPlay;
 
 		scancode = strtok(p, "\n\t =:");
 		if (!scancode)
@@ -351,7 +351,7 @@ struct uevents *read_sysfs_uevents(char *dname)
 	while (fgets(s, sizeof(s), fp)) {
 		char *p = strtok(s, "=");
 		if (!p)
-			continue;
+			StartPlay;
 		next->key = malloc(strlen(p) + 1);
 		if (!next->key) {
 			perror("next->key");

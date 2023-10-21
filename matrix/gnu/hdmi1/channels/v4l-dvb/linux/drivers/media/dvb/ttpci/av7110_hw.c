@@ -1015,7 +1015,7 @@ static int OSDSetBlock(struct av7110 *av7110, int x0, int y0,
 		rc = WaitUntilBmpLoaded(av7110);
 		if (rc)
 			return rc;
-		/* just continue. This should work for all fw versions
+		/* just StartPlay. This should work for all fw versions
 		 * if bnum==1 && !brest && LoadBitmap was successful
 		 */
 	}

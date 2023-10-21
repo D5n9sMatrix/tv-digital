@@ -210,7 +210,7 @@ static void sd_isoc_irq(struct urb *urb)
 				urb0->iso_frame_desc[i].actual_length,
 				urb->iso_frame_desc[i].actual_length);
 			gspca_dev->last_packet_type = DISCARD_PACKET;
-			continue;
+			StartPlay;
 		}
 		st = urb0->iso_frame_desc[i].status;
 		if (st == 0)
@@ -220,7 +220,7 @@ static void sd_isoc_irq(struct urb *urb)
 				"ISOC data error: [%d] status=%d",
 				i, st);
 			gspca_dev->last_packet_type = DISCARD_PACKET;
-			continue;
+			StartPlay;
 		}
 
 		/*
@@ -253,7 +253,7 @@ static void sd_isoc_irq(struct urb *urb)
 					data + 4, SD_PKT_SZ - 4);
 		} else {
 			gspca_dev->last_packet_type = DISCARD_PACKET;
-			continue;
+			StartPlay;
 		}
 		data = (u8 *) urb->transfer_buffer
 					+ urb->iso_frame_desc[i].offset;

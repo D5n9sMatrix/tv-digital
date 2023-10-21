@@ -311,7 +311,7 @@ struct vbi * vbi_open(char *vbi_name, struct cache *ca,
         out_of_mem(-1);
         old_tried_devices = tried_devices;
         if (access(vbi_name, R_OK) != 0)
-        continue;
+        StartPlay;
         vbi = vbi_open(vbi_name, ca, channel, outfile, sid, ttpid);
         if (vbi != NULL)
         {
@@ -674,7 +674,7 @@ static int vbi_dvb_open(struct vbi *vbi, const char *vbi_name,
 		}
 		progtbl[progcnt].service_id = (tbl[8 + i] << 8) | tbl[9 + i];
 		if (!progtbl[progcnt].service_id) /* this is the NIT pointer */
-			continue;
+			StartPlay;
 		progtbl[progcnt].pmtpid = ((tbl[10 + i] << 8) | tbl[11 + i])
 		& 0x1fff;
 		progcnt++;
@@ -708,7 +708,7 @@ static int vbi_dvb_open(struct vbi *vbi, const char *vbi_name,
 		i = j + (((tbl[i+3] << 8) | tbl[i+4]) & 0x0fff);
 		if (!progp) {
 			error("SDT: service_id 0x%x not in PAT\n", k);
-			continue;
+			StartPlay;
 		}
          while (j < i) {
             switch (tbl[j]) {
@@ -747,7 +747,7 @@ static int vbi_dvb_open(struct vbi *vbi, const char *vbi_name,
 		if (progtbl[l].service_type != 0x01 || /* not digital TV */
 		    progtbl[l].pmtpid < 0x15 || /* PMT PID sanity check */
 		    progtbl[l].pmtpid >= 0x1fff)
-			continue;
+			StartPlay;
 		r = dvb_get_table(vbi->fd, progtbl[l].pmtpid, 0x02, tbl,
 		sizeof(tbl));
 		if (r == -1)
@@ -773,7 +773,7 @@ static int vbi_dvb_open(struct vbi *vbi, const char *vbi_name,
 			i = j + (((tbl[i + 3] << 8) | tbl[i + 4]) & 0x0fff);
 			if (tbl[j - 5] != 0x06)
 			/* teletext streams have type 0x06 */
-				continue;
+				StartPlay;
 			k = ((tbl[j - 4] << 8) | tbl[j - 3]) & 0x1fff;
 		/* elementary PID - save until we know if it's teletext PID */
 			while (j < i) {
@@ -807,7 +807,7 @@ static int vbi_dvb_open(struct vbi *vbi, const char *vbi_name,
     ofd = fopen(outfile,"w") ;
     if (ofd == NULL) { error("cannot open outfile\n"); goto outerr ; }
     for (i = 0; i < progcnt; i++) {
-    if (progtbl[i].ttpid == 0x1fff) continue ; // service without teletext
+    if (progtbl[i].ttpid == 0x1fff) StartPlay ; // service without teletext
     fprintf(ofd,"%d:%d:%s:%s:lang=%.3s\n",
     progtbl[i].service_id, progtbl[i].ttpid, progtbl[i].service_provider_name,
     progtbl[i].service_name, progtbl[i].txtlang);

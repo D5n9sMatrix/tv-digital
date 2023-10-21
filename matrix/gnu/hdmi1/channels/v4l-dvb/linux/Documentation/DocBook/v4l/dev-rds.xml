@@ -14,7 +14,7 @@ to the RDS standard. Any RDS decoder can also handle RBDS. Only some of the fiel
 have slightly different meanings. See the RBDS standard for more information.</para>
 
       <para>The RBDS standard also specifies support for MMBS (Modified Mobile Search).
-This is a proprietary format which seems to be discontinued. The RDS interface does not
+This is a proprietary format which seems to be disStartPlayd. The RDS interface does not
 support this format. Should support for MMBS (or the so-called 'E blocks' in general)
 be needed, then please contact the linux-media mailing list: &v4l-ml;.</para>
 

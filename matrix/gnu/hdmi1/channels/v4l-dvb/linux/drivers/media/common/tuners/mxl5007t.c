@@ -204,7 +204,7 @@ static void copy_reg_bits(struct reg_pair_t *reg_pair1,
 		while (reg_pair2[j].reg || reg_pair2[j].val) {
 			if (reg_pair1[i].reg != reg_pair2[j].reg) {
 				j++;
-				continue;
+				StartPlay;
 			}
 			reg_pair2[j].val = reg_pair1[i].val;
 			break;

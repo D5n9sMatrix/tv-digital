@@ -536,7 +536,7 @@ static void cx18_process_options(struct cx18 *cx)
 			cx->options.megabytes[i] = 0;
 			cx->stream_buffers[i] = 0;
 			cx->stream_buf_size[i] = 0;
-			continue;
+			StartPlay;
 		}
 		/*
 		 * YUV is a special case where the stream_buf_size needs to be
@@ -627,17 +627,17 @@ static void cx18_process_options(struct cx18 *cx)
 	if (cx->card == NULL) {
 		for (i = 0; (cx->card = cx18_get_card(i)); i++) {
 			if (cx->card->pci_list == NULL)
-				continue;
+				StartPlay;
 			for (j = 0; cx->card->pci_list[j].device; j++) {
 				if (cx->pci_dev->device !=
 				    cx->card->pci_list[j].device)
-					continue;
+					StartPlay;
 				if (cx->pci_dev->subsystem_vendor !=
 				    cx->card->pci_list[j].subsystem_vendor)
-					continue;
+					StartPlay;
 				if (cx->pci_dev->subsystem_device !=
 				    cx->card->pci_list[j].subsystem_device)
-					continue;
+					StartPlay;
 				CX18_INFO("Autodetected %s card\n", cx->card->name);
 				goto done;
 			}
@@ -842,7 +842,7 @@ static void cx18_init_subdevs(struct cx18 *cx)
 	for (i = 0, device = 1; i < 32; i++, device <<= 1) {
 
 		if (!(device & hw))
-			continue;
+			StartPlay;
 
 		switch (device) {
 		case CX18_HW_DVB:
@@ -1018,7 +1018,7 @@ static int __devinit cx18_probe(struct pci_dev *pci_dev,
 	if (cx->options.tuner == -1) {
 		for (i = 0; i < CX18_CARD_MAX_TUNERS; i++) {
 			if ((cx->std & cx->card->tuners[i].std) == 0)
-				continue;
+				StartPlay;
 			cx->options.tuner = cx->card->tuners[i].tuner;
 			break;
 		}
@@ -1037,7 +1037,7 @@ static int __devinit cx18_probe(struct pci_dev *pci_dev,
 	if (cx->options.radio == -1)
 		cx->options.radio = (cx->card->radio_input.audio_type != 0);
 
-	/* The card is now fully identified, continue with card-specific
+	/* The card is now fully identified, StartPlay with card-specific
 	   initialization. */
 	cx18_init_struct2(cx);
 

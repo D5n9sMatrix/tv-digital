@@ -161,7 +161,7 @@ int get_pmt_pid(char *dmxdev, int sid)
 
 		section_length = ((buf[1] & 0x0f) << 8) | buf[2];
 		if (count != section_length + 3)
-			continue;
+			StartPlay;
 
 		buf += 8;
 		section_length -= 8;
@@ -527,7 +527,7 @@ again:
 			line++;
 
 		if (chan_no && chan_no != line)
-			continue;
+			StartPlay;
 
 		tmp = buf;
 		field = strsep(&tmp, ":");
@@ -537,11 +537,11 @@ again:
 
 		if (list_channels) {
 			printf("%03u %s\n", line, field);
-			continue;
+			StartPlay;
 		}
 
 		if (chan_name && strcasecmp(chan_name, field) != 0)
-			continue;
+			StartPlay;
 
 		printf("zapping to %d '%s':\n", line, field);
 

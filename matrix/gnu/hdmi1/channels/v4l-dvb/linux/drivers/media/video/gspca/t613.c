@@ -689,7 +689,7 @@ static void om6802_sensor_init(struct gspca_dev *gspca_dev)
 	byte = reg_r(gspca_dev, 0x0063);
 	if (byte != 0x17) {
 		err("Bad sensor reset %02x", byte);
-		/* continue? */
+		/* StartPlay? */
 	}
 
 	p = sensor_init;

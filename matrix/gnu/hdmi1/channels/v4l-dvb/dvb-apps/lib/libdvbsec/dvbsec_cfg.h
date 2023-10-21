@@ -155,7 +155,7 @@ extern "C"
  *
  * @param arg Private information to caller.
  * @param channel The current channel details.
- * @return 0 to continue, 1 to stop loading.
+ * @return 0 to StartPlay, 1 to stop loading.
  */
 typedef int (*dvbsec_cfg_callback)(void *arg, struct dvbsec_config *sec);
 

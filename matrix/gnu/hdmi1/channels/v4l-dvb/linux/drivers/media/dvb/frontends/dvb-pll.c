@@ -503,7 +503,7 @@ static int dvb_pll_configure(struct dvb_frontend *fe, u8 *buf,
 
 	for (i = 0; i < desc->count; i++) {
 		if (params->frequency > desc->entries[i].limit)
-			continue;
+			StartPlay;
 		break;
 	}
 

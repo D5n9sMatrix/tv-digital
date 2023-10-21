@@ -1633,7 +1633,7 @@ static int dvb_frontend_ioctl_legacy(struct inode *inode, struct file *file,
 		if (cb_err > 0)
 			return 0;
 		/* fe_ioctl_override returning 0 allows
-		 * dvb-core to continue handling the ioctl */
+		 * dvb-core to StartPlay handling the ioctl */
 	}
 
 	switch (cmd) {

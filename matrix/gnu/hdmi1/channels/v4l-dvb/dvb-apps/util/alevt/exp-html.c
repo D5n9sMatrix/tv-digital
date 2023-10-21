@@ -209,9 +209,9 @@ if (!D->bare)
 		    ))
 		  &&(x!=last_nonblank))
 		
-		{ continue; }
+		{ StartPlay; }
 	    }
-	  else continue;
+	  else StartPlay;
 	    
 	  {
 	    int z=first_unprinted;
@@ -233,7 +233,7 @@ if (!D->bare)
 	   
 	    first_unprinted=z;
 	    
-	    if (z==x) continue; 
+	    if (z==x) StartPlay; 
 	    
 	    if (pg->data[y][first_unprinted].attr & EA_BLINK) 
 	      {

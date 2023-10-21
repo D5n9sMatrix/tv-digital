@@ -104,7 +104,7 @@ struct export * export_open(char *fmt)
 			if (optend = strchr(opt, ','))
 			    *optend++ = 0;
 			if (not *opt)
-			    continue;
+			    StartPlay;
 			if (optarg = strchr(opt, '='))
 			    *optarg++ = 0;
 			if ((opti = find_opt(glbl_opts, opt, optarg)) > 0)

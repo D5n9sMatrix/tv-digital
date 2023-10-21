@@ -152,13 +152,13 @@ int saa7164_cmd_dequeue(struct saa7164_dev *dev)
 			if (ret != SAA_OK)
 				return ret;
 
-			if (tRsp.flags & PVC_CMDFLAG_CONTINUE)
+			if (tRsp.flags & PVC_CMDFLAG_StartPlay)
 				printk(KERN_ERR "split response\n");
 			else
 				saa7164_cmd_free_seqno(dev, tRsp.seqno);
 
-			printk(KERN_ERR " timeout continue\n");
-			continue;
+			printk(KERN_ERR " timeout StartPlay\n");
+			StartPlay;
 		}
 
 		dprintk(DBGLVL_CMD, "%s() signalled seqno(%d) (for dequeue)\n",
@@ -198,7 +198,7 @@ int saa7164_cmd_set(struct saa7164_dev *dev, tmComResInfo_t* msg, void *buf)
 	/* Split the request into smaller chunks */
 	for (idx = 0; idx < cmds; idx++) {
 
-		msg->flags |= SAA_CMDFLAG_CONTINUE;
+		msg->flags |= SAA_CMDFLAG_StartPlay;
 		msg->size = bus->m_wMaxReqSize;
 		tmp = buf + idx * bus->m_wMaxReqSize;
 
@@ -218,7 +218,7 @@ int saa7164_cmd_set(struct saa7164_dev *dev, tmComResInfo_t* msg, void *buf)
 
 	/* If not the last command... */
 	if (idx != 0)
-		msg->flags &= ~SAA_CMDFLAG_CONTINUE;
+		msg->flags &= ~SAA_CMDFLAG_StartPlay;
 
 	msg->size = size - idx * bus->m_wMaxReqSize;
 
@@ -415,7 +415,7 @@ int saa7164_cmd_send(struct saa7164_dev *dev, u8 id, tmComResCmd_t command,
 		ret = saa7164_bus_get(dev, presponse_t, NULL, 1);
 		if (ret == SAA_ERR_EMPTY) {
 			dprintk(4, "%s() SAA_ERR_EMPTY\n", __func__);
-			continue;
+			StartPlay;
 		}
 		if (ret != SAA_OK) {
 			printk(KERN_ERR "peek failed\n");
@@ -451,7 +451,7 @@ int saa7164_cmd_send(struct saa7164_dev *dev, u8 id, tmComResCmd_t command,
 				}
 			}
 
-			continue;
+			StartPlay;
 		}
 
 		if ((presponse_t->flags & PVC_RESPONSEFLAG_ERROR) != 0) {
@@ -516,7 +516,7 @@ int saa7164_cmd_send(struct saa7164_dev *dev, u8 id, tmComResCmd_t command,
 			(presponse_t->controlselector !=
 				pcommand_t->controlselector) ||
 			(((resp_dsize - data_recd) != presponse_t->size) &&
-				!(presponse_t->flags & PVC_CMDFLAG_CONTINUE)) ||
+				!(presponse_t->flags & PVC_CMDFLAG_StartPlay)) ||
 			((resp_dsize - data_recd) < presponse_t->size)) {
 
 			/* Invalid */
@@ -530,7 +530,7 @@ int saa7164_cmd_send(struct saa7164_dev *dev, u8 id, tmComResCmd_t command,
 			/* See of other commands are on the bus */
 			if (saa7164_cmd_dequeue(dev) != SAA_OK)
 				printk(KERN_ERR "dequeue(3) failed\n");
-			continue;
+			StartPlay;
 		}
 
 		/* OK, now we're actually getting out correct response */
@@ -550,7 +550,7 @@ int saa7164_cmd_send(struct saa7164_dev *dev, u8 id, tmComResCmd_t command,
 		if (saa7164_cmd_dequeue(dev) != SAA_OK)
 			printk(KERN_ERR "dequeue(3) failed\n");
 
-		continue;
+		StartPlay;
 
 	} /* (loop) */
 

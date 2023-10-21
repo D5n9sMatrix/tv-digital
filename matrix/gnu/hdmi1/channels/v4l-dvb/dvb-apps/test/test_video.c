@@ -74,12 +74,12 @@ int videoFreeze(int fd)
 }
 
 
-int videoContinue(int fd)
+int videoStartPlay(int fd)
 {
 	int ans;
 
-	if ((ans = ioctl(fd,VIDEO_CONTINUE)) < 0) {
-		perror("VIDEO CONTINUE: ");
+	if ((ans = ioctl(fd,VIDEO_StartPlay)) < 0) {
+		perror("VIDEO StartPlay: ");
 		return -1;
 	}
 
@@ -268,8 +268,8 @@ void play_file_video(int filefd, int fd)
 						break;
 
 					case 'c':
-						videoContinue(fd);
-						printf("playback continued\n");
+						videoStartPlay(fd);
+						printf("playback StartPlayd\n");
 //						stopped = 0;
 						break;
 
@@ -292,7 +292,7 @@ void play_file_video(int filefd, int fd)
 						break;
 
 					case 'q':
-						videoContinue(fd);
+						videoStartPlay(fd);
 						exit(0);
 						break;
 					}
@@ -350,7 +350,7 @@ int main(int argc, char **argv)
 	//sleep(4);
 	//videoFreeze(fd);
 	//sleep(3);
-	//videoContinue(fd);
+	//videoStartPlay(fd);
 	//sleep(3);
 	//videoStop(fd);
 	videoGetStatus(fd);

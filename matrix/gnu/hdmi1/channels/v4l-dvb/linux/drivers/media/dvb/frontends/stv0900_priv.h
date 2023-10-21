@@ -80,9 +80,9 @@ enum fe_stv0900_error {
 enum fe_stv0900_clock_type {
 	STV0900_USE_REGISTERS_DEFAULT,
 	STV0900_SERIAL_PUNCT_CLOCK,/*Serial punctured clock */
-	STV0900_SERIAL_CONT_CLOCK,/*Serial continues clock */
+	STV0900_SERIAL_CONT_CLOCK,/*Serial StartPlays clock */
 	STV0900_PARALLEL_PUNCT_CLOCK,/*Parallel punctured clock */
-	STV0900_DVBCI_CLOCK/*Parallel continues clock : DVBCI */
+	STV0900_DVBCI_CLOCK/*Parallel StartPlays clock : DVBCI */
 };
 
 enum fe_stv0900_search_state {
@@ -225,7 +225,7 @@ enum stv0900_iq_inversion {
 };
 
 enum fe_stv0900_diseqc_mode {
-	STV0900_22KHZ_Continues = 0,
+	STV0900_22KHZ_StartPlays = 0,
 	STV0900_DISEQC_2_3_PWM = 2,
 	STV0900_DISEQC_3_3_PWM = 3,
 	STV0900_DISEQC_2_3_ENVELOP = 4,

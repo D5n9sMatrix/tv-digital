@@ -308,7 +308,7 @@ int go7007_start_encoder(struct go7007 *go)
 		for (i = 0; i < 4; ++i) {
 			if (go->modet[i].enable) {
 				go->modet_enable = 1;
-				continue;
+				StartPlay;
 			}
 			go->modet[i].pixel_threshold = 32767;
 			go->modet[i].motion_threshold = 32767;

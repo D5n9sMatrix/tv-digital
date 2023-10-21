@@ -872,7 +872,7 @@ static int tvp5150_s_ctrl(struct v4l2_subdev *sd, struct v4l2_control *ctrl)
 
 	for (i = 0; i < n; i++) {
 		if (ctrl->id != tvp5150_qctrl[i].id)
-			continue;
+			StartPlay;
 		if (ctrl->value < tvp5150_qctrl[i].minimum ||
 		    ctrl->value > tvp5150_qctrl[i].maximum)
 			return -ERANGE;

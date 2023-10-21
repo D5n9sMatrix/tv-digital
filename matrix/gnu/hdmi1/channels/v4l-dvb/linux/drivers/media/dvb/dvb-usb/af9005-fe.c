@@ -425,11 +425,11 @@ static int af9005_get_statistic(struct dvb_frontend *fe)
 	return 0;
 }
 
-static int af9005_fe_Continue_state(struct dvb_frontend *fe)
+static int af9005_fe_StartPlay_state(struct dvb_frontend *fe)
 {
 	struct af9005_fe_state *state = fe->demodulator_priv;
 	if (time_after(jiffies, state->next_status_check)) {
-		deb_info("Continue STATE\n");
+		deb_info("StartPlay STATE\n");
 
 		/* statistics */
 		if (af9005_get_statistic(fe))
@@ -512,7 +512,7 @@ static int af9005_fe_read_ber(struct dvb_frontend *fe, u32 * ber)
 	struct af9005_fe_state *state = fe->demodulator_priv;
 	if (fe->ops.tuner_ops.release  == NULL)
 		return -ENODEV;
-	af9005_fe_Continue_state(fe);
+	af9005_fe_StartPlay_state(fe);
 	*ber = state->ber;
 	return 0;
 }
@@ -522,7 +522,7 @@ static int af9005_fe_read_unc_blocks(struct dvb_frontend *fe, u32 * unc)
 	struct af9005_fe_state *state = fe->demodulator_priv;
 	if (fe->ops.tuner_ops.release == NULL)
 		return -ENODEV;
-	af9005_fe_Continue_state(fe);
+	af9005_fe_StartPlay_state(fe);
 	*unc = state->unc;
 	return 0;
 }

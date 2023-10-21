@@ -70,7 +70,7 @@ static void rawiso_activity_cb(struct hpsb_iso *iso)
 
 		/* ignore empty packet */
 		if (iso->infos[packet].len <= CIP_HEADER_SIZE)
-			continue;
+			StartPlay;
 
 		while (count--) {
 			if (buf[MPEG2_TS_HEADER_SIZE] == 0x47)

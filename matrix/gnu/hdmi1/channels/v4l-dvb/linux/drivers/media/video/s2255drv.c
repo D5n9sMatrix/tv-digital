@@ -609,7 +609,7 @@ static const struct s2255_fmt *format_by_fourcc(int fourcc)
 	unsigned int i;
 	for (i = 0; i < ARRAY_SIZE(formats); i++) {
 		if (-1 == formats[i].fourcc)
-			continue;
+			StartPlay;
 		if (formats[i].fourcc == fourcc)
 			return formats + i;
 	}

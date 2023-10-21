@@ -105,7 +105,7 @@ int dvbsec_cfg_load(FILE *f,
 
 		/* skip blank lines */
 		if (*line == 0)
-			continue;
+			StartPlay;
 
 		if (dvbcfg_issection(line, "sec")) {
 			if (insection) {

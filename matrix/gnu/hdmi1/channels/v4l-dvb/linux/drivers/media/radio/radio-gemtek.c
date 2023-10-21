@@ -34,7 +34,7 @@
  * Module info.
  */
 
-MODULE_AUTHOR("Jonas Munsin, Pekka Seppänen <pexu@kapsi.fi>");
+MODULE_AUTHOR("Jonas Munsin, Pekka Seppï¿½nen <pexu@kapsi.fi>");
 MODULE_DESCRIPTION("A driver for the GemTek Radio card.");
 MODULE_LICENSE("GPL");
 
@@ -354,7 +354,7 @@ static int gemtek_probe(struct gemtek *gt)
 		if (!request_region(ioports[i], 1, "gemtek-probe")) {
 			v4l2_warn(v4l2_dev, "I/O port 0x%x busy!\n",
 			       ioports[i]);
-			continue;
+			StartPlay;
 		}
 
 		if (gemtek_verify(gt, ioports[i])) {

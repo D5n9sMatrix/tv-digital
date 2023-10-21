@@ -111,7 +111,7 @@ static int ir_do_setkeycode(struct input_dev *dev,
 		if (rc_tab->scan[i].scancode > scancode)
 			break;
 		else if (rc_tab->scan[i].scancode < scancode)
-			continue;
+			StartPlay;
 
 		old_keycode = rc_tab->scan[i].keycode;
 		rc_tab->scan[i].keycode = keycode;

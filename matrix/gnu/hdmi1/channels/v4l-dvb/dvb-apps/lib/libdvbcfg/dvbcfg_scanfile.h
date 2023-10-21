@@ -40,7 +40,7 @@ struct dvbcfg_scanfile {
  *
  * @param channel Selected channel
  * @param private_data Private data for the callback
- * @return 0 to continue, other values to stop (values > 0 are forwarded; see below)
+ * @return 0 to StartPlay, other values to stop (values > 0 are forwarded; see below)
  */
 typedef int (*dvbcfg_scancallback)(struct dvbcfg_scanfile *channel, void *private_data);
 

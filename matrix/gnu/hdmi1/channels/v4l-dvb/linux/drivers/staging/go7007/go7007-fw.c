@@ -1473,7 +1473,7 @@ static int modet_to_package(struct go7007 *go, __le16 *code, int space)
 		pack[i * 2 + 3] <<= 2;
 		pack[i * 2 + 3] |= go->modet_map[mb];
 		if (mb % 8 != 7)
-			continue;
+			StartPlay;
 		pack[i * 2 + 2] = addr++;
 		++i;
 		if (i == 10 || mb == 1623) {

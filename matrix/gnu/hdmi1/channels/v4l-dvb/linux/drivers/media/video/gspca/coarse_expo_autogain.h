@@ -45,7 +45,7 @@ static int gspca_coarse_grained_expo_autogain(struct gspca_dev *gspca_dev,
 
 	for (i = 0; i < gspca_dev->sd_desc->nctrls; i++) {
 		if (gspca_dev->ctrl_dis & (1 << i))
-			continue;
+			StartPlay;
 		if (gspca_dev->sd_desc->ctrls[i].qctrl.id == V4L2_CID_GAIN)
 			gain_ctrl = &gspca_dev->sd_desc->ctrls[i];
 		if (gspca_dev->sd_desc->ctrls[i].qctrl.id == V4L2_CID_EXPOSURE)

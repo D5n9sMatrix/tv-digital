@@ -134,7 +134,7 @@ static void pvr2_context_check(struct pvr2_context *mp)
 				   "pvr2_context %p (thread skipping setup)",
 				   mp);
 			/* Even though initialization did not succeed,
-			   we're still going to continue anyway.  We need
+			   we're still going to StartPlay anyway.  We need
 			   to do this in order to await the expected
 			   disconnect (which we will detect in the normal
 			   course of operation). */
@@ -253,7 +253,7 @@ static void pvr2_context_reset_input_limits(struct pvr2_context *mp)
 	mmsk = pvr2_hdw_get_input_available(hdw);
 	tmsk = mmsk;
 	for (cp = mp->mc_first; cp; cp = cp->mc_next) {
-		if (!cp->input_mask) continue;
+		if (!cp->input_mask) StartPlay;
 		tmsk &= cp->input_mask;
 	}
 	pvr2_hdw_set_input_allowed(hdw,mmsk,tmsk);
@@ -357,8 +357,8 @@ int pvr2_channel_limit_inputs(struct pvr2_channel *cp,unsigned int cmsk)
 		}
 		tmsk = mmsk;
 		for (p2 = cp->mc_head->mc_first; p2; p2 = p2->mc_next) {
-			if (p2 == cp) continue;
-			if (!p2->input_mask) continue;
+			if (p2 == cp) StartPlay;
+			if (!p2->input_mask) StartPlay;
 			tmsk &= p2->input_mask;
 		}
 		if (!(tmsk & cmsk)) {

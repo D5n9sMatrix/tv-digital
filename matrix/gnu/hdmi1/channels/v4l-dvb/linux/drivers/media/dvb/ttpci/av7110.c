@@ -270,7 +270,7 @@ static int arm_thread(void *data)
 		}
 
 		if (!av7110->arm_ready)
-			continue;
+			StartPlay;
 
 #if defined(CONFIG_INPUT_EVDEV) || defined(CONFIG_INPUT_EVDEV_MODULE)
 		av7110_check_ir_config(av7110, false);
@@ -1027,11 +1027,11 @@ static int av7110_start_feed(struct dvb_demux_feed *feed)
 
 		for (i = 0; i < demux->filternum; i++) {
 			if (demux->filter[i].state != DMX_STATE_READY)
-				continue;
+				StartPlay;
 			if (demux->filter[i].type != DMX_TYPE_SEC)
-				continue;
+				StartPlay;
 			if (demux->filter[i].filter.parent != &feed->feed.sec)
-				continue;
+				StartPlay;
 			demux->filter[i].state = DMX_STATE_GO;
 			if (demux->dmx.frontend->source != DMX_MEMORY_FE) {
 				ret = StartHWFilter(&demux->filter[i]);
@@ -1115,9 +1115,9 @@ static void restart_feeds(struct av7110 *av7110)
 			if (feed->type == DMX_TYPE_SEC) {
 				for (j = 0; j < dvbdmx->filternum; j++) {
 					if (dvbdmx->filter[j].type != DMX_TYPE_SEC)
-						continue;
+						StartPlay;
 					if (dvbdmx->filter[j].filter.parent != &feed->feed.sec)
-						continue;
+						StartPlay;
 					if (dvbdmx->filter[j].state == DMX_STATE_GO)
 						dvbdmx->filter[j].state = DMX_STATE_READY;
 				}

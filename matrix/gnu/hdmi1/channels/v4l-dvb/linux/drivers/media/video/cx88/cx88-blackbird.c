@@ -135,7 +135,7 @@ enum blackbird_copyright {
 	BLACKBIRD_COPYRIGHT_ON,
 };
 enum blackbird_notification_type {
-	BLACKBIRD_NOTIFICATION_Continue,
+	BLACKBIRD_NOTIFICATION_StartPlay,
 };
 enum blackbird_notification_status {
 	BLACKBIRD_NOTIFICATION_OFF,
@@ -174,7 +174,7 @@ enum blackbird_mute_video_shift {
 };
 
 /* Registers */
-#define IVTV_REG_ENC_SDRAM_Continue (0x07F8 /*| IVTV_REG_OFFSET*/)
+#define IVTV_REG_ENC_SDRAM_StartPlay (0x07F8 /*| IVTV_REG_OFFSET*/)
 #define IVTV_REG_ENC_SDRAM_PRECHARGE (0x07FC /*| IVTV_REG_OFFSET*/)
 #define IVTV_REG_SPU (0x9050 /*| IVTV_REG_OFFSET*/)
 #define IVTV_REG_HW_BLOCKS (0x9054 /*| IVTV_REG_OFFSET*/)
@@ -437,7 +437,7 @@ static int blackbird_load_firmware(struct cx8802_dev *dev)
 
 	retval  = register_write(dev->core, IVTV_REG_VPU, 0xFFFFFFED);
 	retval |= register_write(dev->core, IVTV_REG_HW_BLOCKS, IVTV_CMD_HW_BLOCKS_RST);
-	retval |= register_write(dev->core, IVTV_REG_ENC_SDRAM_Continue, 0x80000640);
+	retval |= register_write(dev->core, IVTV_REG_ENC_SDRAM_StartPlay, 0x80000640);
 	retval |= register_write(dev->core, IVTV_REG_ENC_SDRAM_PRECHARGE, 0x1A);
 	msleep(1);
 	retval |= register_write(dev->core, IVTV_REG_APU, 0);
@@ -616,7 +616,7 @@ static int blackbird_start_codec(struct file *file, void *priv)
 	/* unmute audio source */
 	cx_clear(AUD_VOL_CTL, (1 << 6));
 
-	blackbird_api_cmd(dev, CX2341X_ENC_Continue_INPUT, 0, 0);
+	blackbird_api_cmd(dev, CX2341X_ENC_StartPlay_INPUT, 0, 0);
 
 	/* initialize the video input */
 	blackbird_api_cmd(dev, CX2341X_ENC_INITIALIZE_INPUT, 0, 0);

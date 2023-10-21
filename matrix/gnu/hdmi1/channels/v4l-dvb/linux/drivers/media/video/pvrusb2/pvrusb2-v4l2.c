@@ -1091,7 +1091,7 @@ static int pvr2_v4l2_open(struct file *file)
 	}
 	input_cnt = 0;
 	for (idx = 0; idx < (sizeof(input_mask) << 3); idx++) {
-		if (!(input_mask & (1 << idx))) continue;
+		if (!(input_mask & (1 << idx))) StartPlay;
 		fhp->input_map[input_cnt++] = idx;
 	}
 

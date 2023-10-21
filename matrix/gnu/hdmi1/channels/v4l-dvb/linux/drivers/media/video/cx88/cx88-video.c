@@ -740,9 +740,9 @@ static u32* ov_risc_field(struct cx8800_dev *dev, struct cx8800_fh *fh,
 	for (maxy = -1, line = 0; line < fh->win.w.height;
 	     line++, addr += dev->fbuf.fmt.bytesperline) {
 		if ((line%2) == 0  &&  skip_even)
-			continue;
+			StartPlay;
 		if ((line%2) == 1  &&  skip_odd)
-			continue;
+			StartPlay;
 
 		/* calculate clipping */
 		if (line > maxy)

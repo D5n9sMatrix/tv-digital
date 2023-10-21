@@ -272,13 +272,13 @@ static int pt1_filter(struct pt1 *pt1, struct pt1_buffer_page *page)
 		upacket = le32_to_cpu(page->upackets[i]);
 		index = (upacket >> 29) - 1;
 		if (index < 0 || index >=  PT1_NR_ADAPS)
-			continue;
+			StartPlay;
 
 		adap = pt1->adaps[index];
 		if (upacket >> 25 & 1)
 			adap->upacket_count = 0;
 		else if (!adap->upacket_count)
-			continue;
+			StartPlay;
 
 		buf = adap->buf;
 		offset = adap->packet_count * 188 + adap->upacket_count * 3;
@@ -319,7 +319,7 @@ static int pt1_thread(void *data)
 		page = pt1->tables[table_index].bufs[buf_index].page;
 		if (!pt1_filter(pt1, page)) {
 			schedule_timeout_interruptible((HZ + 999) / 1000);
-			continue;
+			StartPlay;
 		}
 
 		if (++buf_index >= PT1_NR_BUFS) {

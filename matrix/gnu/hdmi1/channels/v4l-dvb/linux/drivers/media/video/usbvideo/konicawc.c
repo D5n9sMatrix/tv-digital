@@ -308,13 +308,13 @@ static int konicawc_compress_iso(struct uvd *uvd, struct urb *dataurb, struct ur
 			DEBUG(1, "Data error: packet=%d. len=%d. status=%d.",
 			      i, n, st);
 			uvd->stats.iso_err_count++;
-			continue;
+			StartPlay;
 		}
 
 		/* Detect and ignore empty packets */
 		if (n <= 0) {
 			uvd->stats.iso_skip_count++;
-			continue;
+			StartPlay;
 		}
 
 		/* See what the status data said about the packet */
@@ -346,18 +346,18 @@ static int konicawc_compress_iso(struct uvd *uvd, struct urb *dataurb, struct ur
 
 		if(sts == 0x01) { /* drop frame */
 			discard++;
-			continue;
+			StartPlay;
 		}
 
 		if((sts > 0x01) && (sts < 0x80)) {
 			dev_info(&uvd->dev->dev, "unknown status %2.2x\n",
 				 sts);
 			bad++;
-			continue;
+			StartPlay;
 		}
 		if(!sts && cam->lastframe == -2) {
 			DEBUG(2, "dropping frame looking for image start");
-			continue;
+			StartPlay;
 		}
 
 		keep++;

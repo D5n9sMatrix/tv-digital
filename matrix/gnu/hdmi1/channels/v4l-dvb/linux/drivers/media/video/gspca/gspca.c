@@ -349,7 +349,7 @@ static void fill_frame(struct gspca_dev *gspca_dev,
 		if (len == 0) {
 			if (gspca_dev->empty_packet == 0)
 				gspca_dev->empty_packet = 1;
-			continue;
+			StartPlay;
 		}
 		st = urb->iso_frame_desc[i].status;
 		if (st) {
@@ -357,7 +357,7 @@ static void fill_frame(struct gspca_dev *gspca_dev,
 				"ISOC data error: [%d] len=%d, status=%d",
 				i, len, st);
 			gspca_dev->last_packet_type = DISCARD_PACKET;
-			continue;
+			StartPlay;
 		}
 
 		/* let the packet be analyzed by the subdriver */
@@ -1178,7 +1178,7 @@ static int vidioc_enum_framesizes(struct file *file, void *priv,
 	for (i = 0; i < gspca_dev->cam.nmodes; i++) {
 		if (fsize->pixel_format !=
 				gspca_dev->cam.cam_mode[i].pixelformat)
-			continue;
+			StartPlay;
 
 		if (fsize->index == index) {
 			fsize->type = V4L2_FRMSIZE_TYPE_DISCRETE;
@@ -1354,7 +1354,7 @@ static const struct ctrl *get_ctrl(struct gspca_dev *gspca_dev,
 	     i < gspca_dev->sd_desc->nctrls;
 	     i++, ctrls++) {
 		if (gspca_dev->ctrl_dis & (1 << i))
-			continue;
+			StartPlay;
 		if (id == ctrls->qctrl.id)
 			return ctrls;
 	}
@@ -1376,12 +1376,12 @@ static int vidioc_queryctrl(struct file *file, void *priv,
 		id++;
 		for (i = 0; i < gspca_dev->sd_desc->nctrls; i++) {
 			if (gspca_dev->ctrl_dis & (1 << i))
-				continue;
+				StartPlay;
 			if (gspca_dev->sd_desc->ctrls[i].qctrl.id < id)
-				continue;
+				StartPlay;
 			if (ctrls && gspca_dev->sd_desc->ctrls[i].qctrl.id
 					    > ctrls->qctrl.id)
-				continue;
+				StartPlay;
 			ctrls = &gspca_dev->sd_desc->ctrls[i];
 		}
 		if (ctrls == NULL)
@@ -2441,7 +2441,7 @@ int gspca_auto_gain_n_exposure(struct gspca_dev *gspca_dev, int avg_lum,
 
 	for (i = 0; i < gspca_dev->sd_desc->nctrls; i++) {
 		if (gspca_dev->ctrl_dis & (1 << i))
-			continue;
+			StartPlay;
 		if (gspca_dev->sd_desc->ctrls[i].qctrl.id == V4L2_CID_GAIN)
 			gain_ctrl = &gspca_dev->sd_desc->ctrls[i];
 		if (gspca_dev->sd_desc->ctrls[i].qctrl.id == V4L2_CID_EXPOSURE)

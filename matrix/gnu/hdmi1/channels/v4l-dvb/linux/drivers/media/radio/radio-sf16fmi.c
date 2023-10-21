@@ -331,14 +331,14 @@ static int __init fmi_init(void)
 			if (io == 0) {
 				io = isapnp_fmi_probe();
 				if (io < 0)
-					continue;
+					StartPlay;
 				pnp_attached = 1;
 			}
 			if (!request_region(io, 2, "radio-sf16fmi")) {
 				if (pnp_attached)
 					pnp_device_detach(dev);
 				io = -1;
-				continue;
+				StartPlay;
 			}
 			if (pnp_attached ||
 			    ((inb(io) & 0xf9) == 0xf9 && (inb(io) & 0x4) == 0))

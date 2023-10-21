@@ -125,7 +125,7 @@ static const struct std_name *find_std_name(const struct std_name *arrPtr,
 	const struct std_name *p;
 	for (idx = 0; idx < arrSize; idx++) {
 		p = arrPtr + idx;
-		if (strlen(p->name) != bufSize) continue;
+		if (strlen(p->name) != bufSize) StartPlay;
 		if (!memcmp(bufPtr,p->name,bufSize)) return p;
 	}
 	return NULL;
@@ -156,7 +156,7 @@ int pvr2_std_str_to_id(v4l2_std_id *idPtr,const char *bufPtr,
 			bufSize -= cnt;
 			mMode = !0;
 			cmsk = sp->id;
-			continue;
+			StartPlay;
 		}
 		cnt = 0;
 		while (cnt < bufSize) {
@@ -198,7 +198,7 @@ unsigned int pvr2_std_id_to_str(char *bufPtr, unsigned int bufSize,
 		gfl = 0;
 		for (idx2 = 0; idx2 < ARRAY_SIZE(std_items); idx2++) {
 			ip = std_items + idx2;
-			if (!(gp->id & ip->id & id)) continue;
+			if (!(gp->id & ip->id & id)) StartPlay;
 			if (!gfl) {
 				if (cfl) {
 					c2 = scnprintf(bufPtr,bufSize,";");
@@ -339,11 +339,11 @@ struct v4l2_standard *pvr2_std_create_enum(unsigned int *countptr,
 	std_cnt = 0;
 	fmsk = 0;
 	for (idmsk = 1, cmsk = id; cmsk; idmsk <<= 1) {
-		if (!(idmsk & cmsk)) continue;
+		if (!(idmsk & cmsk)) StartPlay;
 		cmsk &= ~idmsk;
 		if (match_std(idmsk)) {
 			std_cnt++;
-			continue;
+			StartPlay;
 		}
 		fmsk |= idmsk;
 	}
@@ -378,14 +378,14 @@ struct v4l2_standard *pvr2_std_create_enum(unsigned int *countptr,
 	/* Enumerate potential special cases */
 	for (idx2 = 0; (idx2 < ARRAY_SIZE(std_mixes)) && (idx < std_cnt);
 	     idx2++) {
-		if (!(id & std_mixes[idx2])) continue;
+		if (!(id & std_mixes[idx2])) StartPlay;
 		if (pvr2_std_fill(stddefs+idx,std_mixes[idx2])) idx++;
 	}
 	/* Now enumerate individual pieces */
 	for (idmsk = 1, cmsk = id; cmsk && (idx < std_cnt); idmsk <<= 1) {
-		if (!(idmsk & cmsk)) continue;
+		if (!(idmsk & cmsk)) StartPlay;
 		cmsk &= ~idmsk;
-		if (!pvr2_std_fill(stddefs+idx,idmsk)) continue;
+		if (!pvr2_std_fill(stddefs+idx,idmsk)) StartPlay;
 		idx++;
 	}
 

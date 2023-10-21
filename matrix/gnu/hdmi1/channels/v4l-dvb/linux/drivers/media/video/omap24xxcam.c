@@ -261,9 +261,9 @@ static void omap24xxcam_vbq_free_mmap_buffers(struct videobuf_queue *vbq)
 
 	for (i = 0; i < VIDEO_MAX_FRAME; i++) {
 		if (NULL == vbq->bufs[i])
-			continue;
+			StartPlay;
 		if (V4L2_MEMORY_MMAP != vbq->bufs[i]->memory)
-			continue;
+			StartPlay;
 		vbq->ops->buf_release(vbq, vbq->bufs[i]);
 		omap24xxcam_vbq_free_mmap_buffer(vbq->bufs[i]);
 		kfree(vbq->bufs[i]);
@@ -682,7 +682,7 @@ static void omap24xxcam_capture_stop(struct omap24xxcam_device *cam)
 }
 
 /*
- * Reset and continue streaming.
+ * Reset and StartPlay streaming.
  *
  * Note: Resetting the camera FIFO via the CC_RST bit in the CC_CTRL
  * register is supposed to be sufficient to recover from a camera
@@ -1386,9 +1386,9 @@ static int omap24xxcam_mmap_buffers(struct file *file,
 	/* look for first buffer to map */
 	for (first = 0; first < VIDEO_MAX_FRAME; first++) {
 		if (NULL == vbq->bufs[first])
-			continue;
+			StartPlay;
 		if (V4L2_MEMORY_MMAP != vbq->bufs[first]->memory)
-			continue;
+			StartPlay;
 		if (vbq->bufs[first]->boff == (vma->vm_pgoff << PAGE_SHIFT))
 			break;
 	}
@@ -1396,9 +1396,9 @@ static int omap24xxcam_mmap_buffers(struct file *file,
 	/* look for last buffer to map */
 	for (size = 0, last = first; last < VIDEO_MAX_FRAME; last++) {
 		if (NULL == vbq->bufs[last])
-			continue;
+			StartPlay;
 		if (V4L2_MEMORY_MMAP != vbq->bufs[last]->memory)
-			continue;
+			StartPlay;
 		size += vbq->bufs[last]->bsize;
 		if (size == (vma->vm_end - vma->vm_start))
 			break;

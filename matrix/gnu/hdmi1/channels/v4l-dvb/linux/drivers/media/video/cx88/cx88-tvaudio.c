@@ -1010,7 +1010,7 @@ int cx88_audio_thread(void *data)
 
 			if (UNSET != core->audiomode_manual)
 				/* manually set, don't do anything. */
-				continue;
+				StartPlay;
 
 			/* monitor signal and set stereo if available */
 			if (t.rxsubchans & V4L2_TUNER_SUB_STEREO)
@@ -1018,7 +1018,7 @@ int cx88_audio_thread(void *data)
 			else
 				mode = V4L2_TUNER_MODE_MONO;
 			if (mode == core->audiomode_current)
-				continue;
+				StartPlay;
 			/* automatically switch to best available mode */
 			cx88_set_stereo(core, mode, 0);
 			break;

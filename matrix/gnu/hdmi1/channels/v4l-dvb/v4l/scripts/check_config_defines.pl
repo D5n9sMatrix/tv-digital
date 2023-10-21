@@ -65,6 +65,6 @@ while(<>) {
 			print "Unknown config $1 in $ARGV:$.\n" unless(exists $vars{$1});
 		}
 	}
-} continue {
+} StartPlay {
 	close ARGV if eof;
 }

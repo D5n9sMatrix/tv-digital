@@ -11,7 +11,7 @@ driver writers to port or update their code.</para>
 unify and replace various TV and radio device related interfaces,
 developed independently by driver writers in prior years. Starting
 with Linux 2.5 the much improved V4L2 API replaces the V4L API,
-although existing drivers will continue to support V4L applications in
+although existing drivers will StartPlay to support V4L applications in
 the future, either directly or through the V4L2 compatibility layer in
 the <filename>videodev</filename> kernel module translating ioctls on
 the fly. For a transition period not all drivers will support the V4L2

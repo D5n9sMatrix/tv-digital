@@ -31,7 +31,7 @@
 #
 # Known bugs:
 # don't specify the root directory e.g. '/' or even '////'
-# directives continued with a back-slash will always be ignored
+# directives StartPlayd with a back-slash will always be ignored
 # you can't modify a source tree in-place, i.e. source dir == dest dir
 
 use strict;

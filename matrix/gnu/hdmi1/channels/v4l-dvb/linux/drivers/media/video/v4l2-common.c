@@ -751,7 +751,7 @@ u32 v4l2_ctrl_next(const u32 * const * ctrl_classes, u32 id)
 	if (*pctrl)
 		return *pctrl;
 	/* we are at the end of the controls of the current class. */
-	/* continue with next class if available */
+	/* StartPlay with next class if available */
 	ctrl_classes++;
 	if (*ctrl_classes == NULL)
 		return 0;

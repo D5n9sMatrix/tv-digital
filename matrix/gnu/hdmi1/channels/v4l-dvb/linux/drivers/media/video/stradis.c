@@ -777,7 +777,7 @@ static int initialize_fpga(struct video_code *bitdata)
 	for (num = 0; num < saa_num; num++) {
 		saa = &saa7146s[num];
 		if (saa->boardcfg[0] > 20)
-			continue;	/* card was programmed */
+			StartPlay;	/* card was programmed */
 		loadtwo = (saa->boardcfg[18] & 0x10);
 		if (!NewCard)	/* we have an old board */
 			for (i = 0; i < 256; i++)
@@ -798,7 +798,7 @@ static int initialize_fpga(struct video_code *bitdata)
 		newdma = (u8 *) saa->dmadebi;
 		if (NewCard) {	/* SDM2xxx */
 			if (!strncmp(bitdata->loadwhat, "decoder2", 8))
-				continue;	/* fpga not for this card */
+				StartPlay;	/* fpga not for this card */
 			if (!strncmp(&saa->boardcfg[42], bitdata->loadwhat, 8))
 				loadfile = 1;
 			else if (loadtwo && !strncmp(&saa->boardcfg[19],
@@ -808,13 +808,13 @@ static int initialize_fpga(struct video_code *bitdata)
 					bitdata->loadwhat, 8))
 				loadfile = 1;	/* special */
 			else
-				continue;	/* fpga not for this card */
+				StartPlay;	/* fpga not for this card */
 			if (loadfile != 1 && loadfile != 2)
-				continue;	/* skip to next card */
+				StartPlay;	/* skip to next card */
 			if (saa->boardcfg[0] && loadfile == 1)
-				continue;	/* skip to next card */
+				StartPlay;	/* skip to next card */
 			if (saa->boardcfg[0] != 1 && loadfile == 2)
-				continue;	/* skip to next card */
+				StartPlay;	/* skip to next card */
 			saa->boardcfg[0]++;	/* mark fpga handled */
 			printk("stradis%d: loading %s\n", saa->nr,
 				bitdata->loadwhat);
@@ -828,7 +828,7 @@ static int initialize_fpga(struct video_code *bitdata)
 			saawrite(0x00400000, SAA7146_GPIO_CTRL);
 		} else {	/* original card */
 			if (strncmp(bitdata->loadwhat, "decoder2", 8))
-				continue;	/* fpga not for this card */
+				StartPlay;	/* fpga not for this card */
 			/* Pull the Xilinx PROG signal WS3 low */
 			saawrite(0x02000200, SAA7146_MC1);
 			/* Turn on the Audio interface so can set PROG low */
@@ -864,7 +864,7 @@ send_fpga_stuff:
 			if (loadtwo && loadfile == 1) {
 				printk("stradis%d: awaiting 2nd FPGA bitfile\n",
 				       saa->nr);
-				continue;	/* skip to next card */
+				StartPlay;	/* skip to next card */
 			}
 		} else {
 			for (i = startindex; i < bitdata->datasize; i++)
@@ -881,7 +881,7 @@ send_fpga_stuff:
 			printk(KERN_INFO "stradis%d: FPGA load failed\n",
 			       saa->nr);
 			failure++;
-			continue;
+			StartPlay;
 		}
 		if (!NewCard) {
 			/* Pull the Xilinx INIT signal (GPIO2) low */
@@ -1056,7 +1056,7 @@ static int initialize_ibmmpeg2(struct video_code *microcode)
 		}
 		if (!strncmp(microcode->loadwhat, "decoder.vid", 11)) {
 			if (saa->boardcfg[0] > 27)
-				continue;	/* skip to next card */
+				StartPlay;	/* skip to next card */
 			/* load video control store */
 			saa->boardcfg[1] = 0x13;	/* no-sync default */
 			debiwrite(saa, debNormal, IBM_MP2_WR_PROT, 1, 2);
@@ -1073,7 +1073,7 @@ static int initialize_ibmmpeg2(struct video_code *microcode)
 		}
 		if (!strncmp(microcode->loadwhat, "decoder.aud", 11)) {
 			if (saa->boardcfg[0] > 35)
-				continue;	/* skip to next card */
+				StartPlay;	/* skip to next card */
 			/* load audio control store */
 			debiwrite(saa, debNormal, IBM_MP2_WR_PROT, 1, 2);
 			debiwrite(saa, debNormal, IBM_MP2_AUD_IADDR, 0, 2);

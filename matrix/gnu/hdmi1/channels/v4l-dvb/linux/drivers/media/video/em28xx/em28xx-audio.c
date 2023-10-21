@@ -127,7 +127,7 @@ static void em28xx_audio_isocirq(struct urb *urb)
 			    urb->iso_frame_desc[i].offset;
 
 			if (!length)
-				continue;
+				StartPlay;
 
 #ifdef NO_PCM_LOCK
 			spin_lock_irqsave(&dev->adev.slock, flags);

@@ -114,7 +114,7 @@ is called with a pointer to this structure the driver fills the
 remaining fields or returns an error code. The driver may also set
 <constant>V4L2_BUF_FLAG_ERROR</constant> in the <structfield>flags</structfield>
 field. It indicates a non-critical (recoverable) streaming error. In such case
-the application may continue as normal, but should be aware that data in the
+the application may StartPlay as normal, but should be aware that data in the
 dequeued buffer might be corrupted.</para>
 
     <para>By default <constant>VIDIOC_DQBUF</constant> blocks when no
@@ -167,7 +167,7 @@ though and its details (e.g. <structfield>index</structfield>) may not be
 returned either. It is recommended that drivers indicate recoverable errors
 by setting the <constant>V4L2_BUF_FLAG_ERROR</constant> and returning 0 instead.
 In that case the application should be able to safely reuse the buffer and
-continue streaming.
+StartPlay streaming.
 	</para>
 	</listitem>
       </varlistentry>

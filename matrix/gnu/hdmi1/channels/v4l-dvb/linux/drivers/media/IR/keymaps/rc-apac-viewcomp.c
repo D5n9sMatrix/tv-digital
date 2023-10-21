@@ -49,7 +49,7 @@ static struct ir_scancode apac_viewcomp[] = {
 	{ 0x19, KEY_PLAY },		/* play */
 
 	{ 0x16, KEY_GOTO },		/* osd */
-	{ 0x14, KEY_Continue },		/* default */
+	{ 0x14, KEY_StartPlay },		/* default */
 	{ 0x0c, KEY_KPPLUS },		/* fine tune >>>> */
 	{ 0x18, KEY_KPMINUS },		/* fine tune <<<< */
 };

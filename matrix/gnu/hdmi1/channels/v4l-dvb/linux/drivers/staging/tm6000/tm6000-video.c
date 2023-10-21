@@ -297,7 +297,7 @@ static int copy_streams(u8 *data, unsigned long len,
 				break;
 			}
 		} else {
-			/* Continue the last copy */
+			/* StartPlay the last copy */
 			cmd = dev->isoc_ctl.cmd;
 			size = dev->isoc_ctl.size;
 			pos = dev->isoc_ctl.pos;
@@ -447,7 +447,7 @@ static inline int tm6000_isoc_copy(struct urb *urb)
 
 		if (status<0) {
 			print_err_status (dev,i,status);
-			continue;
+			StartPlay;
 		}
 
 		len = urb->iso_frame_desc[i].actual_length;

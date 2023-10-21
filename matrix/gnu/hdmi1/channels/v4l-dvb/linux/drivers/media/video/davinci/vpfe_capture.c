@@ -599,7 +599,7 @@ static irqreturn_t vpfe_isr(int irq, void *dev_id)
 	v4l2_dbg(1, debug, &vpfe_dev->v4l2_dev, "field id = %x:%x.\n",
 		fid, vpfe_dev->field_id);
 	if (fid == vpfe_dev->field_id) {
-		/* we are in-sync here,continue */
+		/* we are in-sync here,StartPlay */
 		if (fid == 0) {
 			/*
 			 * One frame is just being captured. If the next frame

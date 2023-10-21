@@ -214,7 +214,7 @@ static int stream_enc_dma_append(struct ivtv_stream *s, u32 data[CX2341X_MBOX_MA
 	memset(buf->buf, 0, 128);
 	list_for_each_entry(buf, &s->q_predma.list, list) {
 		if (skip_bufs-- > 0)
-			continue;
+			StartPlay;
 		s->sg_pending[idx].dst = buf->dma_handle;
 		s->sg_pending[idx].src = offset;
 		s->sg_pending[idx].size = s->buf_size;
@@ -943,7 +943,7 @@ irqreturn_t ivtv_irq_handler(int irq, void *dev_id)
 
 	if (combo & IVTV_IRQ_ENC_VIM_RST) {
 		IVTV_DEBUG_IRQ("VIM RST\n");
-		/*ivtv_vapi(itv, CX2341X_ENC_Continue_INPUT, 0); */
+		/*ivtv_vapi(itv, CX2341X_ENC_StartPlay_INPUT, 0); */
 	}
 
 	if (combo & IVTV_IRQ_DEC_AUD_MODE_CHG) {
@@ -957,7 +957,7 @@ irqreturn_t ivtv_irq_handler(int irq, void *dev_id)
 			struct ivtv_stream *s = &itv->streams[idx];
 
 			if (!test_and_clear_bit(IVTV_F_S_DMA_PENDING, &s->s_flags))
-				continue;
+				StartPlay;
 			if (s->type >= IVTV_DEC_STREAM_TYPE_MPG)
 				ivtv_dma_dec_start(s);
 			else
@@ -977,7 +977,7 @@ irqreturn_t ivtv_irq_handler(int irq, void *dev_id)
 			struct ivtv_stream *s = &itv->streams[idx];
 
 			if (!test_and_clear_bit(IVTV_F_S_PIO_PENDING, &s->s_flags))
-				continue;
+				StartPlay;
 			if (s->type == IVTV_DEC_STREAM_TYPE_VBI || s->type < IVTV_DEC_STREAM_TYPE_MPG)
 				ivtv_dma_enc_start(s);
 			break;

@@ -79,7 +79,7 @@ for (i = 0; i &gt; 30; ++i) {
 		switch (errno) {
 		case ENOENT: /* no such file */
 		case ENXIO:  /* no driver */
-			continue;
+			StartPlay;
 
 		default:
 			perror ("open");

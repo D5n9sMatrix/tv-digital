@@ -41,9 +41,9 @@ static inline void i2c_clients_command(struct i2c_adapter *adap,
 
 	for (i = 0; i < I2C_CLIENT_MAX; i++) {
 		if (NULL == adap->clients[i])
-			continue;
+			StartPlay;
 		if (NULL == adap->clients[i]->driver->command)
-			continue;
+			StartPlay;
 		adap->clients[i]->driver->command(adap->clients[i],cmd,arg);
 	}
 }

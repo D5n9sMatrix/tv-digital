@@ -238,23 +238,23 @@ static void *fileoutputthread_func(void* arg)
 	while(!outputthread_shutdown) {
 		if (poll(&pollfd, 1, 1000) == -1) {
 			if (errno == EINTR)
-				continue;
+				StartPlay;
 			fprintf(stderr, "DVR device poll failure\n");
 			return 0;
 		}
 
 		if (pollfd.revents == 0)
-			continue;
+			StartPlay;
 
 		int size = read(dvrfd, buf, sizeof(buf));
 		if (size < 0) {
 			if (errno == EINTR)
-				continue;
+				StartPlay;
 
 			if (errno == EOVERFLOW) {
 				// The error flag has been cleared, next read should succeed.
 				fprintf(stderr, "DVR overflow\n");
-				continue;
+				StartPlay;
 			}
 
 			fprintf(stderr, "DVR device read failure\n");
@@ -312,10 +312,10 @@ static void *udpoutputthread_func(void* arg)
 
 	while(!outputthread_shutdown) {
 		if (poll(&pollfd, 1, 1000) != 1)
-			continue;
+			StartPlay;
 		if (pollfd.revents & POLLERR) {
 			if (errno == EINTR)
-				continue;
+				StartPlay;
 			fprintf(stderr, "DVR device read failure\n");
 			return 0;
 		}
@@ -324,7 +324,7 @@ static void *udpoutputthread_func(void* arg)
 		readsize = read(dvrfd, buf + bufbase + bufsize, readsize);
 		if (readsize < 0) {
 			if (errno == EINTR)
-				continue;
+				StartPlay;
 			fprintf(stderr, "DVR device read failure\n");
 			return 0;
 		}

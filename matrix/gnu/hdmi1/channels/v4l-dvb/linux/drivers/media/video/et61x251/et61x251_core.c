@@ -381,7 +381,7 @@ static void et61x251_urb_complete(struct urb *urb)
 		if (status) {
 			DBG(3, "Error in isochronous frame");
 			(*f)->state = F_ERROR;
-			continue;
+			StartPlay;
 		}
 
 		b1 = pos++;
@@ -412,14 +412,14 @@ start_of_frame:
 					       "after %lu bytes",
 					   (unsigned long)(*f)->buf.bytesused);
 					(*f)->state = F_ERROR;
-					continue;
+					StartPlay;
 				}
 			}
 
 			if ((*f)->buf.bytesused + imglen > imagesize) {
 				DBG(3, "Video frame size exceeded");
 				(*f)->state = F_ERROR;
-				continue;
+				StartPlay;
 			}
 
 			pos += VOID_BYTES;

@@ -374,12 +374,12 @@ int en50221_sl_broadcast_data(struct en50221_session_layer *sl,
 
 		if (sl->sessions[i].state != S_STATE_ACTIVE) {
 			pthread_mutex_unlock(&sl->sessions[i].session_lock);
-			continue;
+			StartPlay;
 		}
 		if ((slot_id != -1)
 		    && (slot_id != sl->sessions[i].slot_id)) {
 			pthread_mutex_unlock(&sl->sessions[i].session_lock);
-			continue;
+			StartPlay;
 		}
 
 		if (sl->sessions[i].resource_id == resource_id) {
@@ -921,11 +921,11 @@ static void en50221_sl_transport_callback(void *arg, int reason,
 
 			if (sl->sessions[i].state == S_STATE_IDLE) {
 				pthread_mutex_unlock(&sl->sessions[i].session_lock);
-				continue;
+				StartPlay;
 			}
 			if (sl->sessions[i].connection_id != connection_id) {
 				pthread_mutex_unlock(&sl->sessions[i].session_lock);
-				continue;
+				StartPlay;
 			}
 
 			sl->sessions[i].state = S_STATE_IDLE;
@@ -952,11 +952,11 @@ static void en50221_sl_transport_callback(void *arg, int reason,
 
 			if (sl->sessions[i].state == S_STATE_IDLE) {
 				pthread_mutex_unlock(&sl->sessions[i].session_lock);
-				continue;
+				StartPlay;
 			}
 			if (sl->sessions[i].slot_id != slot_id) {
 				pthread_mutex_unlock(&sl->sessions[i].session_lock);
-				continue;
+				StartPlay;
 			}
 			sl->sessions[i].state = S_STATE_IDLE;
 

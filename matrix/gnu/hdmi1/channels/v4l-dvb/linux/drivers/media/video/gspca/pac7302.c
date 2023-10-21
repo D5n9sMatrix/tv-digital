@@ -480,7 +480,7 @@ static void reg_w_page(struct gspca_dev *gspca_dev,
 		return;
 	for (index = 0; index < len; index++) {
 		if (page[index] == SKIP)		/* skip this index */
-			continue;
+			StartPlay;
 		gspca_dev->usb_buf[0] = page[index];
 		ret = usb_control_msg(gspca_dev->dev,
 				usb_sndctrlpipe(gspca_dev->dev, 0),
@@ -807,7 +807,7 @@ static const unsigned char pac_jpeg_header1[] = {
   /* 2 bytes is placed here: samples per line */
 };
 
-/* JPEG header, continued */
+/* JPEG header, StartPlayd */
 static const unsigned char pac_jpeg_header2[] = {
   0x03,			/* Number of image components: 3 */
   0x01, 0x21, 0x00,	/* ID=1, Subsampling 1x1, Quantization table: 0 */

@@ -1031,7 +1031,7 @@ static void tuner_lookup(struct i2c_adapter *adap,
 
 		if (pos->i2c->adapter != adap ||
 		    strcmp(pos->i2c->driver->driver.name, "tuner"))
-			continue;
+			StartPlay;
 
 		mode_mask = pos->mode_mask & ~T_STANDBY;
 		if (*radio == NULL && mode_mask == T_RADIO)

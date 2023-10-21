@@ -362,13 +362,13 @@ static irqreturn_t vpif_channel_isr(int irq, void *dev_id)
 		common = &ch->common[i];
 		/* skip If streaming is not started in this channel */
 		if (0 == common->started)
-			continue;
+			StartPlay;
 
 		/* Check the field format */
 		if (1 == ch->vpifparams.std_info.frm_fmt) {
 			/* Progressive mode */
 			if (list_empty(&common->dma_queue))
-				continue;
+				StartPlay;
 
 			if (!channel_first_int[i][channel_id])
 				vpif_process_buffer_complete(common);
@@ -386,7 +386,7 @@ static irqreturn_t vpif_channel_isr(int irq, void *dev_id)
 			 */
 			if (channel_first_int[i][channel_id]) {
 				channel_first_int[i][channel_id] = 0;
-				continue;
+				StartPlay;
 			}
 			if (0 == i) {
 				ch->field_id ^= 1;
@@ -406,7 +406,7 @@ static irqreturn_t vpif_channel_isr(int irq, void *dev_id)
 			if (0 == fid) {
 				/* this is even field */
 				if (common->cur_frm == common->next_frm)
-					continue;
+					StartPlay;
 
 				/* mark the current buffer as done */
 				vpif_process_buffer_complete(common);
@@ -414,7 +414,7 @@ static irqreturn_t vpif_channel_isr(int irq, void *dev_id)
 				/* odd field */
 				if (list_empty(&common->dma_queue) ||
 				    (common->cur_frm != common->next_frm))
-					continue;
+					StartPlay;
 
 				vpif_schedule_next_buffer(common);
 			}

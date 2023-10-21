@@ -561,16 +561,16 @@ static inline int au0828_isoc_copy(struct au0828_dev *dev, struct urb *urb)
 		if (status < 0) {
 			print_err_status(dev, i, status);
 			if (urb->iso_frame_desc[i].status != -EPROTO)
-				continue;
+				StartPlay;
 		}
 
 		if (urb->iso_frame_desc[i].actual_length <= 0)
-			continue;
+			StartPlay;
 
 		if (urb->iso_frame_desc[i].actual_length >
 						dev->max_pkt_size) {
 			au0828_isocdbg("packet bigger than packet size");
-			continue;
+			StartPlay;
 		}
 
 		p = urb->transfer_buffer + urb->iso_frame_desc[i].offset;
@@ -1361,7 +1361,7 @@ static int vidioc_s_input(struct file *file, void *priv, unsigned int index)
 	for (i = 0; i < AU0828_MAX_INPUT; i++) {
 		int enable = 0;
 		if (AUVI_INPUT(i).audio_setup == NULL)
-			continue;
+			StartPlay;
 
 		if (i == index)
 			enable = 1;
@@ -1621,7 +1621,7 @@ static int vidioc_streamoff(struct file *file, void *priv,
 
 		for (i = 0; i < AU0828_MAX_INPUT; i++) {
 			if (AUVI_INPUT(i).audio_setup == NULL)
-				continue;
+				StartPlay;
 			(AUVI_INPUT(i).audio_setup)(dev, 0);
 		}
 

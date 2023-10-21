@@ -406,10 +406,10 @@ static void dvb_net_ule( struct net_device *dev, const u8 *buf, size_t buf_len )
 				reset_ule(priv);
 				priv->need_pusi = 1;
 
-				/* Continue with next TS cell. */
+				/* StartPlay with next TS cell. */
 				ts += TS_SZ;
 				priv->ts_count++;
-				continue;
+				StartPlay;
 			}
 
 			ts_remain = 184;
@@ -427,7 +427,7 @@ static void dvb_net_ule( struct net_device *dev, const u8 *buf, size_t buf_len )
 					       "(pointer field %d)\n", priv->ts_count, ts[4]);
 					ts += TS_SZ;
 					priv->ts_count++;
-					continue;
+					StartPlay;
 				}
 				/* Skip to destination of pointer field. */
 				from_where = &ts[5] + ts[4];
@@ -437,7 +437,7 @@ static void dvb_net_ule( struct net_device *dev, const u8 *buf, size_t buf_len )
 				skipped++;
 				ts += TS_SZ;
 				priv->ts_count++;
-				continue;
+				StartPlay;
 			}
 		}
 
@@ -465,7 +465,7 @@ static void dvb_net_ule( struct net_device *dev, const u8 *buf, size_t buf_len )
 				reset_ule(priv);
 				/* skip to next PUSI. */
 				priv->need_pusi = 1;
-				continue;
+				StartPlay;
 			}
 			/* If we still have an incomplete payload, but PUSI is
 			 * set; some TS cells are missing.
@@ -498,7 +498,7 @@ static void dvb_net_ule( struct net_device *dev, const u8 *buf, size_t buf_len )
 
 						reset_ule(priv);
 						priv->need_pusi = 1;
-						continue;
+						StartPlay;
 					}
 					/* Skip pointer field (we're processing a
 					 * packed payload). */
@@ -543,7 +543,7 @@ static void dvb_net_ule( struct net_device *dev, const u8 *buf, size_t buf_len )
 				priv->ule_sndu_len = 0;
 				priv->need_pusi = 1;
 				ts += TS_SZ;
-				continue;
+				StartPlay;
 			}
 
 			if (! priv->ule_sndu_len) {
@@ -571,7 +571,7 @@ static void dvb_net_ule( struct net_device *dev, const u8 *buf, size_t buf_len )
 					new_ts = 1;
 					ts += TS_SZ;
 					priv->ts_count++;
-					continue;
+					StartPlay;
 				}
 				ts_remain -= 2;	/* consume the 2 bytes SNDU length. */
 				from_where += 2;
@@ -591,12 +591,12 @@ static void dvb_net_ule( struct net_device *dev, const u8 *buf, size_t buf_len )
 					priv->ule_sndu_type = from_where[0] << 8;
 					priv->ule_sndu_type_1 = 1; /* first byte of ule_type is set. */
 					ts_remain -= 1; from_where += 1;
-					/* Continue w/ next TS. */
+					/* StartPlay w/ next TS. */
 				case 0:
 					new_ts = 1;
 					ts += TS_SZ;
 					priv->ts_count++;
-					continue;
+					StartPlay;
 
 				default: /* complete ULE header is present in current TS. */
 					/* Extract ULE type field. */
@@ -1639,7 +1639,7 @@ void dvb_net_release (struct dvb_net *dvbnet)
 
 	for (i=0; i<DVB_NET_DEVICES_MAX; i++) {
 		if (!dvbnet->state[i])
-			continue;
+			StartPlay;
 		dvb_net_remove_if(dvbnet, i);
 	}
 }

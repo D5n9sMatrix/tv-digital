@@ -198,7 +198,7 @@ static irqreturn_t saa7164_irq(int irq, void *dev_id)
 			for (bit = 0; bit < 32; bit++) {
 
 				if (((intstat[i] >> bit) & 0x00000001) == 0)
-					continue;
+					StartPlay;
 
 				/* Calculate the interrupt id (0x00 to 0x7f) */
 
@@ -638,7 +638,7 @@ static int __devinit saa7164_initdev(struct pci_dev *pci_dev,
 		err = saa7164_bus_setup(dev);
 		if (err < 0)
 			printk(KERN_ERR
-				"Failed to setup the bus, will continue\n");
+				"Failed to setup the bus, will StartPlay\n");
 		saa7164_bus_dump(dev);
 
 		/* Ping the running firmware via the command bus and get the

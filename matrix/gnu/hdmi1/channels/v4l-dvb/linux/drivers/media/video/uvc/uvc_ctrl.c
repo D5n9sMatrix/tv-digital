@@ -740,7 +740,7 @@ static void __uvc_find_control(struct uvc_entity *entity, __u32 v4l2_id,
 	for (i = 0; i < entity->ncontrols; ++i) {
 		ctrl = &entity->controls[i];
 		if (ctrl->info == NULL)
-			continue;
+			StartPlay;
 
 		list_for_each_entry(map, &ctrl->info->mappings, list) {
 			if ((map->id == v4l2_id) && !next) {
@@ -952,7 +952,7 @@ static int uvc_ctrl_actived_entity(struct uvc_device *dev,
 	for (i = 0; i < entity->ncontrols; ++i) {
 		ctrl = &entity->controls[i];
 		if (ctrl->info == NULL)
-			continue;
+			StartPlay;
 
 		/* Reset the loaded flag for auto-update controls that were
 		 * marked as loaded in uvc_ctrl_get/uvc_ctrl_set to prevent
@@ -962,7 +962,7 @@ static int uvc_ctrl_actived_entity(struct uvc_device *dev,
 			ctrl->loaded = 0;
 
 		if (!ctrl->dirty)
-			continue;
+			StartPlay;
 
 		if (!rollback)
 			ret = uvc_query_ctrl(dev, UVC_SET_CUR, ctrl->entity->id,
@@ -1163,7 +1163,7 @@ int uvc_xu_ctrl_query(struct uvc_video_chain *chain,
 	for (i = 0; i < entity->ncontrols; ++i) {
 		ctrl = &entity->controls[i];
 		if (ctrl->info == NULL)
-			continue;
+			StartPlay;
 
 		if (ctrl->info->selector == xctrl->selector) {
 			found = 1;
@@ -1247,7 +1247,7 @@ int uvc_ctrl_resume_device(struct uvc_device *dev)
 
 			if (ctrl->info == NULL || !ctrl->modified ||
 			    (ctrl->info->flags & UVC_CONTROL_RESTORE) == 0)
-				continue;
+				StartPlay;
 
 			printk(KERN_INFO "restoring control %pUl/%u/%u\n",
 				ctrl->info->entity, ctrl->info->index,
@@ -1277,7 +1277,7 @@ static void uvc_ctrl_add_ctrl(struct uvc_device *dev,
 
 	list_for_each_entry(entity, &dev->entities, list) {
 		if (!uvc_entity_match_guid(entity, info->entity))
-			continue;
+			StartPlay;
 
 		for (i = 0; i < entity->ncontrols; ++i) {
 			ctrl = &entity->controls[i];
@@ -1364,7 +1364,7 @@ int uvc_ctrl_add_info(struct uvc_control_info *info)
 	 */
 	list_for_each_entry(ctrl, &uvc_driver.controls, list) {
 		if (memcmp(ctrl->entity, info->entity, 16))
-			continue;
+			StartPlay;
 
 		if (ctrl->selector == info->selector) {
 			uvc_trace(UVC_TRACE_CONTROL,
@@ -1414,7 +1414,7 @@ int uvc_ctrl_add_mapping(struct uvc_control_mapping *mapping)
 	list_for_each_entry(info, &uvc_driver.controls, list) {
 		if (memcmp(info->entity, mapping->entity, 16) ||
 			info->selector != mapping->selector)
-			continue;
+			StartPlay;
 
 		if (info->size * 8 < mapping->size + mapping->offset) {
 			uvc_trace(UVC_TRACE_CONTROL,
@@ -1486,11 +1486,11 @@ uvc_ctrl_prune_entity(struct uvc_device *dev, struct uvc_entity *entity)
 #else
 		if (!usb_match_one_id(dev->intf, &blacklist[i].id))
 #endif
-			continue;
+			StartPlay;
 
 		if (blacklist[i].index >= 8 * size ||
 		    !uvc_test_bit(controls, blacklist[i].index))
-			continue;
+			StartPlay;
 
 		uvc_trace(UVC_TRACE_CONTROL, "%u/%u control is black listed, "
 			"removing it.\n", entity->id, blacklist[i].index);
@@ -1531,7 +1531,7 @@ int uvc_ctrl_init_device(struct uvc_device *dev)
 			ncontrols += hweight8(bmControls[i]);
 
 		if (ncontrols == 0)
-			continue;
+			StartPlay;
 
 		entity->controls = kzalloc(ncontrols*sizeof *ctrl, GFP_KERNEL);
 		if (entity->controls == NULL)
@@ -1542,7 +1542,7 @@ int uvc_ctrl_init_device(struct uvc_device *dev)
 		ctrl = entity->controls;
 		for (i = 0; i < bControlSize * 8; ++i) {
 			if (uvc_test_bit(bmControls, i) == 0)
-				continue;
+				StartPlay;
 
 			ctrl->entity = entity;
 			ctrl->index = i;

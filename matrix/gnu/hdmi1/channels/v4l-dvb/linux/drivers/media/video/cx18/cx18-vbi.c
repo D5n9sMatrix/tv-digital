@@ -64,7 +64,7 @@ static void copy_vbi_data(struct cx18 *cx, int lines, u32 pts_stamp)
 		int f, l;
 
 		if (sdata->id == 0)
-			continue;
+			StartPlay;
 
 		l = sdata->line - 6;
 		f = sdata->field;
@@ -172,7 +172,7 @@ static u32 compress_sliced_buf(struct cx18 *cx, u8 *buf, u32 size,
 		if (p[0] != 0xff || p[1] || p[2] ||
 		    (p[3] != sliced_vbi_eav_rp[0] &&
 		     p[3] != sliced_vbi_eav_rp[1]))
-			continue;
+			StartPlay;
 		vbi.p = p + 4;
 		v4l2_subdev_call(cx->sd_av, vbi, decode_vbi_line, &vbi);
 		if (vbi.type) {

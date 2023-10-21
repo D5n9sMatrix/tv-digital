@@ -591,7 +591,7 @@ int saa7164_i2caddr_to_unitid(struct saa7164_i2c *bus, int addr)
 		unit = &saa7164_boards[dev->board].unit[i];
 
 		if (unit->type == SAA7164_UNIT_UNDEFINED)
-			continue;
+			StartPlay;
 #if 0
 		printk(KERN_ERR "bus->nr %x unit->i2c_bus_nr %x, addr %x "
 			"unit->i2c_bus_addr %x\n", bus->nr, unit->i2c_bus_nr,
@@ -623,7 +623,7 @@ int saa7164_i2caddr_to_reglen(struct saa7164_i2c *bus, int addr)
 		unit = &saa7164_boards[dev->board].unit[i];
 
 		if (unit->type == SAA7164_UNIT_UNDEFINED)
-			continue;
+			StartPlay;
 
 		if ((bus->nr == unit->i2c_bus_nr) &&
 			(addr == unit->i2c_bus_addr))
@@ -651,7 +651,7 @@ char *saa7164_unitid_name(struct saa7164_dev *dev, u8 unitid)
 		unit = &saa7164_boards[dev->board].unit[i];
 
 		if (unit->type == SAA7164_UNIT_UNDEFINED)
-			continue;
+			StartPlay;
 
 		if (unitid == unit->id)
 				return unit->name;

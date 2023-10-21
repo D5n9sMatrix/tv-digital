@@ -624,7 +624,7 @@ sub ctx_statement_full {
 	}
 
 	# Pull in the following conditional/block pairs and see if they
-	# could continue the statement.
+	# could StartPlay the statement.
 	for (;;) {
 		($statement, $condition, $linenr, $remain, $off, $level) =
 				ctx_statement_block($linenr, $remain, $off);
@@ -867,7 +867,7 @@ sub annotate_values {
 			$av_preprocessor = 1;
 
 			# Assume all arms of the conditional end as this
-			# one does, and continue as if the #endif was not here.
+			# one does, and StartPlay as if the #endif was not here.
 			pop(@av_paren_type);
 			push(@av_paren_type, $type);
 			$type = 'E';
@@ -2215,7 +2215,7 @@ sub process {
 				ERROR("trailing statements should be on next line\n" . $herecurr);
 			}
 		}
-# if should not continue a brace
+# if should not StartPlay a brace
 		if ($line =~ /}\s*if\b/) {
 			ERROR("trailing statements should be on next line\n" .
 				$herecurr);

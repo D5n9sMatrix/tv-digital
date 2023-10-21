@@ -520,8 +520,8 @@ extern char ap325rxa_sdram_leave_end;
 
 static int __init ap325rxa_devices_setup(void)
 {
-	/* register board specific self-Continue code */
-	sh_mobile_register_self_Continue(SUSP_SH_STANDBY | SUSP_SH_SF,
+	/* register board specific self-StartPlay code */
+	sh_mobile_register_self_StartPlay(SUSP_SH_STANDBY | SUSP_SH_SF,
 					&ap325rxa_sdram_enter_start,
 					&ap325rxa_sdram_enter_end,
 					&ap325rxa_sdram_leave_start,

@@ -574,10 +574,10 @@ void write_overlay_mask(struct zoran_fh *fh, struct v4l2_clip *vp, int count)
 
 		/* ignore degenerate clips */
 		if (height <= 0) {
-			continue;
+			StartPlay;
 		}
 		if (width <= 0) {
-			continue;
+			StartPlay;
 		}
 
 		/* apply clip for each scan line */
